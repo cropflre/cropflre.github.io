@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nowen-reader — 自托管漫画 &amp; 小说阅读平台 | cropflre</title>
+  <meta name="description" content="高性能自托管漫画 & 小说管理阅读平台 · Go 单二进制 · 30MB 镜像 · 17+ LLM AI 辅助 · NAS 友好" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>📖</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="brand">cropflre</a>
+      <div class="nav-links">
+        <a href="/">首页</a>
+        <a href="welcome.html">项目</a>
+        <a href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
+        <button class="theme-toggle" data-theme-toggle aria-label="切换主题">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <article class="article">
+    <div class="container">
+      <header class="article-header">
+        <a href="/" class="back-link">← 返回首页</a>
+        <h1 class="reveal">📖 nowen-reader<br/><small style="font-size:.5em;color:var(--fg-soft);font-weight:500">高性能自托管漫画 &amp; 小说管理阅读平台</small></h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-05-08">📅 2026-05-08</time>
+          <span>⏱ 阅读约 6 分钟</span>
+          <span class="tag">Reader</span>
+          <span class="tag">Comics</span>
+          <span class="tag">EPUB</span>
+        </div>
+      </header>
+
+      <div class="prose">
+
+        <h2 class="reveal">为什么选择 NowenReader？</h2>
+
+        <p class="reveal">
+          市面上的漫画 / 小说管理工具往往存在各种痛点：内存占用动辄 <strong>1 GB+</strong>、部署复杂、中文支持缺失、功能单一……
+        </p>
+
+        <blockquote class="reveal">
+          🎯 <strong>NowenReader</strong> 专为解决这些问题而生，尤其针对 <strong>NAS 用户</strong>和<strong>个人服务器</strong>场景深度优化。
+        </blockquote>
+
+        <div class="features reveal">
+          <div class="feature">
+            <div class="ico">💾</div>
+            <h4>极致轻量</h4>
+            <p>内存 512 MB 即可流畅运行 · Docker 镜像仅 ~30 MB</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📦</div>
+            <h4>零依赖部署</h4>
+            <p>Go 单静态二进制 · 前端通过 <code>go:embed</code> 嵌入</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🐳</div>
+            <h4>Docker 一键启动</h4>
+            <p>通用 / 生产 / NAS 三种 Compose 配置</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🤖</div>
+            <h4>17+ LLM AI 辅助</h4>
+            <p>智能标签 · 语义搜索 · 个性化推荐</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📚</div>
+            <h4>全格式覆盖</h4>
+            <p>漫画：ZIP/CBZ/CBR/RAR/7Z/CB7/PDF · 小说：TXT/EPUB/MOBI/AZW3/HTML</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🌐</div>
+            <h4>中文原生支持</h4>
+            <p>中英双语界面 · 元数据中英翻译 · 标签自动翻译</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📱</div>
+            <h4>多端访问</h4>
+            <p>Web PWA + Flutter 原生（Android / iOS / 桌面）</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🏗️</div>
+            <h4>多平台架构</h4>
+            <p>amd64 / arm64（群晖、威联通、绿联、铁威马全覆盖）</p>
+          </div>
+        </div>
+
+        <h2 class="reveal">核心特性</h2>
+
+        <h3 class="reveal">📚 内容管理</h3>
+        <ul class="reveal">
+          <li><strong>自动扫描入库</strong> — fsnotify 实时监控 + 定时轮询双保障</li>
+          <li><strong>标签 &amp; 分类</strong> — 多标签、多分类管理，颜色自定义</li>
+          <li><strong>合并分组</strong> — 系列卷册自动检测 + 手动归组</li>
+          <li><strong>阅读状态</strong> — 未读 / 在读 / 已读 / 搁置</li>
+          <li><strong>重复检测</strong> — 多维度智能识别（文件哈希 / 大小 / 标题）</li>
+          <li><strong>元数据编辑</strong> — 在线修改标题、作者、出版社、描述</li>
+          <li><strong>批量操作</strong> — 打标签 / 分类 / 删除 / 翻译 / 获取元数据</li>
+        </ul>
+
+        <h3 class="reveal">🔍 五大元数据源</h3>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">数据源链</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-f">AniList</span>       <span class="tok-c"># 动漫/漫画综合</span>
+<span class="tok-f">Bangumi</span>       <span class="tok-c"># 动画专项（中文友好）</span>
+<span class="tok-f">MangaDex</span>      <span class="tok-c"># 漫画主力</span>
+<span class="tok-f">MangaUpdates</span>  <span class="tok-c"># 漫画补充</span>
+<span class="tok-f">Kitsu</span>         <span class="tok-c"># 动漫元数据</span>
+
++ <span class="tok-f">ComicInfo.xml</span> 自动读取内嵌元数据
++ 小说 EPUB / TXT 元数据自动提取</pre>
+        </div>
+
+        <h3 class="reveal">🤖 AI 智能辅助（17+ LLM 供应商）</h3>
+        <p class="reveal">
+          可选接入 <strong>OpenAI / Anthropic / Gemini / 通义千问 / DeepSeek / 智谱 GLM / 百川 / Kimi / MiniMax / 讯飞星火</strong> 等：
+        </p>
+        <ul class="reveal">
+          <li>🔎 <strong>语义搜索</strong> — 自然语言搜索（"关于巨人的漫画"）</li>
+          <li>🏷️ <strong>标签 / 分类建议</strong> — AI 批量推荐</li>
+          <li>🖼️ <strong>封面分析</strong> — 内容识别辅助分类</li>
+          <li>📑 <strong>章节摘要</strong> — 小说章节 AI 摘要</li>
+          <li>📖 <strong>章节回顾</strong> — 快速回顾之前情节</li>
+          <li>🌐 <strong>页面翻译</strong> — 漫画 OCR + 翻译</li>
+          <li>💬 <strong>AI 对话</strong> — 阅读器内置 AI 聊天</li>
+          <li>📊 <strong>阅读洞察</strong> — 个性化阅读报告</li>
+        </ul>
+
+        <blockquote class="reveal">
+          💡 AI 功能 <strong>完全可选</strong>，不配置也不影响任何核心功能的使用。
+        </blockquote>
+
+        <h3 class="reveal">📖 阅读体验</h3>
+        <div class="features reveal">
+          <div class="feature">
+            <div class="ico">📄</div>
+            <h4>漫画阅读器</h4>
+            <p>单页 / 双页 / 条漫 / Webtoon 多种模式</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📕</div>
+            <h4>小说阅读器</h4>
+            <p>EPUB 章节渲染 · TXT 智能分章</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📑</div>
+            <h4>PDF 阅读器</h4>
+            <p>PDF.js 原生渲染 · 微信浏览器自动降级</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📊</div>
+            <h4>阅读统计</h4>
+            <p>时长 · 会话 · 每日趋势 · 年度报告</p>
+          </div>
+        </div>
+
+        <h3 class="reveal">📡 协议与集成</h3>
+        <p class="reveal">
+          支持 <strong>OPDS 协议</strong>，可通过 <em>KOReader</em> / <em>Moon+ Reader</em> 等阅读器远程串流。
+        </p>
+
+        <h2 class="reveal">技术栈</h2>
+
+        <div class="features reveal">
+          <div class="feature">
+            <div class="ico">🐹</div>
+            <h4>后端</h4>
+            <p>Go 1.23 · Gin · GORM · SQLite (WAL / FTS5)</p>
+          </div>
+          <div class="feature">
+            <div class="ico">⚛️</div>
+            <h4>前端</h4>
+            <p>React 19 · TypeScript · Vite</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📱</div>
+            <h4>移动端</h4>
+            <p>Flutter · Material 3 · 手势缩放 · 沉浸式阅读</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🐳</div>
+            <h4>部署</h4>
+            <p>Docker ~30MB · amd64 + arm64</p>
+          </div>
+        </div>
+
+        <h2 class="reveal">快速开始</h2>
+
+        <p class="reveal">三步完成最小化部署：</p>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">Terminal</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-c"># 1. 下载生产配置</span>
+<span class="tok-k">$</span> curl -O https://raw.githubusercontent.com/cropflre/nowen-reader/main/docker-compose.prod.yml
+
+<span class="tok-c"># 2. 一键启动</span>
+<span class="tok-k">$</span> docker compose -f docker-compose.prod.yml up -d
+
+<span class="tok-c"># 3. 访问 http://localhost:6680</span>
+<span class="tok-c"># 首次访问会引导注册管理员账号</span></pre>
+        </div>
+
+        <p class="reveal">
+          将漫画放入 <code>./comics/</code>、小说放入 <code>./novels/</code> 目录即可自动扫描入库。
+        </p>
+
+        <h3 class="reveal">🏠 NAS 部署（群晖 / 威联通 / 绿联 / 铁威马）</h3>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">NAS 专用配置</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-k">$</span> curl -O https://raw.githubusercontent.com/cropflre/nowen-reader/main/docker-compose.nas.yml
+<span class="tok-k">$</span> vi docker-compose.nas.yml   <span class="tok-c"># 修改为你的实际路径</span>
+<span class="tok-k">$</span> docker compose -f docker-compose.nas.yml up -d</pre>
+        </div>
+
+        <p class="reveal">典型挂载路径（以群晖为例）：</p>
+        <ul class="reveal">
+          <li><code>/volume1/docker/nowen-reader/data</code> → <code>/data</code>（数据库）</li>
+          <li><code>/volume1/docker/nowen-reader/cache</code> → <code>/app/.cache</code>（缩略图缓存）</li>
+          <li><code>/volume1/comics</code> → <code>/app/comics</code>（漫画主目录）</li>
+          <li><code>/volume1/novels</code> → <code>/app/novels</code>（小说主目录）</li>
+        </ul>
+
+        <blockquote class="reveal">
+          🔑 <strong>权限提示：</strong>NAS 上如遇到 <code>permission denied</code>，在 compose 的 <code>environment</code> 中设置 <code>PUID</code> / <code>PGID</code> 为宿主机文件的实际 UID/GID。
+        </blockquote>
+
+        <h2 class="reveal">相关链接</h2>
+
+        <blockquote class="reveal">
+          📂 <strong>源码仓库：</strong> <a href="https://github.com/cropflre/nowen-reader" target="_blank" rel="noopener">github.com/cropflre/nowen-reader</a><br/>
+          🐳 <strong>Docker Hub：</strong> <a href="https://hub.docker.com/r/cropflre/nowen-reader" target="_blank" rel="noopener">cropflre/nowen-reader</a><br/>
+          💬 <strong>QQ 交流群：</strong> <code>1093473044</code>
+        </blockquote>
+
+      </div><!-- .prose -->
+    </div>
+  </article>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span data-year></span> cropflre · Built with ❤️ &amp; vanilla code</p>
+      <p style="margin-top:8px">
+        <a href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
+        &nbsp;·&nbsp;
+        <a href="/">首页</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nowen-note — 自托管私有知识库 | cropflre</title>
+  <meta name="description" content="对标群晖 Note Station 的自托管私有知识库 · Tiptap 3 + Hono + SQLite · Docker 一键部署，集成 6 大 AI 服务商" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>📓</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ===== Navigation ===== -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="brand">cropflre</a>
+      <div class="nav-links">
+        <a href="/">首页</a>
+        <a href="welcome.html">项目</a>
+        <a href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
+        <button class="theme-toggle" data-theme-toggle aria-label="切换主题">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== Article ===== -->
+  <article class="article">
+    <div class="container">
+      <header class="article-header">
+        <a href="/" class="back-link">← 返回首页</a>
+        <h1 class="reveal">📓 nowen-note<br/><small style="font-size:.5em;color:var(--fg-soft);font-weight:500">自托管私有知识库 · 对标群晖 Note Station</small></h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-05-08">📅 2026-05-08</time>
+          <span>⏱ 阅读约 5 分钟</span>
+          <span class="tag">Self-Hosted</span>
+          <span class="tag">Knowledge Base</span>
+          <span class="tag">AI</span>
+        </div>
+      </header>
+
+      <div class="prose">
+
+        <!-- === 1. 项目介绍 === -->
+        <h2 class="reveal">项目介绍</h2>
+
+        <p class="reveal">
+          <strong>nowen-note</strong> 是一款自托管的私有化知识管理应用，对标群晖 <em>Note Station</em>。采用现代前后端分离架构，支持 <strong>Docker 一键部署</strong>、<strong>Electron 桌面客户端</strong>，以及基于 Capacitor 的 <strong>Android 移动端</strong>，让你的知识完全掌握在自己手中。
+        </p>
+
+        <blockquote class="reveal">
+          💡 设计哲学：数据自有、隐私无忧。一切都在你的服务器里，AI 也可以完全跑在本地 Ollama。
+        </blockquote>
+
+        <!-- === 2. 核心功能 === -->
+        <h2 class="reveal">核心功能</h2>
+
+        <div class="features reveal">
+          <div class="feature">
+            <div class="ico">✍️</div>
+            <h4>富文本 + Markdown 双引擎</h4>
+            <p>Tiptap 3 + CodeMirror 6，共享 AI / 版本 / 评论等上层能力</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🤖</div>
+            <h4>6 大 AI 服务商</h4>
+            <p>通义千问 / OpenAI / Gemini / DeepSeek / 豆包 / Ollama</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📚</div>
+            <h4>知识管理</h4>
+            <p>无限层级笔记本 · 彩色标签 · 任务 · 思维导图 · 说说 · FTS5 全文搜索</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🔗</div>
+            <h4>协作 &amp; 历史</h4>
+            <p>分享（密码 / 有效期 / 权限 / 评论）· 版本回溯</p>
+          </div>
+          <div class="feature">
+            <div class="ico">⚙️</div>
+            <h4>自动化</h4>
+            <p>沙箱插件系统 · Webhook · 审计日志 · 定时自动备份</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📱</div>
+            <h4>全平台多端</h4>
+            <p>Web / Electron（Win/macOS/Linux）/ Android（Capacitor）</p>
+          </div>
+        </div>
+
+        <p class="reveal">
+          开发者生态同样完善：官方提供 <strong>MCP Server</strong>、<strong>TypeScript SDK</strong>、<strong>CLI</strong>、<strong>浏览器剪藏扩展</strong> 以及符合 <strong>OpenAPI 3.0</strong> 的完整接口描述。
+        </p>
+
+        <!-- === 3. 技术栈 === -->
+        <h2 class="reveal">技术栈</h2>
+
+        <div class="features reveal">
+          <div class="feature">
+            <div class="ico">⚛️</div>
+            <h4>前端</h4>
+            <p>React 18 · TypeScript · Vite 5 · Tiptap 3 · Tailwind</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🚀</div>
+            <h4>后端</h4>
+            <p>Hono 4 · SQLite (FTS5) · JWT</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🖥️</div>
+            <h4>桌面端</h4>
+            <p>Electron 33 · Win / macOS / Linux</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📲</div>
+            <h4>移动端</h4>
+            <p>Capacitor 8 · Android APK 直接下载</p>
+          </div>
+        </div>
+
+        <!-- === 4. 快速开始 === -->
+        <h2 class="reveal">快速开始</h2>
+
+        <p class="reveal">默认管理员账号：<code>admin / admin123</code>，首次登录后请立即修改密码。</p>
+
+        <h3 class="reveal">🐳 Docker（推荐）</h3>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">Terminal — 一键部署</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-k">$</span> git clone https://github.com/cropflre/nowen-note.git
+<span class="tok-k">$</span> cd nowen-note
+<span class="tok-k">$</span> docker-compose up -d
+
+<span class="tok-c"># 访问 http://&lt;你的IP&gt;:3001</span></pre>
+        </div>
+
+        <h3 class="reveal">💻 本地开发</h3>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">Terminal — Node.js 20+</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-k">$</span> npm run install:all
+<span class="tok-k">$</span> npm run dev:backend   <span class="tok-c"># 后端 :3001</span>
+<span class="tok-k">$</span> npm run dev:frontend  <span class="tok-c"># 前端 :5173</span></pre>
+        </div>
+
+        <h3 class="reveal">🍥 飞牛 fnOS 一键安装</h3>
+        <p class="reveal">
+          从 <a href="https://github.com/cropflre/nowen-note/releases" target="_blank" rel="noopener">Releases</a> 下载最新 <code>nowen-note-x.y.z.fpk</code>，飞牛 NAS「应用中心 → 设置 → 手动安装应用」选中文件即可。安装后桌面出现「弄文笔记」图标。
+        </p>
+
+        <!-- === 5. 关键配置 === -->
+        <h2 class="reveal">关键配置</h2>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">环境变量</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-k">PORT</span>=<span class="tok-n">3001</span>                              <span class="tok-c"># 服务端口</span>
+<span class="tok-k">DB_PATH</span>=<span class="tok-s">/app/data/nowen-note.db</span>       <span class="tok-c"># 数据库路径</span>
+<span class="tok-k">OLLAMA_URL</span>=<span class="tok-s">http://localhost:11434</span>     <span class="tok-c"># 本地 Ollama（可选）</span>
+<span class="tok-k">BACKUP_DIR</span>=<span class="tok-s">/app/backups</span>                <span class="tok-c"># 独立备份磁盘（推荐）</span></pre>
+        </div>
+
+        <p class="reveal">
+          💾 <strong>数据持久化：</strong>容器需将 <code>/app/data</code> 映射到宿主机（不是 <code>/data</code>）。镜像已声明 <code>VOLUME ["/app/data"]</code>，主流 NAS 面板会自动预填该路径。
+        </p>
+
+        <blockquote class="reveal">
+          🗂️ <strong>备份最佳实践：</strong>遵循 3-2-1 原则，把 <code>/app/backups</code> 另挂到独立磁盘，配置 SMTP 邮件备份，双重保险。
+        </blockquote>
+
+        <!-- === 6. 链接 === -->
+        <h2 class="reveal">相关链接</h2>
+
+        <blockquote class="reveal">
+          📂 <strong>源码仓库：</strong> <a href="https://github.com/cropflre/nowen-note" target="_blank" rel="noopener">github.com/cropflre/nowen-note</a><br/>
+          💬 <strong>QQ 交流群：</strong> <code>1093473044</code><br/>
+          📜 <strong>开源协议：</strong> GPL-3.0
+        </blockquote>
+
+      </div><!-- .prose -->
+    </div>
+  </article>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p>© <span data-year></span> cropflre · Built with ❤️ &amp; vanilla code</p>
+      <p style="margin-top:8px">
+        <a href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
+        &nbsp;·&nbsp;
+        <a href="/">首页</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

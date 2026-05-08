@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NOWEN · 星云门户 — 极简个人导航站 | cropflre</title>
+  <meta name="description" content="集书签管理与系统监控于一体的极简个人导航站 · React 18 + TypeScript · Docker 多架构 · Spotlight 搜索 · 8 款主题" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>🌌</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="brand">cropflre</a>
+      <div class="nav-links">
+        <a href="/">首页</a>
+        <a href="welcome.html">项目</a>
+        <a href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
+        <button class="theme-toggle" data-theme-toggle aria-label="切换主题">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <article class="article">
+    <div class="container">
+      <header class="article-header">
+        <a href="/" class="back-link">← 返回首页</a>
+        <h1 class="reveal">🌌 NOWEN · 弄文 · 星云门户<br/><small style="font-size:.5em;color:var(--fg-soft);font-weight:500">集书签管理与系统监控于一体的极简个人导航站</small></h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-05-08">📅 2026-05-08</time>
+          <span>⏱ 阅读约 4 分钟</span>
+          <span class="tag">Bookmark</span>
+          <span class="tag">Dashboard</span>
+          <span class="tag">PWA</span>
+        </div>
+      </header>
+
+      <div class="prose">
+
+        <h2 class="reveal">项目介绍</h2>
+
+        <p class="reveal">
+          <strong>NOWEN（弄文 · 星云门户）</strong> 是一个集 <strong>书签管理</strong> 与 <strong>系统监控</strong> 于一体的极简个人导航站。打开浏览器即是「你的家」——收藏的网站、实时的硬件状态、甚至 Docker 容器状态都一目了然。
+        </p>
+
+        <blockquote class="reveal">
+          🎨 设计理念：像 macOS Dock 一样优雅，像 Raycast 一样高效，像 Grafana 一样清晰。
+        </blockquote>
+
+        <h2 class="reveal">核心特性</h2>
+
+        <div class="features reveal">
+          <div class="feature">
+            <div class="ico">📚</div>
+            <h4>智能书签管理</h4>
+            <p>拖拽排序 · 分类标签 · 置顶 · AI 自动元数据与标签</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🖥️</div>
+            <h4>实时系统监控</h4>
+            <p>CPU / 内存 / 硬盘 / 网络 / 温度 / Docker 容器</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🔍</div>
+            <h4>Spotlight 搜索</h4>
+            <p><code>⌘/Ctrl + K</code> 全局搜索，支持书签和命令</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🎨</div>
+            <h4>8 款预设主题</h4>
+            <p>深/浅双模式，跟随系统或时间自动切换</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🌐</div>
+            <h4>国际化</h4>
+            <p>中文 / English / 日本語 / 한국어</p>
+          </div>
+          <div class="feature">
+            <div class="ico">💾</div>
+            <h4>数据安全</h4>
+            <p>Named Volume + 多层备份 · 支持 WebDAV 云备份</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🚀</div>
+            <h4>多架构支持</h4>
+            <p>x86_64 / ARM64（树莓派 / RK3588 友好）</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📱</div>
+            <h4>全端响应式</h4>
+            <p>桌面 Dock 与移动端悬浮坞，触觉反馈</p>
+          </div>
+        </div>
+
+        <h2 class="reveal">技术栈</h2>
+
+        <div class="features reveal">
+          <div class="feature">
+            <div class="ico">⚛️</div>
+            <h4>前端</h4>
+            <p>React 18 · TS · Vite · Tailwind · Framer Motion · @dnd-kit · SWR · i18next</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🚀</div>
+            <h4>后端</h4>
+            <p>Express · sql.js · systeminformation · Cheerio · WebDAV · node-cron</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🐳</div>
+            <h4>部署</h4>
+            <p>Docker 多架构 · Nginx · GitHub Actions 自动化</p>
+          </div>
+        </div>
+
+        <h2 class="reveal">快速开始</h2>
+
+        <h3 class="reveal">🐳 Docker 一键启动</h3>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">Terminal</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-k">$</span> docker run -d \
+    --name nowen \
+    -p 3000:3000 \
+    -v nowen-data:/app/server/data \
+    -v nowen-backup:/app/.data-backup \
+    --restart unless-stopped \
+    cropflre/nowen:latest
+
+<span class="tok-c"># 打开 http://localhost:3000</span>
+<span class="tok-c"># 默认账号: admin / admin123 （首次登录请立即修改）</span></pre>
+        </div>
+
+        <h3 class="reveal">📝 Docker Compose</h3>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">docker-compose.yml</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-k">services</span>:
+  <span class="tok-k">nowen</span>:
+    <span class="tok-k">image</span>: <span class="tok-s">cropflre/nowen:latest</span>
+    <span class="tok-k">container_name</span>: <span class="tok-s">nowen</span>
+    <span class="tok-k">ports</span>:
+      - <span class="tok-s">"3000:3000"</span>
+    <span class="tok-k">volumes</span>:
+      - <span class="tok-s">nowen-data:/app/server/data</span>
+      - <span class="tok-s">nowen-backup:/app/.data-backup</span>
+    <span class="tok-k">restart</span>: <span class="tok-s">unless-stopped</span>
+
+<span class="tok-k">volumes</span>:
+  <span class="tok-k">nowen-data</span>:
+  <span class="tok-k">nowen-backup</span>:</pre>
+        </div>
+
+        <h3 class="reveal">💻 本地开发</h3>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">Terminal — Node 20+</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-k">$</span> git clone https://github.com/cropflre/NOWEN.git
+<span class="tok-k">$</span> cd NOWEN
+<span class="tok-k">$</span> npm install
+<span class="tok-k">$</span> cd server &amp;&amp; npm install &amp;&amp; cd ..
+
+<span class="tok-c"># 后端（:3001）</span>
+<span class="tok-k">$</span> cd server &amp;&amp; npm run dev
+
+<span class="tok-c"># 前端（:5173，新终端）</span>
+<span class="tok-k">$</span> npm run dev</pre>
+        </div>
+
+        <h2 class="reveal">全局快捷键</h2>
+
+        <ul class="reveal">
+          <li><code>⌘/Ctrl + K</code> — Spotlight 搜索</li>
+          <li><code>⌘/Ctrl + N</code> — 新建书签</li>
+          <li><code>Esc</code> — 关闭弹窗</li>
+          <li><code>↑ ↓ / Enter</code> — 列表导航 / 确认</li>
+        </ul>
+
+        <h2 class="reveal">数据持久化 &amp; 备份</h2>
+
+        <p class="reveal">
+          数据库位于容器内 <code>/app/server/data/zen-garden.db</code>。项目内置 <strong>8 层防呆机制</strong>：
+        </p>
+        <ul class="reveal">
+          <li>双卷互备</li>
+          <li>启动自动备份</li>
+          <li>运行时同步</li>
+          <li>SQLite 完整性校验</li>
+        </ul>
+
+        <p class="reveal">
+          进阶：在后台启用 <strong>WebDAV 云备份</strong>（坚果云 / 群晖 / Alist 等），实现定时异地备份。
+        </p>
+
+        <h2 class="reveal">API 概览</h2>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">主要 REST API</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-k">/api/bookmarks</span>      <span class="tok-c"># 书签 CRUD、标签、批量操作</span>
+<span class="tok-k">/api/categories</span>     <span class="tok-c"># 分类管理</span>
+<span class="tok-k">/api/admin</span>          <span class="tok-c"># 登录、修改密码 / 用户名</span>
+<span class="tok-k">/api/system</span>         <span class="tok-c"># 实时硬件监控数据</span>
+<span class="tok-k">/api/visits</span>         <span class="tok-c"># 访问统计</span>
+<span class="tok-k">/api/health-check</span>   <span class="tok-c"># 链接健康检测</span>
+<span class="tok-k">/api/backup</span>         <span class="tok-c"># 备份与 WebDAV</span>
+<span class="tok-k">/api/ai</span>             <span class="tok-c"># AI 标签 / 分类 / 元数据</span></pre>
+        </div>
+
+        <h2 class="reveal">相关链接</h2>
+
+        <blockquote class="reveal">
+          📂 <strong>源码仓库：</strong> <a href="https://github.com/cropflre/NOWEN" target="_blank" rel="noopener">github.com/cropflre/NOWEN</a><br/>
+          🐳 <strong>Docker Hub：</strong> <a href="https://hub.docker.com/r/cropflre/nowen" target="_blank" rel="noopener">cropflre/nowen</a><br/>
+          💬 <strong>QQ 交流群：</strong> <code>1093473044</code><br/>
+          📜 <strong>开源协议：</strong> MIT
+        </blockquote>
+
+      </div><!-- .prose -->
+    </div>
+  </article>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span data-year></span> cropflre · Built with ❤️ &amp; vanilla code</p>
+      <p style="margin-top:8px">
+        <a href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
+        &nbsp;·&nbsp;
+        <a href="/">首页</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

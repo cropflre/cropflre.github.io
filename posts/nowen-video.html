@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>nowen-video — 私人家庭影音中心 | cropflre</title>
+  <meta name="description" content="Go + React 构建的轻量级家庭媒体服务器，对标 Emby / Jellyfin，单二进制 + SQLite + Docker 一键启动，AI 驱动刮削与推荐" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>🎬</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="brand">cropflre</a>
+      <div class="nav-links">
+        <a href="/">首页</a>
+        <a href="welcome.html">项目</a>
+        <a href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
+        <button class="theme-toggle" data-theme-toggle aria-label="切换主题">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <article class="article">
+    <div class="container">
+      <header class="article-header">
+        <a href="/" class="back-link">← 返回首页</a>
+        <h1 class="reveal">🎬 nowen-video<br/><small style="font-size:.5em;color:var(--fg-soft);font-weight:500">私人家庭影音中心 · 轻量级 Go + React 媒体服务器</small></h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-05-08">📅 2026-05-08</time>
+          <span>⏱ 阅读约 8 分钟</span>
+          <span class="tag">Media Server</span>
+          <span class="tag">Go</span>
+          <span class="tag">NAS</span>
+        </div>
+      </header>
+
+      <div class="prose">
+
+        <h2 class="reveal">项目介绍</h2>
+
+        <p class="reveal">
+          <strong>nowen-video</strong> 是一个基于 <strong>Go + React</strong> 构建的轻量级家庭媒体服务器，类似 <em>Emby / Jellyfin</em>，但专为 <strong>NAS 部署</strong> 深度优化：单二进制 + SQLite，Docker 一键启动，零配置即可使用。
+        </p>
+
+        <blockquote class="reveal">
+          🎯 设计目标：让家里的每部电影、每集番剧，都能像 Netflix 一样优雅呈现 —— 完全属于你自己。
+        </blockquote>
+
+        <p class="reveal">
+          🖥️ <strong>PC 桌面客户端</strong> 已上线！支持 <strong>MKV / HEVC / HDR / 杜比视界 / DTS / Atmos 零转码播放</strong>。
+        </p>
+
+        <h2 class="reveal">核心特性</h2>
+
+        <h3 class="reveal">🎬 媒体库管理</h3>
+        <ul class="reveal">
+          <li>自动扫描 MKV / MP4 / AVI / MOV / WebM / TS / RMVB 等格式</li>
+          <li>FFprobe 自动提取视频/音频完整元数据</li>
+          <li>完整 NFO 文件解析（兼容 Kodi / Emby / Jellyfin）</li>
+          <li>fsnotify 实时监控，新增/修改/删除自动同步</li>
+          <li>重复媒体智能检测与标记</li>
+        </ul>
+
+        <h3 class="reveal">📺 智能播放</h3>
+        <div class="features reveal">
+          <div class="feature">
+            <div class="ico">⚡</div>
+            <h4>直接播放</h4>
+            <p>MP4/WebM/M4V 浏览器原生播放 + Range 断点续传</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🔁</div>
+            <h4>HLS 自适应流</h4>
+            <p>MKV/AVI 按需转码，360p~原画多码率切换</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📊</div>
+            <h4>ABR 自适应码率</h4>
+            <p>根据网络带宽自动切换清晰度，无缝播放</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🎮</div>
+            <h4>全功能控制</h4>
+            <p>快捷键 / 书签 / 画中画 / 倍速 / 全屏</p>
+          </div>
+        </div>
+
+        <h3 class="reveal">⚡ 硬件加速转码</h3>
+        <p class="reveal">自动检测并启用最优硬件加速方案：</p>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">支持的硬件加速</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-c"># Intel 核显 — 群晖 Celeron/Pentium/Core</span>
+<span class="tok-f">qsv</span>    → h264_qsv
+
+<span class="tok-c"># Linux 通用 — Intel/AMD GPU</span>
+<span class="tok-f">vaapi</span>  → h264_vaapi
+
+<span class="tok-c"># NVIDIA 独显</span>
+<span class="tok-f">nvenc</span>  → h264_nvenc
+
+<span class="tok-c"># 兜底 — 纯软件编码</span>
+<span class="tok-f">none</span>   → libx264</pre>
+        </div>
+
+        <h3 class="reveal">🎨 多数据源元数据刮削（Provider Chain）</h3>
+        <p class="reveal">按优先级自动调度 6 大数据源，失败自动回落：</p>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">Provider Chain</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-n">10</span>  → <span class="tok-f">TMDb</span>        <span class="tok-c"># 主数据源，电影/剧集</span>
+<span class="tok-n">20</span>  → <span class="tok-f">豆瓣</span>        <span class="tok-c"># 补充源，中文友好</span>
+<span class="tok-n">25</span>  → <span class="tok-f">TheTVDB</span>     <span class="tok-c"># 剧集增强</span>
+<span class="tok-n">30</span>  → <span class="tok-f">Bangumi</span>     <span class="tok-c"># 动画专项</span>
+<span class="tok-n">50</span>  → <span class="tok-f">Fanart.tv</span>   <span class="tok-c"># 高清图片</span>
+<span class="tok-n">100</span> → <span class="tok-f">AI</span>          <span class="tok-c"># 兜底生成</span></pre>
+        </div>
+
+        <h3 class="reveal">🧠 AI 智能功能</h3>
+        <p class="reveal">集成 LLM，支持 OpenAI / DeepSeek / 通义千问 / Ollama 等 OpenAI 兼容 API：</p>
+        <ul class="reveal">
+          <li><strong>AI 智能搜索</strong> — 自然语言转结构化查询（"找一部关于太空的科幻片"）</li>
+          <li><strong>AI 推荐理由</strong> — 为推荐结果生成个性化文案</li>
+          <li><strong>AI 文件重命名</strong> — 智能规范化文件名</li>
+          <li><strong>AI 助手</strong> — 管理后台对话式媒体库管理</li>
+          <li><strong>AI 场景识别（V3）</strong> — 自动章节、精彩片段、封面候选</li>
+          <li><strong>ASR 语音识别</strong> — 自动生成字幕</li>
+        </ul>
+
+        <h3 class="reveal">📡 Emby / Jellyfin 兼容</h3>
+        <p class="reveal">
+          完整实现 <strong>Emby Server API</strong>（15 个模块，140+ 接口），让 <strong>Infuse / Kodi / Emby 原生客户端</strong> 无缝接入：
+        </p>
+        <ul class="reveal">
+          <li>JWT 复用 —— Emby AccessToken 直接是 nowen JWT，单点登录</li>
+          <li>虚拟 Season —— 通过 <code>SeasonNum</code> 聚合 + ID 编码 <code>uuid|season|N</code></li>
+          <li>UUID ↔ 数字 ID 稳定映射（SHA-1 派生）</li>
+          <li>视频流直通 + Remux + HLS，支持 Range / HEAD</li>
+          <li>外挂字幕 + 内嵌字幕提取</li>
+        </ul>
+
+        <h2 class="reveal">架构概览</h2>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">分层架构</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre>┌─────────────────────────────────────────────────┐
+│  浏览器：React 18 + TS + Tailwind + HLS.js      │
+└────────────────────┬────────────────────────────┘
+                     │ HTTP / WebSocket
+                     ▼
+┌─────────────────────────────────────────────────┐
+│  Gin HTTP Server (:8080)                        │
+│  ├─ Handler（33+ 文件）                          │
+│  ├─ Service（67+ 文件，含 Provider Chain）       │
+│  ├─ Repository（14+ 文件，GORM 数据访问）        │
+│  └─ SQLite (WAL 模式, 30+ 张表)                 │
+└─────────────────────────────────────────────────┘</pre>
+        </div>
+
+        <h2 class="reveal">技术栈</h2>
+
+        <div class="features reveal">
+          <div class="feature">
+            <div class="ico">🐹</div>
+            <h4>后端</h4>
+            <p>Go 1.22 · Gin · GORM · SQLite (WAL) · Zap · FFmpeg</p>
+          </div>
+          <div class="feature">
+            <div class="ico">⚛️</div>
+            <h4>前端</h4>
+            <p>React 18 · TS 5.4 · Vite 5 · Tailwind · Zustand · HLS.js</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🐳</div>
+            <h4>部署</h4>
+            <p>Docker (Alpine 3.19) · Compose · 多阶段构建</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🌐</div>
+            <h4>国际化</h4>
+            <p>中文 / English / 日本語</p>
+          </div>
+        </div>
+
+        <h2 class="reveal">快速开始</h2>
+
+        <h3 class="reveal">🐳 Docker 部署（推荐）</h3>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">Terminal</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-c"># 1. 克隆项目</span>
+<span class="tok-k">$</span> git clone https://github.com/cropflre/nowen-video.git
+<span class="tok-k">$</span> cd nowen-video
+
+<span class="tok-c"># 2. 修改 docker-compose.yml</span>
+<span class="tok-c">#    - 媒体目录挂载路径（如 /volume1/Media）</span>
+<span class="tok-c">#    - NOWEN_SECRETS_JWT_SECRET（必改！）</span>
+<span class="tok-c">#    - PUID/PGID 匹配宿主机（通过 `id` 命令查看）</span>
+
+<span class="tok-c"># 3. 启动</span>
+<span class="tok-k">$</span> docker-compose up -d
+
+<span class="tok-c"># 访问 http://你的NAS地址:8080</span>
+<span class="tok-c"># 默认管理员: admin / admin123</span></pre>
+        </div>
+
+        <h3 class="reveal">💻 本地开发</h3>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">Makefile 命令</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-c"># 前置要求: Go 1.22+, Node.js 20+, FFmpeg</span>
+
+<span class="tok-k">$</span> make dev       <span class="tok-c"># 开发模式运行后端</span>
+<span class="tok-k">$</span> make dev-web   <span class="tok-c"># 开发模式运行前端</span>
+<span class="tok-k">$</span> make build     <span class="tok-c"># 一键构建前端 + 后端</span>
+<span class="tok-k">$</span> make docker    <span class="tok-c"># Docker 构建并启动</span></pre>
+        </div>
+
+        <h3 class="reveal">🔧 硬件加速（可选）</h3>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">docker-compose.yml</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-k">devices</span>:
+  <span class="tok-c"># Intel QSV / VAAPI / AMD GPU</span>
+  - <span class="tok-s">/dev/dri:/dev/dri</span></pre>
+        </div>
+
+        <h2 class="reveal">未来规划（v1.0 ~ v1.2）</h2>
+
+        <p class="reveal">对标 Emby 的三大核心演进方向：</p>
+
+        <ul class="reveal">
+          <li><strong>无缝动态码率（ABR）</strong> — Master Playlist + hls.js 基于带宽在切片边界自动切换</li>
+          <li><strong>节流策略（Throttling）</strong> — 转码超前播放 N× 时暂停 FFmpeg，降低 GPU 空载功耗 &gt; 40%</li>
+          <li><strong>分段按需转码</strong> — 跳转时按需启动对应起点转码（<code>-ss N*6</code>），秒开 Seek</li>
+        </ul>
+
+        <blockquote class="reveal">
+          🎯 <strong>v1.0 验收指标：</strong>首帧时间 &lt; 3s · 码率切换 &lt; 2s · 单 GPU 并发 ≥ 4 路 1080p · 缓存命中率 &gt; 70%
+        </blockquote>
+
+        <h2 class="reveal">相关链接</h2>
+
+        <blockquote class="reveal">
+          📂 <strong>源码仓库：</strong> <a href="https://github.com/cropflre/nowen-video" target="_blank" rel="noopener">github.com/cropflre/nowen-video</a><br/>
+          💬 <strong>QQ 交流群：</strong> <code>1093473044</code><br/>
+          📜 <strong>开源协议：</strong> GPL-3.0
+        </blockquote>
+
+      </div><!-- .prose -->
+    </div>
+  </article>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© <span data-year></span> cropflre · Built with ❤️ &amp; vanilla code</p>
+      <p style="margin-top:8px">
+        <a href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
+        &nbsp;·&nbsp;
+        <a href="/">首页</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

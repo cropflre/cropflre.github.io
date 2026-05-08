@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — cropflre</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>🌿</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; }
+    body {
+      font-family: "JetBrains Mono", monospace;
+      background: #0d1117;
+      color: #e6edf3;
+      min-height: 100dvh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .terminal {
+      max-width: 540px; width: 100%;
+      border: 1px solid #30363d;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,.5);
+    }
+    .terminal-bar {
+      display: flex; align-items: center; gap: 8px;
+      padding: 12px 16px;
+      background: #161b22;
+      border-bottom: 1px solid #21262d;
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-r { background: #ff5f57; }
+    .dot-y { background: #febc2e; }
+    .dot-g { background: #28c840; }
+    .terminal-title { margin-left: 10px; font-size: 12px; color: #6e7681; }
+    .terminal-body { padding: 28px 24px; line-height: 1.8; }
+    .prompt { color: #7ee787; }
+    .err { color: #ff7b72; }
+    .dim { color: #6e7681; }
+    .link {
+      color: #79c0ff;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .link:hover { color: #7ee787; }
+    .cursor {
+      display: inline-block;
+      width: 9px; height: 18px;
+      background: #7ee787;
+      vertical-align: text-bottom;
+      animation: blink 1.2s steps(2) infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot dot-r"></span>
+      <span class="dot dot-y"></span>
+      <span class="dot dot-g"></span>
+      <span class="terminal-title">bash — cropflre.github.io</span>
+    </div>
+    <div class="terminal-body">
+      <p><span class="prompt">$</span> cat ./requested-page</p>
+      <p><span class="err">Error 404:</span> file not found.</p>
+      <br/>
+      <p><span class="prompt">$</span> echo "Oops!"</p>
+      <p>你访问的页面不存在或已被移除 🍃</p>
+      <br/>
+      <p><span class="prompt">$</span> cd <a href="/" class="link">~homepage</a></p>
+      <p class="dim">输入回车返回首页...</p>
+      <p><span class="prompt">$</span> <span class="cursor"></span></p>
+    </div>
+  </div>
+</body>
+</html>

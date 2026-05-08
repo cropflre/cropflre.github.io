@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>项目全面解析 — cropflre</title>
+  <meta name="description" content="深度解析 cropflre 开源项目的设计理念、核心功能、代码亮点与使用指南" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>🌿</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+</head>
+<body>
+
+  <!-- ===== Navigation ===== -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="/" class="brand">cropflre</a>
+      <div class="nav-links">
+        <a href="/">首页</a>
+        <a href="welcome.html">项目</a>
+        <a href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
+        <button class="theme-toggle" data-theme-toggle aria-label="切换主题">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== Article ===== -->
+  <article class="article">
+    <div class="container">
+      <header class="article-header">
+        <a href="/" class="back-link">← 返回首页</a>
+        <h1 class="reveal">🚀 项目全面解析<br/><small style="font-size:.5em;color:var(--fg-soft);font-weight:500">核心功能 · 代码亮点 · 使用指南</small></h1>
+        <div class="article-meta reveal">
+          <time datetime="2026-05-08">📅 2026-05-08</time>
+          <span>⏱ 阅读约 6 分钟</span>
+          <span class="tag">Open Source</span>
+          <span class="tag">Frontend</span>
+          <span class="tag">Design</span>
+        </div>
+      </header>
+
+      <div class="prose">
+
+        <!-- === 1. 项目介绍 === -->
+        <h2 class="reveal">项目介绍</h2>
+
+        <p class="reveal">
+          <strong>cropflre.github.io</strong> 是一个完全从零构建的开发者个人博客，采用纯 HTML/CSS/JavaScript 实现，无任何框架依赖。设计灵感来源于终端界面与现代 GitHub 的暗色美学——"用写代码的态度写博客"。
+        </p>
+
+        <blockquote class="reveal">
+          💡 设计哲学：以终端的沉浸感为基底，融合现代 UI 的流畅与精致。每一个像素都服务于阅读体验。
+        </blockquote>
+
+        <p class="reveal">项目的核心目标：</p>
+        <ul class="reveal">
+          <li><strong>零依赖</strong> — 不依赖 React、Vue 或任何框架，纯原生实现</li>
+          <li><strong>极致性能</strong> — 首屏加载 &lt; 100ms（本地），无打包过程</li>
+          <li><strong>可定制</strong> — CSS Custom Properties 驱动主题系统</li>
+          <li><strong>可访问性</strong> — 语义化 HTML，ARIA 标签，键盘导航友好</li>
+        </ul>
+
+        <!-- Demo -->
+        <div class="demo reveal">
+          <div class="demo-frame">
+            cropflre.github.io — Live Preview
+          </div>
+          <div class="caption">↗ 访问 <a href="https://cropflre.github.io" target="_blank">cropflre.github.io</a> 查看在线效果</div>
+        </div>
+
+        <!-- === 2. 核心功能 === -->
+        <h2 class="reveal">核心功能展示</h2>
+
+        <div class="features reveal">
+          <div class="feature">
+            <div class="ico">🌗</div>
+            <h4>暗色/亮色双主题</h4>
+            <p>一键切换，偏好自动保存至 localStorage</p>
+          </div>
+          <div class="feature">
+            <div class="ico">✨</div>
+            <h4>卡片聚光效果</h4>
+            <p>鼠标跟踪高光，radial-gradient 动态渲染</p>
+          </div>
+          <div class="feature">
+            <div class="ico">⌨️</div>
+            <h4>终端打字机</h4>
+            <p>Hero 区域循环打字动画，增强品牌辨识度</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📋</div>
+            <h4>一键复制代码</h4>
+            <p>代码块右上角 Copy 按钮，Clipboard API 实现</p>
+          </div>
+          <div class="feature">
+            <div class="ico">📱</div>
+            <h4>全端响应式</h4>
+            <p>从移动端到超宽屏，完美自适应布局</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🎯</div>
+            <h4>滚动渐入动画</h4>
+            <p>IntersectionObserver 驱动的视口触发动效</p>
+          </div>
+        </div>
+
+        <!-- === 3. 代码亮点 === -->
+        <h2 class="reveal">代码亮点解析</h2>
+
+        <h3 class="reveal">🎨 CSS Custom Properties 主题系统</h3>
+        <p class="reveal">
+          整套设计系统基于 CSS 变量构建，实现主题切换只需修改根选择器的变量值，无需重写任何组件样式：
+        </p>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">style.css — 主题变量</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-c">/* 暗色主题（默认） */</span>
+<span class="tok-k">:root</span> {
+  <span class="tok-k">--bg</span>: <span class="tok-s">#0d1117</span>;
+  <span class="tok-k">--fg</span>: <span class="tok-s">#e6edf3</span>;
+  <span class="tok-k">--accent</span>: <span class="tok-s">#7ee787</span>;  <span class="tok-c">/* terminal green */</span>
+}
+
+<span class="tok-c">/* 亮色主题 — 只需覆盖变量 */</span>
+<span class="tok-k">[data-theme="light"]</span> {
+  <span class="tok-k">--bg</span>: <span class="tok-s">#fbfcfd</span>;
+  <span class="tok-k">--fg</span>: <span class="tok-s">#1f2328</span>;
+  <span class="tok-k">--accent</span>: <span class="tok-s">#1a7f37</span>;
+}</pre>
+        </div>
+
+        <h3 class="reveal">✨ 卡片聚光效果（Spotlight）</h3>
+        <p class="reveal">
+          利用 CSS <code>radial-gradient</code> + JS <code>mousemove</code> 实时设置自定义属性，实现跟随鼠标的光照效果：
+        </p>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">main.js — 卡片聚光</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-c">// 卡片鼠标跟踪高光</span>
+document.<span class="tok-f">querySelectorAll</span>(<span class="tok-s">".card"</span>).<span class="tok-f">forEach</span>(<span class="tok-k">card</span> => {
+  card.<span class="tok-f">addEventListener</span>(<span class="tok-s">"mousemove"</span>, (<span class="tok-k">e</span>) => {
+    <span class="tok-k">const</span> r = card.<span class="tok-f">getBoundingClientRect</span>();
+    card.style.<span class="tok-f">setProperty</span>(<span class="tok-s">"--x"</span>, <span class="tok-s">`${e.clientX - r.left}px`</span>);
+    card.style.<span class="tok-f">setProperty</span>(<span class="tok-s">"--y"</span>, <span class="tok-s">`${e.clientY - r.top}px`</span>);
+  });
+});</pre>
+        </div>
+
+        <h3 class="reveal">🎬 IntersectionObserver 滚动动画</h3>
+        <p class="reveal">
+          无需任何第三方动画库，通过原生 IntersectionObserver API 实现元素进入视口时的优雅渐入：
+        </p>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">main.js — 滚动渐入</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-k">const</span> io = <span class="tok-k">new</span> <span class="tok-f">IntersectionObserver</span>((entries) => {
+  entries.<span class="tok-f">forEach</span>(e => {
+    <span class="tok-k">if</span> (e.isIntersecting) {
+      e.target.classList.<span class="tok-f">add</span>(<span class="tok-s">"in"</span>);
+      io.<span class="tok-f">unobserve</span>(e.target);
+    }
+  });
+}, { rootMargin: <span class="tok-s">"0px 0px -10% 0px"</span>, threshold: <span class="tok-n">0.05</span> });
+
+document.<span class="tok-f">querySelectorAll</span>(<span class="tok-s">".reveal"</span>).<span class="tok-f">forEach</span>(el => io.<span class="tok-f">observe</span>(el));</pre>
+        </div>
+
+        <h3 class="reveal">⌨️ 打字机效果</h3>
+        <p class="reveal">
+          纯 JS 递归实现的打字机效果，支持多文本循环和自然的删除/输入节奏：
+        </p>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">HTML — 声明式配置</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-c">&lt;!-- 只需在 HTML 中声明文本数组 --&gt;</span>
+&lt;<span class="tok-k">span</span>
+  <span class="tok-f">data-typewriter</span>
+  <span class="tok-f">data-words</span>=<span class="tok-s">'["写干净的代码", "探索有趣的技术", "打造好用的工具"]'</span>
+&gt;&lt;/<span class="tok-k">span</span>&gt;</pre>
+        </div>
+
+        <!-- === 4. 使用指南 === -->
+        <h2 class="reveal">使用指南</h2>
+
+        <h3 class="reveal">📦 快速开始</h3>
+        <p class="reveal">只需 3 步即可部署你自己的版本：</p>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">Terminal</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre><span class="tok-c"># 1. Fork 或克隆仓库</span>
+<span class="tok-k">$</span> git clone https://github.com/cropflre/cropflre.github.io.git
+<span class="tok-k">$</span> cd cropflre.github.io
+
+<span class="tok-c"># 2. 本地预览（使用任意静态服务器）</span>
+<span class="tok-k">$</span> npx serve .
+<span class="tok-c"># 或: python -m http.server 3000</span>
+
+<span class="tok-c"># 3. 推送到 GitHub，自动部署到 username.github.io</span>
+<span class="tok-k">$</span> git push origin master</pre>
+        </div>
+
+        <h3 class="reveal">🛠 自定义配置</h3>
+
+        <div class="codeblock reveal">
+          <div class="codeblock-head">
+            <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+            <span class="codeblock-title">项目结构</span>
+            <button class="copy-btn">Copy</button>
+          </div>
+<pre>cropflre.github.io/
+├── index.html          <span class="tok-c"># 首页</span>
+├── posts/
+│   └── welcome.html    <span class="tok-c"># 文章页面</span>
+├── assets/
+│   ├── css/
+│   │   └── style.css   <span class="tok-c"># 设计系统（修改变量即可换肤）</span>
+│   └── js/
+│       └── main.js     <span class="tok-c"># 交互逻辑</span>
+├── 404.html            <span class="tok-c"># 终端风 404 页面</span>
+├── .nojekyll           <span class="tok-c"># 绕过 Jekyll 处理</span>
+└── README.md</pre>
+        </div>
+
+        <h3 class="reveal">🎨 主题定制</h3>
+        <p class="reveal">
+          修改 <code>style.css</code> 顶部的 CSS 变量即可快速换肤：
+        </p>
+        <ul class="reveal">
+          <li><code>--accent</code> — 主强调色（默认终端绿）</li>
+          <li><code>--accent-2</code> — 链接色（默认蓝）</li>
+          <li><code>--bg</code> — 主背景色</li>
+          <li><code>--font-mono</code> — 等宽字体系列</li>
+          <li><code>--radius</code> — 全局圆角大小</li>
+        </ul>
+
+        <h3 class="reveal">📝 新增文章</h3>
+        <ol class="reveal">
+          <li>在 <code>posts/</code> 目录下新建 HTML 文件</li>
+          <li>复制 <code>welcome.html</code> 作为模板</li>
+          <li>修改 <code>&lt;article&gt;</code> 内容区域</li>
+          <li>在 <code>index.html</code> 的文章列表中添加链接</li>
+        </ol>
+
+        <blockquote class="reveal">
+          🔗 <strong>在线演示：</strong> <a href="https://cropflre.github.io" target="_blank">https://cropflre.github.io</a><br/>
+          📂 <strong>源码仓库：</strong> <a href="https://github.com/cropflre/cropflre.github.io" target="_blank">github.com/cropflre/cropflre.github.io</a>
+        </blockquote>
+
+        <h2 class="reveal">技术栈总结</h2>
+
+        <div class="features reveal">
+          <div class="feature">
+            <div class="ico">📄</div>
+            <h4>HTML5</h4>
+            <p>语义化标签 · ARIA</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🎨</div>
+            <h4>CSS3</h4>
+            <p>Custom Props · Grid · Backdrop Filter</p>
+          </div>
+          <div class="feature">
+            <div class="ico">⚡</div>
+            <h4>Vanilla JS</h4>
+            <p>零依赖 · ES6+ · Observer API</p>
+          </div>
+          <div class="feature">
+            <div class="ico">🚀</div>
+            <h4>GitHub Pages</h4>
+            <p>自动部署 · 全球 CDN</p>
+          </div>
+        </div>
+
+      </div><!-- .prose -->
+    </div>
+  </article>
+
+  <!-- ===== Footer ===== -->
+  <footer class="footer">
+    <div class="container">
+      <p>© <span data-year></span> cropflre · Built with ❤️ & vanilla code</p>
+      <p style="margin-top:8px">
+        <a href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
+        &nbsp;·&nbsp;
+        <a href="/">首页</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
