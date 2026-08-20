@@ -1,211 +1,156 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>cropflre — Developer Blog</title>
-  <meta name="description" content="cropflre 的开源开发者博客 · 分享项目、代码与思考" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>🌿</text></svg>" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#f7f8fb" />
+  <meta name="description" content="Nowen 帮助中心：Nowen Note（弄文笔记）、Nowen Reader、Nowen Video、NOWEN 书签的使用教程、部署指南与常见问题。" />
+  <meta name="keywords" content="Nowen Note,弄文笔记,Nowen Reader,Nowen Video,NOWEN书签,帮助中心,使用教程,NAS,自托管" />
+  <meta property="og:title" content="Nowen 帮助中心" />
+  <meta property="og:description" content="Nowen 系列产品的使用教程、部署指南与问题解答。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://cropflre.github.io/" />
+  <title>Nowen 帮助中心 · 使用教程与问题解答</title>
+  <link rel="stylesheet" href="assets/css/help.css" />
+  <script>
+    (() => {
+      const saved = localStorage.getItem('nowen-help-theme');
+      const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    })();
+  </script>
 </head>
 <body>
+  <a class="skip-link" href="#mainContent">跳到主要内容</a>
 
-  <!-- ===== Navigation ===== -->
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a href="/" class="brand">cropflre</a>
-      <div class="nav-links">
-        <a href="/">首页</a>
-        <a href="posts/welcome.html">项目</a>
-        <a href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
-        <button class="theme-toggle" data-theme-toggle aria-label="切换主题">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-            <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-          </svg>
+  <header class="app-header">
+    <div class="header-inner">
+      <a class="brand" href="#/" aria-label="Nowen 帮助中心首页">
+        <span class="brand-mark">N</span>
+        <span class="brand-copy">NOWEN <small>帮助中心</small></span>
+      </a>
+
+      <div class="header-search" role="search">
+        <div class="search-input-wrap">
+          <svg class="search-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="globalSearch" type="search" autocomplete="off" placeholder="搜索教程、功能或问题…" aria-label="搜索帮助中心" />
+          <kbd class="search-kbd">Ctrl K</kbd>
+        </div>
+        <div class="search-results" id="searchResults" aria-live="polite"></div>
+      </div>
+
+      <nav class="header-actions" aria-label="顶部导航">
+        <a class="header-link" href="http://nowen.cn/" target="_blank" rel="noopener">官网</a>
+        <a class="header-link" href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
+        <button class="icon-btn mobile-menu-btn" id="mobileMenu" type="button" aria-label="打开教程目录">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
         </button>
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="切换深浅色模式">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a6 6 0 1 0 9 9 9 9 0 1 1-9-9Z"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main" id="mainContent">
+    <div class="landing" id="landing">
+      <section class="hero">
+        <span class="eyebrow"><i></i> Nowen Open Source Lab · Documentation</span>
+        <h1>一个入口，找到所有 <span>Nowen 使用答案</span></h1>
+        <p>从第一次安装到高级功能，从日常使用到故障排查。这里将统一维护 Nowen Note、Reader、Video 与 NOWEN 书签的用户教程。</p>
+        <div class="hero-search">
+          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="heroSearch" type="search" autocomplete="off" placeholder="例如：Docker 部署、图片加载失败、AI 配置…" aria-label="搜索 Nowen 教程" />
+          <span class="hint">输入后回车</span>
+        </div>
+      </section>
+
+      <section class="landing-section" aria-labelledby="productsTitle">
+        <div class="section-heading">
+          <div><h2 id="productsTitle">选择产品</h2><p>帮助中心按产品独立维护，统一搜索和统一设计语言。</p></div>
+          <span class="badge ready">Nowen Note 教程首批已上线</span>
+        </div>
+
+        <div class="product-grid">
+          <a class="product-card" href="#/note" style="--card-bg:rgba(101,88,245,.11);--card-glow:rgba(101,88,245,.22)">
+            <div class="product-icon">📓</div>
+            <h3>Nowen Note · 弄文笔记</h3>
+            <p>知识树、富文本 / Markdown、每日记录、任务、AI、协作、多端与 NAS 自托管。</p>
+            <div class="product-meta"><span class="badge ready">教程已上线</span><span>15 篇首批指南 →</span></div>
+          </a>
+
+          <a class="product-card" href="#/reader" style="--card-bg:rgba(25,166,126,.10);--card-glow:rgba(25,166,126,.18)">
+            <div class="product-icon">📖</div>
+            <h3>Nowen Reader</h3>
+            <p>漫画与小说阅读平台。后续覆盖书库、阅读器、AI、OPDS、服务端与多端客户端。</p>
+            <div class="product-meta"><span class="badge">即将上线</span><span>结构已预留</span></div>
+          </a>
+
+          <a class="product-card" href="#/video" style="--card-bg:rgba(22,166,199,.10);--card-glow:rgba(22,166,199,.19)">
+            <div class="product-icon">🎬</div>
+            <h3>Nowen Video</h3>
+            <p>私人家庭影音中心。后续覆盖媒体库、刮削、字幕、播放、客户端、转码与维护。</p>
+            <div class="product-meta"><span class="badge">即将上线</span><span>结构已预留</span></div>
+          </a>
+
+          <a class="product-card" href="#/bookmarks" style="--card-bg:rgba(232,155,50,.10);--card-glow:rgba(232,155,50,.18)">
+            <div class="product-icon">🔖</div>
+            <h3>NOWEN 书签</h3>
+            <p>书签与星云门户。后续覆盖收藏、分类、搜索、导入导出与系统监控。</p>
+            <div class="product-meta"><span class="badge">规划中</span><span>结构已预留</span></div>
+          </a>
+        </div>
+      </section>
+
+      <section class="landing-section" aria-labelledby="quickTitle">
+        <div class="section-heading"><div><h2 id="quickTitle">Nowen Note 快速入口</h2><p>第一次使用，建议按下面三步先跑通核心链路。</p></div></div>
+        <div class="quick-grid">
+          <a class="quick-card" href="#/note/quick-start"><span class="num">01 · START</span><h3>5 分钟快速上手</h3><p>部署、登录、创建目录、写下第一篇笔记，再完成第一份备份。</p></a>
+          <a class="quick-card" href="#/note/editors"><span class="num">02 · WRITE</span><h3>富文本与 Markdown</h3><p>选择适合自己的编辑器，掌握图片、表格、代码、公式与 Mermaid。</p></a>
+          <a class="quick-card" href="#/note/deploy"><span class="num">03 · HOST</span><h3>Docker / NAS 部署</h3><p>长期运行在绿联、飞牛、群晖或 Linux 服务器时要注意哪些数据和安全项。</p></a>
+          <a class="quick-card" href="#/note/ai"><span class="num">04 · AI</span><h3>AI 配置与 RAG</h3><p>接入 DeepSeek、Gemini、豆包、通义、OpenAI 兼容接口或 Ollama。</p></a>
+          <a class="quick-card" href="#/note/backup"><span class="num">05 · DATA</span><h3>备份与恢复</h3><p>理解完整备份包含什么，以及升级、迁移前必须做的恢复准备。</p></a>
+          <a class="quick-card" href="#/note/faq"><span class="num">06 · SUPPORT</span><h3>常见问题排查</h3><p>客户端连接、登录、图片附件、同步冲突和性能问题从哪里开始查。</p></a>
+        </div>
+      </section>
+
+      <section class="landing-section">
+        <div class="callout-banner">
+          <div><h3>教程内容会跟着真实代码持续更新</h3><p>Nowen Note 首批内容以 GitHub main 分支当前能力和现有仓库教程为事实基线；安装包与平台支持范围以 Releases 为准。</p></div>
+          <a class="primary-btn" href="#/note">进入 Nowen Note 教程 →</a>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        © 2026 Nowen Open Source Lab · <a href="https://github.com/cropflre/cropflre.github.io" target="_blank" rel="noopener">帮助中心源码</a> · <a href="posts/welcome.html">旧项目文章</a>
+      </footer>
+    </div>
+
+    <section class="docs-view" id="docsView" aria-label="产品教程">
+      <aside class="docs-sidebar" id="docsSidebar">
+        <button class="product-switcher" id="productSwitcher" type="button" aria-label="切换产品">
+          <span class="mini-icon">📓</span>
+          <span><strong>Nowen Note</strong><small>弄文笔记 · 使用教程</small></span>
+          <svg style="margin-left:auto;color:var(--text-3)" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+        <nav class="sidebar-nav" id="sidebarNav" aria-label="教程目录"></nav>
+        <div class="sidebar-bottom">
+          <a href="http://nowen.cn/" target="_blank" rel="noopener">Nowen 官网 ↗</a>
+          <a href="http://note.nowen.cn/" target="_blank" rel="noopener">Nowen Note 在线体验 ↗</a>
+          <a href="https://github.com/cropflre/nowen-note/releases" target="_blank" rel="noopener">客户端下载 ↗</a>
+          <a href="https://github.com/cropflre/nowen-note/issues" target="_blank" rel="noopener">问题反馈 ↗</a>
+        </div>
+      </aside>
+
+      <div class="docs-main">
+        <div class="docs-stage">
+          <div id="articleContainer"></div>
+          <aside class="toc" id="toc" aria-label="本页目录"></aside>
+        </div>
       </div>
-    </div>
-  </nav>
+    </section>
+  </main>
 
-  <!-- ===== Hero ===== -->
-  <section class="hero">
-    <div class="container">
-      <p class="hero-tag reveal">$ whoami</p>
-      <h1 class="hero-title reveal">
-        Hi, I'm <span class="gradient">cropflre</span>
-      </h1>
-      <p class="hero-desc reveal">
-        热爱开源的开发者，专注于构建实用高效的工具与项目。<br/>
-        <span data-typewriter data-words='["写干净的代码", "探索有趣的技术", "打造好用的工具", "分享学到的一切"]'></span>&nbsp;
-      </p>
-      <div class="hero-actions reveal">
-        <a href="posts/welcome.html" class="btn btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
-          查看项目介绍
-        </a>
-        <a href="https://github.com/cropflre" target="_blank" rel="noopener" class="btn">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Projects ===== -->
-  <section class="section">
-    <div class="container">
-      <div class="section-title reveal">开源项目</div>
-      <div class="grid">
-
-        <a href="posts/nowen-note.html" class="card reveal">
-          <h3>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-            nowen-note
-          </h3>
-          <p>📓 自托管私有知识库 — 对标群晖 Note Station，Tiptap 3 + Hono + SQLite，集成 6 大 AI 服务商，Docker 一键部署。</p>
-          <div class="card-meta">
-            <span><span class="lang-dot" style="background:#3178c6"></span>TypeScript / React 18</span>
-            <span>📚 Knowledge</span>
-          </div>
-        </a>
-
-        <a href="posts/nowen-video.html" class="card reveal">
-          <h3>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-            nowen-video
-          </h3>
-          <p>🎬 私人家庭影音中心 — 对标 Emby/Jellyfin，Go 单二进制 + React，支持硬件加速、Provider Chain 刮削、Emby API 兼容层。</p>
-          <div class="card-meta">
-            <span><span class="lang-dot" style="background:#00ADD8"></span>Go / React 18</span>
-            <span>🎥 Media Server</span>
-          </div>
-        </a>
-
-        <a href="posts/nowen.html" class="card reveal">
-          <h3>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            NOWEN · 星云门户
-          </h3>
-          <p>🌌 极简个人导航站 — 集书签管理与系统监控于一体，Spotlight 搜索，8 款主题，支持 x86/ARM64。</p>
-          <div class="card-meta">
-            <span><span class="lang-dot" style="background:#61dafb"></span>React 18 / Express</span>
-            <span>🏠 Dashboard</span>
-          </div>
-        </a>
-
-        <a href="posts/nowen-reader.html" class="card reveal">
-          <h3>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            nowen-reader
-          </h3>
-          <p>📖 自托管漫画 &amp; 小说阅读平台 — Go 单二进制 + 30MB 镜像，17+ LLM AI 辅助，支持 OPDS 协议与 Flutter 客户端。</p>
-          <div class="card-meta">
-            <span><span class="lang-dot" style="background:#00ADD8"></span>Go 1.23 / React 19</span>
-            <span>📚 Reader</span>
-          </div>
-        </a>
-
-        <a href="posts/nowen-file.html" class="card reveal">
-          <h3>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
-            nowen-file
-          </h3>
-          <p>📁 现代化文件管理系统 — Go + React，多数据源映射（SMB/NFS/S3），WebDAV 协议、文件分享与版本管理。</p>
-          <div class="card-meta">
-            <span><span class="lang-dot" style="background:#00ADD8"></span>Go 1.25 / React 18</span>
-            <span>☁️ File Cloud</span>
-          </div>
-        </a>
-
-        <a href="https://github.com/cropflre/cropflre.github.io" class="card reveal" target="_blank" rel="noopener">
-          <h3>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-            cropflre.github.io
-          </h3>
-          <p>🌿 个人开发博客 — 极客终端风格设计，暗色/亮色双主题，响应式布局，零依赖纯原生实现。</p>
-          <div class="card-meta">
-            <span><span class="lang-dot" style="background:#f1e05a"></span>HTML / CSS / JS</span>
-            <span>⭐ Open Source</span>
-          </div>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Articles ===== -->
-  <section class="section" style="border-top:1px solid var(--border-soft)">
-    <div class="container">
-      <div class="section-title reveal">最新文章</div>
-      <div class="posts">
-
-        <a href="posts/nowen-note.html" class="post-item reveal">
-          <div>
-            <h4>📓 nowen-note：自托管私有知识库，对标群晖 Note Station</h4>
-            <p>Tiptap 3 + Hono + SQLite · 集成 6 大 AI 服务商 · 支持 Web/Electron/Android 多端</p>
-          </div>
-          <time datetime="2026-05-08">2026-05-08</time>
-        </a>
-
-        <a href="posts/nowen-video.html" class="post-item reveal">
-          <div>
-            <h4>🎬 nowen-video：私人家庭影音中心 · Go + React 轻量媒体服务器</h4>
-            <p>对标 Emby/Jellyfin · Provider Chain 多源刮削 · 硬件加速 · Emby API 兼容层</p>
-          </div>
-          <time datetime="2026-05-08">2026-05-08</time>
-        </a>
-
-        <a href="posts/nowen.html" class="post-item reveal">
-          <div>
-            <h4>🌌 NOWEN · 星云门户：极简个人导航站 + 实时系统监控</h4>
-            <p>书签管理 + Docker/硬件监控 · Spotlight 搜索 · 8 款主题 · 支持 ARM64</p>
-          </div>
-          <time datetime="2026-05-08">2026-05-08</time>
-        </a>
-
-        <a href="posts/nowen-reader.html" class="post-item reveal">
-          <div>
-            <h4>📖 nowen-reader：自托管漫画 &amp; 小说阅读平台</h4>
-            <p>Go 单二进制 30MB 镜像 · 17+ LLM AI 辅助 · OPDS 协议 · Flutter 客户端</p>
-          </div>
-          <time datetime="2026-05-08">2026-05-08</time>
-        </a>
-
-        <a href="posts/nowen-file.html" class="post-item reveal">
-          <div>
-            <h4>📁 nowen-file：现代化文件管理系统 · 多数据源 · WebDAV</h4>
-            <p>Go + React · 映射 SMB/NFS/本地目录 · S3/MinIO 后端 · 文件分享与版本管理</p>
-          </div>
-          <time datetime="2026-05-08">2026-05-08</time>
-        </a>
-
-        <a href="posts/welcome.html" class="post-item reveal">
-          <div>
-            <h4>🚀 项目全面解析：核心功能 · 代码亮点 · 使用指南</h4>
-            <p>深度介绍个人开源项目的设计理念、技术实现与快速上手教程</p>
-          </div>
-          <time datetime="2026-05-08">2026-05-08</time>
-        </a>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== Footer ===== -->
-  <footer class="footer">
-    <div class="container">
-      <p>© <span data-year></span> cropflre · Built with ❤️ & vanilla code</p>
-      <p style="margin-top:8px">
-        <a href="https://github.com/cropflre" target="_blank" rel="noopener">GitHub</a>
-        &nbsp;·&nbsp;
-        <a href="#">RSS</a>
-      </p>
-    </div>
-  </footer>
-
-  <script src="assets/js/main.js"></script>
+  <script src="assets/js/help.js"></script>
 </body>
 </html>
