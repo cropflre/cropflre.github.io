@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
   <meta name="theme-color" content="#f6f7fb" />
   <meta name="description" content="Nowen 帮助中心：Nowen Note（弄文笔记）、Nowen Reader、Nowen Video、NOWEN 书签的使用教程、部署指南、NAS 指南与常见问题。" />
-  <meta name="keywords" content="Nowen Note,弄文笔记,Nowen Reader,Nowen Video,NOWEN书签,帮助中心,使用教程,NAS,Docker,自托管,MCP" />
+  <meta name="keywords" content="Nowen Note,弄文笔记,Nowen Reader,漫画,小说,OPDS,Nowen Video,NOWEN书签,帮助中心,使用教程,NAS,Docker,自托管,MCP" />
   <meta property="og:title" content="Nowen 帮助中心" />
   <meta property="og:description" content="Nowen 系列产品的使用教程、部署指南与问题解答。" />
   <meta property="og:type" content="website" />
@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/help-v2.css" />
+  <link rel="stylesheet" href="assets/css/help-v3.css" />
   <script>
     (() => {
       const saved = localStorage.getItem('nowen-help-theme');
@@ -23,7 +24,8 @@
     })();
   </script>
   <script defer src="assets/js/help-data-v2.js"></script>
-  <script defer src="assets/js/help-app-v2.js"></script>
+  <script defer src="assets/js/help-reader-v3.js"></script>
+  <script defer src="assets/js/help-app-v3.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#appMain">跳到主要内容</a>
@@ -38,7 +40,7 @@
       <div class="global-search" role="search">
         <div class="search-box">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input id="globalSearch" type="search" autocomplete="off" placeholder="搜索教程、功能或问题…" aria-label="搜索帮助中心" />
+          <input id="globalSearch" type="search" autocomplete="off" placeholder="跨产品搜索教程、功能或问题…" aria-label="搜索帮助中心" />
           <kbd>Ctrl K</kbd>
         </div>
         <div class="search-results" id="searchResults" aria-live="polite"></div>
