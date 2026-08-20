@@ -6,8 +6,8 @@
 
 当前已接入：
 
-- 📓 **Nowen Note（弄文笔记）** — 知识库、每日记录、任务、AI、协作、多端与 NAS 自托管教程
-- 📖 **Nowen Reader** — 漫画 / 小说、书库、阅读器、AI、OPDS、Flutter 与 NAS 教程
+- 📓 **Nowen Note（弄文笔记）** — 39 篇教程，覆盖知识管理、离线、桌面文件夹同步、协作权限、对象存储、备份恢复、迁移与排障
+- 📖 **Nowen Reader** — 15 篇漫画 / 小说、书库、阅读器、AI、OPDS、Flutter 与 NAS 教程
 - 🎬 **Nowen Video** — 已预留产品入口
 - 🔖 **NOWEN 书签** — 已预留产品入口
 
@@ -36,8 +36,9 @@ cropflre.github.io/
 │   │   ├── help-v2.css        # 帮助中心基础 Design System
 │   │   └── help-v3.css        # 搜索、最近浏览、FAQ、灯箱等增强样式
 │   ├── js/
-│   │   ├── help-data-v2.js    # Nowen Note 教程数据
-│   │   ├── help-reader-v3.js  # Nowen Reader 教程数据 + V3 数据扩展
+│   │   ├── help-data-v2.js    # Nowen Note 基础教程数据
+│   │   ├── help-reader-v3.js  # Nowen Reader 教程数据 + 通用产品元数据
+│   │   ├── help-note-v4.js    # Nowen Note 深度专题与分类扩展
 │   │   └── help-app-v3.js     # 通用多产品路由、搜索与渲染引擎
 │   └── help/
 │       └── note/              # Nowen Note 教程示意图资源
@@ -45,6 +46,22 @@ cropflre.github.io/
 ├── 404.html
 └── .nojekyll
 ```
+
+## Nowen Note 文档结构
+
+V4 将 Note 从宽泛功能总览继续拆成 7 个可直接检索的文档分类：
+
+```text
+快速上手
+笔记、编辑器与知识管理
+效率与 AI
+协作、权限与发布
+多端、部署与离线
+数据、安全与恢复
+迁移、排障与开放能力
+```
+
+`help-data-v2.js` 保留首批稳定教程；`help-note-v4.js` 负责深度专题与分类重组。这样后续继续补充 Note 内容时，不需要重写历史数据文件。
 
 ## 内容维护原则
 
@@ -57,6 +74,8 @@ cropflre.github.io/
 - Nowen Video：`cropflre/nowen-video` → 当前正式主分支
 
 教程中的版本、端口、路径、权限和配置必须能在真实代码或当前文档中找到依据。
+
+部分 `nowen-note/docs/tutorials` 历史文章仍带旧版本尾注，只能作为操作线索；涉及当前权限、离线、同步、客户端和存储能力时，以当前 `main` README、当前专题文档和真实代码为准。
 
 ### 2. 用户教程优先解决问题
 
@@ -99,6 +118,8 @@ Nowen Reader 当前直接引用仓库 `main/docs/` 中维护的真实截图；�
 }
 ```
 
+Nowen Note 新的深度专题优先加入 `assets/js/help-note-v4.js`，避免继续扩大首版基础数据文件。
+
 可选真实截图：
 
 ```js
@@ -140,6 +161,11 @@ http://localhost:3000/
 
 ```text
 #/note/quick-start
+#/note/offline-workspace
+#/note/desktop-folder-sync
+#/note/acl-restricted
+#/note/object-storage
+#/note/backup-restore-drill
 #/note/mcp
 #/reader/quick-start
 #/reader/opds
@@ -147,17 +173,21 @@ http://localhost:3000/
 
 ## 发布
 
-正式站点由 `master` 分支承载。合并前至少检查：
+正式站点由 `master` 分支承载，并通过 `.github/workflows/pages.yml` 使用 GitHub Actions 发布。
+
+合并前至少检查：
 
 - 首页能正常渲染
 - Note / Reader 产品页可进入
+- Note 显示 39 篇教程且 7 个分类完整
+- V4 深链接可以打开
 - 深链接刷新后仍可使用
-- 搜索能同时命中两个产品
+- 搜索能同时命中 Note 与 Reader
+- 搜索可命中“离线工作区”“本地文件夹同步”“ACL”“对象存储”等 V4 专题
 - 深浅色正常
 - 手机端目录可打开 / 关闭
 - FAQ 可展开
 - 图片可放大并用 Esc 关闭
-- 外链截图可以加载
 
 ## License
 
