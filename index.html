@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="assets/css/help-v2.css" />
   <link rel="stylesheet" href="assets/css/help-v3.css" />
   <script>
+    var DATA_DIR = '${DATA_DIR}';
     (() => {
       const saved = localStorage.getItem('nowen-help-theme');
       const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
