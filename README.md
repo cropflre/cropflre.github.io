@@ -1,73 +1,164 @@
-# 🌿 cropflre.github.io
+# Nowen 帮助中心
 
-> 极客终端风格的开发者个人博客 — 纯原生实现，零依赖
+> Nowen 系列产品统一使用教程、部署指南与问题排查入口。
 
-[![GitHub Pages](https://img.shields.io/badge/Live-cropflre.github.io-7ee787?style=flat-square&logo=github)](https://cropflre.github.io)
-[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+[![GitHub Pages](https://img.shields.io/badge/Live-cropflre.github.io-6658f5?style=flat-square&logo=github)](https://cropflre.github.io/)
 
-## ✨ 特性
+当前已接入：
 
-- 🌗 暗色/亮色双主题（自动保存偏好）
-- ⌨️ 终端打字机动画
-- ✨ 鼠标追踪卡片聚光效果
-- 📋 代码块一键复制
-- 🎬 滚动渐入动画（IntersectionObserver）
-- 📱 完全响应式，适配所有设备
-- 🚀 零框架依赖，极致性能
-- 🎨 CSS Custom Properties 驱动的主题系统
+- 📓 **Nowen Note（弄文笔记）** — 知识库、每日记录、任务、AI、协作、多端与 NAS 自托管教程
+- 📖 **Nowen Reader** — 漫画 / 小说、书库、阅读器、AI、OPDS、Flutter 与 NAS 教程
+- 🎬 **Nowen Video** — 已预留产品入口
+- 🔖 **NOWEN 书签** — 已预留产品入口
 
-## 📂 项目结构
+## 帮助中心能力
 
-```
+- 多产品教程路由与统一导航
+- 跨产品全文搜索，支持标题 / 关键词 / 正文
+- 搜索关键词高亮与键盘 ↑ / ↓ / Enter 导航
+- `Ctrl/Cmd + K`、`/` 快捷聚焦搜索
+- 最近浏览记录
+- 相关文章 / “你可能还需要”推荐
+- 左侧分组目录 + 右侧页内目录
+- 可折叠 FAQ
+- 教程图片灯箱预览
+- 深色 / 浅色模式
+- 桌面端、平板和手机响应式布局
+- GitHub Issues 反馈与仓库文档跳转
+
+## 项目结构
+
+```text
 cropflre.github.io/
-├── index.html           # 博客首页
-├── posts/
-│   └── welcome.html     # 项目介绍文章
+├── index.html
 ├── assets/
 │   ├── css/
-│   │   └── style.css    # 设计系统 & 全部样式
-│   └── js/
-│       └── main.js      # 交互逻辑
-├── 404.html             # 终端风 404 页面
-├── .nojekyll            # 绕过 Jekyll 处理
-└── README.md
+│   │   ├── help-v2.css        # 帮助中心基础 Design System
+│   │   └── help-v3.css        # 搜索、最近浏览、FAQ、灯箱等增强样式
+│   ├── js/
+│   │   ├── help-data-v2.js    # Nowen Note 教程数据
+│   │   ├── help-reader-v3.js  # Nowen Reader 教程数据 + V3 数据扩展
+│   │   └── help-app-v3.js     # 通用多产品路由、搜索与渲染引擎
+│   └── help/
+│       └── note/              # Nowen Note 教程示意图资源
+├── posts/                     # 历史项目介绍文章，继续保留
+├── 404.html
+└── .nojekyll
 ```
 
-## 🚀 快速开始
+## 内容维护原则
 
-```bash
-# 克隆仓库
-git clone https://github.com/cropflre/cropflre.github.io.git
-cd cropflre.github.io
+### 1. 以真实主分支为事实基线
 
-# 本地预览
-npx serve .
-# 或 python -m http.server 3000
+教程不根据旧截图、旧版本说明或记忆编写。修改教程前先检查对应产品主分支：
 
-# 部署（推送到 master 分支即可）
-git push origin master
+- Nowen Note：`cropflre/nowen-note` → `main`
+- Nowen Reader：`cropflre/nowen-reader` → `main`
+- Nowen Video：`cropflre/nowen-video` → 当前正式主分支
+
+教程中的版本、端口、路径、权限和配置必须能在真实代码或当前文档中找到依据。
+
+### 2. 用户教程优先解决问题
+
+帮助中心不是源码 README 的镜像。推荐结构：
+
+```text
+用户目标
+↓
+操作步骤
+↓
+注意事项
+↓
+失败时怎么排查
+↓
+相关教程
 ```
 
-## 🎨 自定义
+技术实现细节只在能帮助用户理解操作边界时出现。
 
-编辑 `assets/css/style.css` 顶部的 `:root` 变量：
+### 3. 截图必须说明来源
 
-```css
-:root {
-  --accent: #7ee787;      /* 主强调色 */
-  --accent-2: #79c0ff;    /* 链接色 */
-  --font-mono: "JetBrains Mono", monospace;
-  --radius: 10px;         /* 全局圆角 */
+优先使用当前正式界面的真实截图。没有可用截图时可以使用“操作示意图”，但不能把示意图伪装成产品真实截图。
+
+Nowen Reader 当前直接引用仓库 `main/docs/` 中维护的真实截图；后续可以将稳定版本截图复制到本仓库 `assets/help/<product>/`，降低跨仓库资源依赖。
+
+## 新增一篇教程
+
+在对应产品的 `articles` 中增加：
+
+```js
+{
+  slug: 'example',
+  group: 'start',
+  title: '教程标题',
+  summary: '一句话说明用户能解决什么问题。',
+  keywords: '搜索关键词 关键词2',
+  updated: '2026-08-20',
+  time: '6 分钟',
+  body: `...`
 }
 ```
 
-## 📝 新增文章
+可选真实截图：
 
-1. 在 `posts/` 目录新建 `.html` 文件
-2. 复制 `posts/welcome.html` 作为模板
-3. 修改文章内容
-4. 在 `index.html` 文章列表中添加链接
+```js
+figure: {
+  src: 'assets/help/product/example.webp',
+  alt: '无障碍替代文本',
+  caption: '截图说明'
+}
+```
 
-## 📄 License
+## 新增一个 Nowen 产品
+
+1. 在 `window.NOWEN_HELP.products` 增加产品信息。
+2. 新建产品数据文件，例如 `assets/js/help-video.js`。
+3. 提供 `meta`、`groups`、`popular`、`articles` 四组数据。
+4. 在 `index.html` 中确保数据文件在 `help-app-v3.js` 之前加载。
+5. 通用引擎会自动接管首页产品卡、产品总览、侧边栏、搜索、相关文章和路由。
+
+无需为每个产品重新开发一套页面组件。
+
+## 本地预览
+
+```bash
+git clone https://github.com/cropflre/cropflre.github.io.git
+cd cropflre.github.io
+
+python -m http.server 3000
+# 或
+npx serve .
+```
+
+访问：
+
+```text
+http://localhost:3000/
+```
+
+常用深链接示例：
+
+```text
+#/note/quick-start
+#/note/mcp
+#/reader/quick-start
+#/reader/opds
+```
+
+## 发布
+
+正式站点由 `master` 分支承载。合并前至少检查：
+
+- 首页能正常渲染
+- Note / Reader 产品页可进入
+- 深链接刷新后仍可使用
+- 搜索能同时命中两个产品
+- 深浅色正常
+- 手机端目录可打开 / 关闭
+- FAQ 可展开
+- 图片可放大并用 Esc 关闭
+- 外链截图可以加载
+
+## License
 
 MIT © cropflre
