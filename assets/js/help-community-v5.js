@@ -10,10 +10,10 @@
   note.meta = note.meta || {};
   note.meta.community = {
     wechat: {
-      name: 'Nowen 实验室',
+      name: 'Nowen开源实验室',
       label: '微信公众号',
       qr: qrUrl,
-      description: '扫码关注 Nowen 实验室公众号，获取项目更新与社区内容。'
+      description: '扫码关注 Nowen开源实验室公众号，获取项目更新与社区内容。'
     },
     qq: {
       label: 'QQ 群',
@@ -27,8 +27,8 @@
       slug: 'community',
       group: 'support',
       title: '微信公众号、QQ 群与问题反馈',
-      summary: '关注 Nowen 实验室公众号、加入 QQ 群，并选择合适的问题反馈渠道。',
-      keywords: '微信公众号 公众号 微信 Nowen实验室 QQ群 QQ 群 1093473044 社区 交流 反馈 Issues',
+      summary: '关注 Nowen开源实验室公众号、加入 QQ 群，并选择合适的问题反馈渠道。',
+      keywords: '微信公众号 公众号 微信 Nowen开源实验室 Nowen开源实验室 QQ群 QQ 群 1093473044 社区 交流 反馈 Issues',
       updated: '2026-08-20',
       time: '3 分钟',
       body: `
@@ -36,11 +36,11 @@
         <div class="community-article-grid">
           <section class="community-article-card">
             <span class="community-kicker">WECHAT</span>
-            <h2>微信公众号 · Nowen 实验室</h2>
+            <h2>微信公众号 · Nowen开源实验室</h2>
             <p>使用微信扫描下方二维码关注公众号。该二维码直接使用 Nowen Note <code>release/v1.5.0</code> 中的官方社区资源。</p>
             <figure class="community-qr-figure">
-              <img src="${qrUrl}" alt="Nowen 实验室微信公众号二维码" loading="lazy" />
-              <figcaption>扫码关注 Nowen 实验室公众号</figcaption>
+              <img src="${qrUrl}" alt="Nowen开源实验室微信公众号二维码" loading="lazy" />
+              <figcaption>扫码关注 Nowen开源实验室公众号</figcaption>
             </figure>
           </section>
           <section class="community-article-card">

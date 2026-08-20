@@ -54,8 +54,8 @@
             <p>${escapeHtml(community.wechat.description)}</p>
             <a href="#/note/community">查看社区与反馈说明 →</a>
           </div>
-          <button class="community-v5-qr community-qr-open" type="button" aria-label="放大查看 Nowen 实验室微信公众号二维码">
-            <img src="${community.wechat.qr}" alt="Nowen 实验室微信公众号二维码" loading="lazy" />
+          <button class="community-v5-qr community-qr-open" type="button" aria-label="放大查看 ${escapeHtml(community.wechat.name)} 微信公众号二维码">
+            <img src="${community.wechat.qr}" alt="${escapeHtml(community.wechat.name)} 微信公众号二维码" loading="lazy" />
             <span>扫码关注</span>
           </button>
         </article>
@@ -87,7 +87,7 @@
 
   function articleSection() {
     return `<aside class="community-v5-article community-v5" aria-label="Nowen Note 社区与支持">
-      <div><span>需要交流或获取项目动态？</span><b>微信公众号 · Nowen 实验室</b><small>QQ 群 ${escapeHtml(qqNumber)}</small></div>
+      <div><span>需要交流或获取项目动态？</span><b>微信公众号 · ${escapeHtml(community.wechat.name)}</b><small>QQ 群 ${escapeHtml(qqNumber)}</small></div>
       <div class="community-v5-article-actions">
         <button class="secondary-community-btn community-qr-open" type="button">公众号二维码</button>
         <button class="community-copy-btn" type="button" data-copy-community="${escapeHtml(qqNumber)}">复制 QQ 群号</button>
@@ -107,8 +107,8 @@
         <button type="button" class="community-qr-close" aria-label="关闭">×</button>
         <span class="community-v5-kicker">微信公众号</span>
         <h2>${escapeHtml(community.wechat.name)}</h2>
-        <img src="${community.wechat.qr}" alt="Nowen 实验室微信公众号二维码" />
-        <p>使用微信扫码关注 Nowen 实验室公众号</p>
+        <img src="${community.wechat.qr}" alt="${escapeHtml(community.wechat.name)} 微信公众号二维码" />
+        <p>使用微信扫码关注 ${escapeHtml(community.wechat.name)} 公众号</p>
       </div>`;
     document.body.appendChild(dialog);
     $('.community-qr-close', dialog).addEventListener('click', () => dialog.close());
