@@ -3,15 +3,18 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#f7f8fb" />
-  <meta name="description" content="Nowen 帮助中心：Nowen Note（弄文笔记）、Nowen Reader、Nowen Video、NOWEN 书签的使用教程、部署指南与常见问题。" />
-  <meta name="keywords" content="Nowen Note,弄文笔记,Nowen Reader,Nowen Video,NOWEN书签,帮助中心,使用教程,NAS,自托管" />
+  <meta name="theme-color" content="#f6f7fb" />
+  <meta name="description" content="Nowen 帮助中心：Nowen Note（弄文笔记）、Nowen Reader、Nowen Video、NOWEN 书签的使用教程、部署指南、NAS 指南与常见问题。" />
+  <meta name="keywords" content="Nowen Note,弄文笔记,Nowen Reader,Nowen Video,NOWEN书签,帮助中心,使用教程,NAS,Docker,自托管,MCP" />
   <meta property="og:title" content="Nowen 帮助中心" />
   <meta property="og:description" content="Nowen 系列产品的使用教程、部署指南与问题解答。" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://cropflre.github.io/" />
   <title>Nowen 帮助中心 · 使用教程与问题解答</title>
-  <link rel="stylesheet" href="assets/css/help.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/help-v2.css" />
   <script>
     (() => {
       const saved = localStorage.getItem('nowen-help-theme');
@@ -19,9 +22,11 @@
       document.documentElement.dataset.theme = dark ? 'dark' : 'light';
     })();
   </script>
+  <script defer src="assets/js/help-data-v2.js"></script>
+  <script defer src="assets/js/help-app-v2.js"></script>
 </head>
 <body>
-  <a class="skip-link" href="#mainContent">跳到主要内容</a>
+  <a class="skip-link" href="#appMain">跳到主要内容</a>
 
   <header class="app-header">
     <div class="header-inner">
@@ -30,11 +35,11 @@
         <span class="brand-copy">NOWEN <small>帮助中心</small></span>
       </a>
 
-      <div class="header-search" role="search">
-        <div class="search-input-wrap">
-          <svg class="search-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <div class="global-search" role="search">
+        <div class="search-box">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
           <input id="globalSearch" type="search" autocomplete="off" placeholder="搜索教程、功能或问题…" aria-label="搜索帮助中心" />
-          <kbd class="search-kbd">Ctrl K</kbd>
+          <kbd>Ctrl K</kbd>
         </div>
         <div class="search-results" id="searchResults" aria-live="polite"></div>
       </div>
@@ -52,105 +57,8 @@
     </div>
   </header>
 
-  <main class="main" id="mainContent">
-    <div class="landing" id="landing">
-      <section class="hero">
-        <span class="eyebrow"><i></i> Nowen Open Source Lab · Documentation</span>
-        <h1>一个入口，找到所有 <span>Nowen 使用答案</span></h1>
-        <p>从第一次安装到高级功能，从日常使用到故障排查。这里将统一维护 Nowen Note、Reader、Video 与 NOWEN 书签的用户教程。</p>
-        <div class="hero-search">
-          <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-          <input id="heroSearch" type="search" autocomplete="off" placeholder="例如：Docker 部署、图片加载失败、AI 配置…" aria-label="搜索 Nowen 教程" />
-          <span class="hint">输入后回车</span>
-        </div>
-      </section>
+  <main id="appMain" tabindex="-1"></main>
 
-      <section class="landing-section" aria-labelledby="productsTitle">
-        <div class="section-heading">
-          <div><h2 id="productsTitle">选择产品</h2><p>帮助中心按产品独立维护，统一搜索和统一设计语言。</p></div>
-          <span class="badge ready">Nowen Note 教程首批已上线</span>
-        </div>
-
-        <div class="product-grid">
-          <a class="product-card" href="#/note" style="--card-bg:rgba(101,88,245,.11);--card-glow:rgba(101,88,245,.22)">
-            <div class="product-icon">📓</div>
-            <h3>Nowen Note · 弄文笔记</h3>
-            <p>知识树、富文本 / Markdown、每日记录、任务、AI、协作、多端与 NAS 自托管。</p>
-            <div class="product-meta"><span class="badge ready">教程已上线</span><span>15 篇首批指南 →</span></div>
-          </a>
-
-          <a class="product-card" href="#/reader" style="--card-bg:rgba(25,166,126,.10);--card-glow:rgba(25,166,126,.18)">
-            <div class="product-icon">📖</div>
-            <h3>Nowen Reader</h3>
-            <p>漫画与小说阅读平台。后续覆盖书库、阅读器、AI、OPDS、服务端与多端客户端。</p>
-            <div class="product-meta"><span class="badge">即将上线</span><span>结构已预留</span></div>
-          </a>
-
-          <a class="product-card" href="#/video" style="--card-bg:rgba(22,166,199,.10);--card-glow:rgba(22,166,199,.19)">
-            <div class="product-icon">🎬</div>
-            <h3>Nowen Video</h3>
-            <p>私人家庭影音中心。后续覆盖媒体库、刮削、字幕、播放、客户端、转码与维护。</p>
-            <div class="product-meta"><span class="badge">即将上线</span><span>结构已预留</span></div>
-          </a>
-
-          <a class="product-card" href="#/bookmarks" style="--card-bg:rgba(232,155,50,.10);--card-glow:rgba(232,155,50,.18)">
-            <div class="product-icon">🔖</div>
-            <h3>NOWEN 书签</h3>
-            <p>书签与星云门户。后续覆盖收藏、分类、搜索、导入导出与系统监控。</p>
-            <div class="product-meta"><span class="badge">规划中</span><span>结构已预留</span></div>
-          </a>
-        </div>
-      </section>
-
-      <section class="landing-section" aria-labelledby="quickTitle">
-        <div class="section-heading"><div><h2 id="quickTitle">Nowen Note 快速入口</h2><p>第一次使用，建议按下面三步先跑通核心链路。</p></div></div>
-        <div class="quick-grid">
-          <a class="quick-card" href="#/note/quick-start"><span class="num">01 · START</span><h3>5 分钟快速上手</h3><p>部署、登录、创建目录、写下第一篇笔记，再完成第一份备份。</p></a>
-          <a class="quick-card" href="#/note/editors"><span class="num">02 · WRITE</span><h3>富文本与 Markdown</h3><p>选择适合自己的编辑器，掌握图片、表格、代码、公式与 Mermaid。</p></a>
-          <a class="quick-card" href="#/note/deploy"><span class="num">03 · HOST</span><h3>Docker / NAS 部署</h3><p>长期运行在绿联、飞牛、群晖或 Linux 服务器时要注意哪些数据和安全项。</p></a>
-          <a class="quick-card" href="#/note/ai"><span class="num">04 · AI</span><h3>AI 配置与 RAG</h3><p>接入 DeepSeek、Gemini、豆包、通义、OpenAI 兼容接口或 Ollama。</p></a>
-          <a class="quick-card" href="#/note/backup"><span class="num">05 · DATA</span><h3>备份与恢复</h3><p>理解完整备份包含什么，以及升级、迁移前必须做的恢复准备。</p></a>
-          <a class="quick-card" href="#/note/faq"><span class="num">06 · SUPPORT</span><h3>常见问题排查</h3><p>客户端连接、登录、图片附件、同步冲突和性能问题从哪里开始查。</p></a>
-        </div>
-      </section>
-
-      <section class="landing-section">
-        <div class="callout-banner">
-          <div><h3>教程内容会跟着真实代码持续更新</h3><p>Nowen Note 首批内容以 GitHub main 分支当前能力和现有仓库教程为事实基线；安装包与平台支持范围以 Releases 为准。</p></div>
-          <a class="primary-btn" href="#/note">进入 Nowen Note 教程 →</a>
-        </div>
-      </section>
-
-      <footer class="site-footer">
-        © 2026 Nowen Open Source Lab · <a href="https://github.com/cropflre/cropflre.github.io" target="_blank" rel="noopener">帮助中心源码</a> · <a href="posts/welcome.html">旧项目文章</a>
-      </footer>
-    </div>
-
-    <section class="docs-view" id="docsView" aria-label="产品教程">
-      <aside class="docs-sidebar" id="docsSidebar">
-        <button class="product-switcher" id="productSwitcher" type="button" aria-label="切换产品">
-          <span class="mini-icon">📓</span>
-          <span><strong>Nowen Note</strong><small>弄文笔记 · 使用教程</small></span>
-          <svg style="margin-left:auto;color:var(--text-3)" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
-        </button>
-        <nav class="sidebar-nav" id="sidebarNav" aria-label="教程目录"></nav>
-        <div class="sidebar-bottom">
-          <a href="http://nowen.cn/" target="_blank" rel="noopener">Nowen 官网 ↗</a>
-          <a href="http://note.nowen.cn/" target="_blank" rel="noopener">Nowen Note 在线体验 ↗</a>
-          <a href="https://github.com/cropflre/nowen-note/releases" target="_blank" rel="noopener">客户端下载 ↗</a>
-          <a href="https://github.com/cropflre/nowen-note/issues" target="_blank" rel="noopener">问题反馈 ↗</a>
-        </div>
-      </aside>
-
-      <div class="docs-main">
-        <div class="docs-stage">
-          <div id="articleContainer"></div>
-          <aside class="toc" id="toc" aria-label="本页目录"></aside>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <script src="assets/js/help.js"></script>
+  <noscript>Nowen 帮助中心需要启用 JavaScript 才能使用全文搜索和教程导航。</noscript>
 </body>
 </html>
