@@ -1,0 +1,73 @@
+{
+  "tag_name": "v1.5.1",
+  "published_at": "2026-10-08T16:17:56Z",
+  "html_url": "https://github.com/cropflre/nowen-note/releases/tag/v1.5.1",
+  "verified_at": "2026-10-15",
+  "assets": [
+    {
+      "name": "nowen-clipper-0.5.0.zip",
+      "size": 168868,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/nowen-clipper-0.5.0.zip"
+    },
+    {
+      "name": "Nowen-Note-1.5.1-amd64.deb",
+      "size": 109526394,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/Nowen-Note-1.5.1-amd64.deb"
+    },
+    {
+      "name": "Nowen-Note-1.5.1-arm64.dmg",
+      "size": 146106262,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/Nowen-Note-1.5.1-arm64.dmg"
+    },
+    {
+      "name": "Nowen-Note-1.5.1-arm64.zip",
+      "size": 141124784,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/Nowen-Note-1.5.1-arm64.zip"
+    },
+    {
+      "name": "Nowen-Note-1.5.1-portable.exe",
+      "size": 164889226,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/Nowen-Note-1.5.1-portable.exe"
+    },
+    {
+      "name": "Nowen-Note-1.5.1-setup.exe",
+      "size": 120704563,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/Nowen-Note-1.5.1-setup.exe"
+    },
+    {
+      "name": "Nowen-Note-1.5.1-x64.dmg",
+      "size": 146231611,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/Nowen-Note-1.5.1-x64.dmg"
+    },
+    {
+      "name": "Nowen-Note-1.5.1-x64.zip",
+      "size": 141488851,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/Nowen-Note-1.5.1-x64.zip"
+    },
+    {
+      "name": "Nowen-Note-1.5.1-x86_64.AppImage",
+      "size": 163589966,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/Nowen-Note-1.5.1-x86_64.AppImage"
+    },
+    {
+      "name": "Nowen-Note-1.5.1.apk",
+      "size": 22819850,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/Nowen-Note-1.5.1.apk"
+    },
+    {
+      "name": "nowen-note-1.5.1.fpk",
+      "size": 25816,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/nowen-note-1.5.1.fpk"
+    },
+    {
+      "name": "Nowen-Note-Lite-1.5.1-amd64.deb",
+      "size": 74785926,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/Nowen-Note-Lite-1.5.1-amd64.deb"
+    },
+    {
+      "name": "Nowen-Note-Lite-1.5.1-x86_64.AppImage",
+      "size": 106189945,
+      "browser_download_url": "https://github.com/cropflre/nowen-note/releases/download/v1.5.1/Nowen-Note-Lite-1.5.1-x86_64.AppImage"
+    }
+  ]
+}
