@@ -47,6 +47,10 @@
     const info = productInfo(product);
     if (!info) return { type: 'home' };
     if (info.status !== 'ready' || !collection(product)?.articles) return { type: 'coming', product };
+    // Dedicated Note pages live beside tutorials; explicit slugs avoid historical article collisions.
+    if (product === 'note' && !slug) return { type: 'note-site', page: 'note' };
+    if (product === 'note' && slug === 'tutorials') return { type: 'product', product };
+    if (product === 'note' && ['download', 'features', 'changelog'].includes(slug)) return { type: 'note-site', page: slug };
     return slug ? { type: 'article', product, slug } : { type: 'product', product };
   }
 
@@ -113,7 +117,7 @@
           <h1>一个入口，找到所有 <em>Nowen 使用答案</em></h1>
           <p>从第一次安装到高级功能，从日常使用到故障排查。统一维护 Nowen Note、Reader、Video 与 NOWEN 书签的官方使用教程。</p>
           <div class="hero-search search-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="heroSearch" type="search" placeholder="例如：NAS 部署、OPDS、图片加载失败、MCP…" autocomplete="off" /><kbd>Enter</kbd></div>
-          <div class="hero-links"><a href="#/note/quick-start">Note 5 分钟上手</a><a href="#/reader/quick-start">Reader 快速部署</a><a href="#/reader/opds">OPDS</a><a href="#/note/mcp">MCP</a></div>
+          <div class="hero-links"><a class="hero-download-link" href="#/note/download">立即下载 Nowen Note →</a><a href="#/note/quick-start">Note 5 分钟上手</a><a href="#/reader/quick-start">Reader 快速部署</a><a href="#/reader/opds">OPDS</a><a href="#/note/mcp">MCP</a></div>
         </div>
         <div class="hero-panel" aria-hidden="true"><div class="window-dots"><i></i><i></i><i></i></div><div class="hero-panel-head"><span>Nowen Help Center</span><span>⌘ K</span></div><div class="hero-panel-grid"><div><small>已上线产品</small><b>Nowen Note</b><b>Nowen Reader</b><b>Nowen Video</b><b>Bookmarks</b></div><div><small>高频问题</small><b>Docker / NAS 部署</b><b>漫画与笔记管理</b><b>Android / OPDS</b><b>备份与故障排查</b></div></div></div>
       </section>
@@ -285,6 +289,7 @@
     const route = parseRoute();
     if (route.type === 'home') renderHome();
     else if (route.type === 'product') renderProduct(route.product);
+    else if (route.type === 'note-site') window.NowenNoteSite.render(route.page);
     else if (route.type === 'article') renderArticle(route.product, route.slug);
     else renderComing(route.product);
     $('#docsSidebar')?.classList.remove('open');
