@@ -79,6 +79,11 @@ test('Chromium: responsive no overflow on all required widths', async () => {
         await page.goto(base+'/'+hash);
         assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth + 1),true,
           hash + ' overflows at ' + width);
+        if (width === 375 || width === 1280) {
+          const artifacts = path.join(root, 'test-artifacts');
+          await fs.mkdir(artifacts, {recursive:true});
+          await page.screenshot({path:path.join(artifacts, hash.replace(/[^a-z]/gi,'-') + '-' + width + '.png'), fullPage:true});
+        }
       }
       await page.close();
     }
