@@ -29,3 +29,10 @@ jobs:
           npx playwright install --with-deps chromium firefox webkit
       - name: Browser smoke tests (Chromium / Firefox / WebKit)
         run: node --test --test-concurrency=1 tests/browser-smoke.test.cjs
+      - name: Upload visual review screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: note-site-visual-review
+          path: test-artifacts/*.png
+          if-no-files-found: ignore
