@@ -52,7 +52,7 @@
       items.map(function (i) {
         const url = i[0] === 'note' ? '#/note' : '#/note/' + i[0];
         return link(url, i[1], active === i[0] ? 'is-current' : '');
-      }).join('') + link('#/note/quick-start', '使用教程', '') + '</div></nav>';
+      }).join('') + link('#/note/tutorials', '所有教程', '') + '</div></nav>';
   }
   function frame(section, html) {
     document.getElementById('appMain').innerHTML = '<div class="note-site">' + nav(section) + html + footer() + '</div>';
@@ -60,7 +60,7 @@
   }
   function footer() {
     return '<footer class="note-site-footer"><span>NOWEN · 开源实验室</span>' +
-      '<div>' + link('#/note/quick-start', '帮助文档') + link('#/note/community', '社区') +
+      '<div>' + link('#/note/tutorials', '帮助文档') + link('#/note/community', '社区') +
       link(APP + '/issues', '反馈问题', '', ' target="_blank" rel="noopener noreferrer"') + '</div></footer>';
   }
   function screenshot(name, alt, shape) {
@@ -121,6 +121,7 @@
   }
 
   function downloadPanel() {
+    if (!snapshot.release) return '<div class="note-panel-body"><p>暂时无法确认正式版安装包，请使用下方 GitHub Releases 备用入口。接口故障不代表没有安装包。</p></div>';
     const x = R.matrix(snapshot.release);
     const header = '<div class="note-panel-head"><h2>' + esc(platforms.find(function (p) { return p[0] === selected; })[1]) +
       '</h2><span>适用版本：' + esc(snapshot.release ? snapshot.release.version : '待确认') + '</span></div>';
@@ -173,7 +174,7 @@
         (command ? '<div class="note-code-head"><span>使用正式版 ' + esc(ver) + ' 的 Compose 配置</span><button type="button" data-copy-command>复制命令</button></div>' +
         '<pre class="note-code"><code>' + esc(command) + '</code></pre>' : '<p>暂时无法确认正式版标签，请先查看部署教程。</p>') +
         '<p class="note-fine">启动后访问 http://设备IP:3001。默认账号和密码须在首次登录后立即修改。数据挂载为 /app/data，升级前备份数据库、附件及配置；公开访问建议 HTTPS。</p>' +
-        guide('#/note/nas-deploy', 'NAS 部署教程') + '　' + guide(DOCS + 'docker-deploy.md', 'Docker Compose 文档');
+        guide('#/note/nas', 'NAS 部署教程') + '　' + guide(DOCS + 'docker-deploy.md', 'Docker Compose 文档');
     }
     if (selected === 'ios') body = '<p>当前正式 Release 没有 iOS 或 HarmonyOS 可直接分发的安装包。项目存在相关工程，但这不代表已上架或可下载。</p>' +
       link(APP + '/blob/release/v1.5.2/docs/iOS-Release.md', '了解 iOS 开发进展 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"');
@@ -254,7 +255,7 @@
       '<section class="note-section"><div class="note-section-heading"><span>AVAILABLE · 正式版</span><h2>日常使用的核心功能</h2></div><div class="note-feature-grid">' +
       feature('Markdown 与富文本', '在熟悉的编辑器中记录笔记，按照内容选择合适格式。', 'v1.5.1 已发布', 'desktop-ai-writing.png', '#/note/advanced-content-blocks') +
       feature('手机随时记录', '移动端创建、编辑笔记；连接服务端后按同一账号访问。', 'v1.5.1 已发布', 'mobile-editor.png', '#/note/quick-start') +
-      feature('AI 辅助写作', '整理文字、总结内容，让创作更高效；需要先配置 AI 服务。', 'v1.5.1 已发布', 'settings-ai.png', '#/note/ai-writing') +
+      feature('AI 辅助写作', '整理文字、总结内容，让创作更高效；需要先配置 AI 服务。', 'v1.5.1 已发布', 'settings-ai.png', '#/note/ai') +
       '</div></section>' +
       '<section class="note-section"><div class="note-section-heading"><span>IN DEVELOPMENT</span><h2>' + DEVELOPMENT + ' 开发中</h2>' +
       '<p>代码分支存在不等于已发版，也不等于通过 Android 或 NAS 真机验收。</p></div><div class="note-feature-grid">' +
