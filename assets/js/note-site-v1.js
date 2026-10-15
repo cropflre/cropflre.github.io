@@ -8,6 +8,7 @@
   const DOCS = APP + '/blob/v1.5.1/docs/tutorials/';
   const SCREEN = 'https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.1/docs/screenshots/';
   const DEVELOPMENT = 'v1.5.2';
+  const LOGO = 'https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.1/build/icons/128x128.png';
   const platforms = [
     ['windows', 'Windows'], ['mac', 'macOS'], ['linux', 'Linux'],
     ['android', 'Android'], ['extension', '浏览器插件'], ['fnos', '飞牛 fnOS'],
@@ -76,7 +77,7 @@
   }
   function renderProduct() {
     frame('note', '<section class="note-hero note-hero-product"><div class="note-hero-text">' +
-      '<span class="note-kicker">NOWEN NOTE · 弄文笔记</span>' +
+      '<div class="note-identity"><img src="' + LOGO + '" width="46" height="46" alt="" /><span class="note-kicker">NOWEN NOTE · 弄文笔记</span></div>' +
       '<h1>记录灵感，<br />整理成自己的知识库。</h1>' +
       '<p>一款开源笔记与知识管理工具。写笔记、管理资料、安排任务，让数据保存在你掌控的设备或服务器上。</p>' +
       '<div class="note-actions">' + link('#/note/download', '免费下载 Nowen Note', 'note-cta') +
@@ -225,7 +226,7 @@
   function renderDownload() {
     const seq = ++generation;
     frame('download', '<section class="note-heading"><span class="note-kicker">DOWNLOAD · OFFICIAL RELEASES</span>' +
-      '<h1>下载 Nowen Note</h1><p>选择你的设备，开始使用弄文笔记。不确定选哪个？先使用系统推荐选项。</p>' +
+      '<div class="note-identity"><img src="' + LOGO + '" width="44" height="44" alt="" /><span class="note-kicker">Nowen Note · 弄文笔记</span></div><h1>下载 Nowen Note</h1><p>选择你的设备，开始使用弄文笔记。不确定选哪个？先使用系统推荐选项。</p>' +
       '<div id="noteReleaseMeta" aria-live="polite">' + meta() + '</div></section>' +
       '<section class="note-section note-download-section" aria-label="选择安装平台"><h2 class="note-small-title">选择设备</h2>' +
       '<div class="note-platform-tabs" role="tablist" aria-label="选择操作系统">' +
