@@ -122,7 +122,7 @@
         </div>
         <figure class="studio-preview">
           <div class="studio-preview-window">
-            <div class="studio-preview-top"><span class="studio-preview-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>NOWEN NOTE / WORKSPACE</span><span>RELEASE v1.5.1</span></div>
+            <div class="studio-preview-top"><span class="studio-preview-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>NOWEN NOTE / WORKSPACE</span><span>SCREENSHOT v1.5.1</span></div>
             <img class="studio-preview-image" src="https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.1/docs/screenshots/desktop-ai-writing.png" alt="Nowen Note v1.5.1 正式版桌面端笔记和 AI 写作的真实界面" width="880" height="660" decoding="async" />
             <figcaption>来自正式版本的产品截图 · 非概念设计</figcaption>
           </div>
@@ -134,7 +134,7 @@
       <section class="home-section soft-section"><div class="section-head"><div><span>POPULAR</span><h2>热门教程</h2></div><p>Nowen Note + Nowen Reader</p></div><div class="topic-grid">${popularCards()}</div></section>
       <section class="home-section trust-row"><div><b>基于真实代码维护</b><span>教程以各产品当前主分支能力为事实基线。</span></div><div><b>真实产品截图</b><span>Reader 教程直接使用项目仓库中的当前界面截图。</span></div><div><b>持续扩展</b><span>Video 与书签继续沿用同一套文档引擎接入。</span></div></section>`;
     document.body.dataset.view = 'home';
-    document.title = 'Nowen 帮助中心 · 使用教程与问题解答';
+    document.title = 'NOWEN 开源实验室 · 笔记、阅读与数字生活';
     initHeroSearch();
     $('#clearRecent')?.addEventListener('click', () => { localStorage.removeItem(RECENT_KEY); renderHome(); });
   }
