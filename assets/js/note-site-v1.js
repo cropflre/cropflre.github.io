@@ -64,11 +64,11 @@
       '<div>' + link('#/note/tutorials', '帮助文档') + link('#/note/community', '社区') +
       link(APP + '/issues', '反馈问题', '', ' target="_blank" rel="noopener noreferrer"') + '</div></footer>';
   }
-  function screenshot(name, alt, shape) {
+  function screenshot(name, alt, shape, eager) {
     const isQa = name.indexOf('qa:') === 0;
     const src = isQa ? 'https://raw.githubusercontent.com/cropflre/nowen-note/release/v1.5.2/docs/qa/artifacts/task-composer/' + name.slice(3) : SCREEN + name;
     return '<img class="note-shot ' + (shape || '') + '" src="' + src +
-      '" alt="' + esc(alt + (isQa ? '（开发 QA 截图，未正式发布）' : '')) + '" loading="lazy" decoding="async" />';
+      '" alt="' + esc(alt + (isQa ? '（开发 QA 截图，未正式发布）' : '')) + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async"' + (eager ? ' fetchpriority="high"' : '') + ' />';
   }
   function feature(title, body, label, img, href) {
     return '<article class="note-feature-card">' +
@@ -86,7 +86,7 @@
       link('http://note.nowen.cn/', '在线体验 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') +
       link(APP, 'GitHub ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div>' +
       '<p class="note-fine">桌面端可本地使用；跨设备同步需要连接同一服务端。在线演示不适合存放真实资料。</p></div>' +
-      '<div class="note-hero-art">' + screenshot('desktop-ai-writing.png', 'Nowen Note 桌面端 AI 写作界面') + '</div></section>' +
+      '<div class="note-hero-art">' + screenshot('desktop-ai-writing.png', 'Nowen Note 桌面端 AI 写作界面', '', true) + '</div></section>' +
       '<section class="note-section"><div class="note-section-heading"><span>WHY NOWEN</span><h2>从日常记录到长期积累</h2></div>' +
       '<div class="note-values"><article><b>01 · 数据自主掌控</b><p>支持桌面本地使用，也能将服务部署在自己的 NAS 或服务器。</p></article>' +
       '<article><b>02 · 笔记有条理</b><p>用知识树整理 Markdown、富文本与附件，查找更方便。</p></article>' +
