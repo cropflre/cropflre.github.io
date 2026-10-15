@@ -169,6 +169,9 @@ test('NOWEN UI v2: branded home, light/dark, responsive and reduced-motion suppo
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
       assert.match(await page.locator('body').evaluate(node=>getComputedStyle(node).color),/^rgb\(/);
       assert.equal(await page.locator('link[href="assets/css/nowen-ui-v2.css"]').count(),1);
+      const visualDir=path.join(root,'test-artifacts');
+      await fs.mkdir(visualDir,{recursive:true});
+      await page.screenshot({path:path.join(visualDir,'nowen-ui-v2-home-'+theme+'-1280.png'),fullPage:true});
       assert.deepEqual(errors,[]);
       await page.close();
     }
@@ -177,6 +180,8 @@ test('NOWEN UI v2: branded home, light/dark, responsive and reduced-motion suppo
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
     assert.equal(await page.locator('.studio-float').count(),1);
     assert.equal(await page.locator('a[href="http://nowen.cn/"]').count(),0);
+    await page.goto(base+'/#/note');
+    assert.equal(await page.locator('.note-hero-art img').getAttribute('loading'),'eager');
     await page.goto(base+'/note/');
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://nowen.cn/note/');
     await page.goto(base+'/download/');
