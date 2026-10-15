@@ -267,16 +267,22 @@
   }
   function renderChangelog() {
     frame('changelog', '<section class="note-heading"><span class="note-kicker">RELEASE STATUS</span><h1>版本与更新</h1>' +
-      '<p>安装请以 GitHub 正式 Release 为准，开发计划不代表已经发布。</p></section>' +
-      '<section class="note-section note-version-list"><article><span class="note-feature-label">最新正式版（2026-10-08）</span><h2>v1.5.1</h2>' +
+      '<p>安装请以 GitHub 正式 Release 为准，开发计划不代表已经发布。</p><div id="noteChangelogLive" aria-live="polite">' + meta() + '</div></section>' +
+      '<section class="note-section note-version-list"><article><span class="note-feature-label">已发布记录 · 2026-10-08</span><h2>v1.5.1</h2>' +
       '<p>任务自动化与 AI 助手体验、移动端可靠性、数据保护与故障排查改进。</p>' +
       link(APP + '/releases/tag/v1.5.1', '查看正式更新内容 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
-      '<article><span class="note-feature-label">开发中 · 未正式发布</span><h2>v1.5.2</h2>' +
+      '<article><span class="note-feature-label">2026-10-15 审计状态：开发中</span><h2>v1.5.2</h2>' +
       '<p>任务生成、每日汇总与归档、附件管理、文件标签等需求处于开发及验收阶段。多端同步与 NAS 场景需重点回归验证。最终发布内容以正式 Release 为准。</p>' +
       link(APP + '/tree/release/v1.5.2', '查看开发分支 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article></section>' +
       '<section class="note-section">' + link(APP + '/blob/main/CHANGELOG.md', '完整历史更新日志 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') +
       '　' + link('#/note/download', '下载最新正式版 →', 'note-cta') + '</section>');
     document.title = 'Nowen Note 版本更新 · 正式版与开发状态';
+    const seq = generation;
+    R.load(function (releaseState) {
+      if (generation !== seq || !document.getElementById('noteChangelogLive')) return;
+      snapshot = releaseState;
+      document.getElementById('noteChangelogLive').innerHTML = meta();
+    });
   }
   function render(name) {
     if (name !== 'download') generation++;
