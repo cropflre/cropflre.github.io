@@ -65,8 +65,10 @@
       link(APP + '/issues', '反馈问题', '', ' target="_blank" rel="noopener noreferrer"') + '</div></footer>';
   }
   function screenshot(name, alt, shape) {
-    return '<img class="note-shot ' + (shape || '') + '" src="' + SCREEN + name +
-      '" alt="' + esc(alt) + '" loading="lazy" decoding="async" />';
+    const isQa = name.indexOf('qa:') === 0;
+    const src = isQa ? 'https://raw.githubusercontent.com/cropflre/nowen-note/release/v1.5.2/docs/qa/artifacts/task-composer/' + name.slice(3) : SCREEN + name;
+    return '<img class="note-shot ' + (shape || '') + '" src="' + src +
+      '" alt="' + esc(alt + (isQa ? '（开发 QA 截图，未正式发布）' : '')) + '" loading="lazy" decoding="async" />';
   }
   function feature(title, body, label, img, href) {
     return '<article class="note-feature-card">' +
@@ -260,7 +262,7 @@
       '</div></section>' +
       '<section class="note-section"><div class="note-section-heading"><span>IN DEVELOPMENT</span><h2>' + DEVELOPMENT + ' 开发中</h2>' +
       '<p>代码分支存在不等于已发版，也不等于通过 Android 或 NAS 真机验收。</p></div><div class="note-feature-grid">' +
-      feature('AI 生成与整理任务', '把自然语言想法整理为可执行的待办，具体交互仍需验收。', '开发中 · 不属于当前正式版', '', '#/note/changelog') +
+      feature('AI 生成与整理任务', '把自然语言想法整理为可执行的待办，具体交互仍需验收。', '开发 QA 截图 · 未正式发布', 'qa:desktop-light-en.png', '#/note/changelog') +
       feature('任务复盘与归档', '目标是汇总每日成果，并安全保存已完成任务。', '开发中 · 不属于当前正式版', '', '#/note/changelog') +
       feature('附件管理体验升级', '目标是让图片、文档与附件更好查找和整理。', '开发中 · 不属于当前正式版', '', '#/note/changelog') +
       '</div></section>');

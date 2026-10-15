@@ -123,3 +123,29 @@ test('Mobile browser identities recommend Android or iOS without false install l
     await pixel.close();
   }finally{await android.close();}
 });
+
+test('Existing help center: cross-product search, theme, community and mobile menu',async()=>{
+  const browser=await chromium.launch({headless:true});
+  const page=await browser.newPage({viewport:{width:375,height:812}});
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  try{
+    await page.goto(base+'/#/');
+    await page.locator('#globalSearch').fill('OPDS');
+    await page.locator('#searchResults a').first().waitFor();
+    assert.match(await page.locator('#searchResults').innerText(),/OPDS/i);
+    await page.locator('#globalSearch').fill('离线工作区');
+    assert.match(await page.locator('#searchResults').innerText(),/离线工作区/);
+    const before=await page.locator('html').getAttribute('data-theme');
+    await page.locator('#themeToggle').click();
+    const after=await page.locator('html').getAttribute('data-theme');
+    assert.notEqual(after,before);
+    await page.goto(base+'/#/note/quick-start');
+    await page.locator('#mobileMenu').click();
+    assert.match(await page.locator('#docsSidebar').getAttribute('class'),/open/);
+    await page.goto(base+'/#/note/community');
+    assert.ok(await page.locator('.article-wrap').count()===1);
+    await page.goto(base+'/download/');
+    assert.match(await page.locator('main').innerText(),/Windows|macOS/);
+    assert.deepEqual(errors,[]);
+  }finally{await browser.close();}
+});
