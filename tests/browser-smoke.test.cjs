@@ -75,7 +75,7 @@ test('Chromium: responsive no overflow on all required widths', async () => {
     for (const width of [375,768,1280,1920]) {
       const page=await browser.newPage({viewport:{width,height:800}});
       await page.route('https://api.github.com/repos/cropflre/nowen-note/releases/latest',fakeApi);
-      for (const hash of ['#/note','#/note/download','#/note/features']) {
+      for (const hash of ['#/','#/note','#/note/download','#/note/features']) {
         await page.goto(base+'/'+hash);
         assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth + 1),true,
           hash + ' overflows at ' + width);
@@ -147,5 +147,40 @@ test('Existing help center: cross-product search, theme, community and mobile me
     await page.goto(base+'/download/');
     assert.match(await page.locator('main').innerText(),/Windows|macOS/);
     assert.deepEqual(errors,[]);
+  }finally{await browser.close();}
+});
+
+
+test('NOWEN UI v2: branded home, light/dark, responsive and reduced-motion support',async()=>{
+  const browser=await chromium.launch({headless:true});
+  try{
+    for(const theme of ['light','dark']){
+      const page=await browser.newPage({viewport:{width:1280,height:900},reducedMotion:'reduce'});
+      const errors=[];page.on('pageerror',err=>errors.push(err.message));
+      await page.goto(base+'/#/');
+      await page.evaluate(value=>localStorage.setItem('nowen-help-theme',value),theme);
+      await page.reload();
+      assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
+      assert.match(await page.locator('.hero-copy h1').innerText(),/知识自由生长/);
+      assert.equal(await page.locator('.studio-preview-image').count(),1);
+      assert.equal(await page.locator('.product-card').count(),4);
+      assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://nowen.cn/');
+      assert.equal(await page.locator('a.header-download').getAttribute('href'),'#/note/download');
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+      assert.match(await page.locator('body').evaluate(node=>getComputedStyle(node).color),/^rgb\(/);
+      assert.equal(await page.locator('link[href="assets/css/nowen-ui-v2.css"]').count(),1);
+      assert.deepEqual(errors,[]);
+      await page.close();
+    }
+    const page=await browser.newPage({viewport:{width:375,height:812},reducedMotion:'reduce'});
+    await page.goto(base+'/#/');
+    assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+    assert.equal(await page.locator('.studio-float').count(),1);
+    assert.equal(await page.locator('a[href="http://nowen.cn/"]').count(),0);
+    await page.goto(base+'/note/');
+    assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://nowen.cn/note/');
+    await page.goto(base+'/download/');
+    assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://nowen.cn/download/');
+    await page.close();
   }finally{await browser.close();}
 });
