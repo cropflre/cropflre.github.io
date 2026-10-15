@@ -234,3 +234,8 @@ body[data-view="home"] .community-v5-card,body[data-view="home"] .community-v5-s
   html{scroll-behavior:auto}
   .product-card,.note-values article,.note-feature-card,.studio-preview,.hero-links a,.note-cta,.header-download{animation:none!important;transition:none!important;transform:none!important}
 }
+
+/* Screenshot CDN fallback remains legible instead of an empty broken frame. */
+.nowen-image-fallback{display:grid;place-items:center;text-align:center;min-height:220px;width:100%;aspect-ratio:4/3;padding:24px;color:var(--color-text-secondary);border-radius:15px;border:1px dashed var(--color-border);background:linear-gradient(140deg,var(--color-bg-tertiary),color-mix(in srgb,var(--color-glass) 70%,var(--color-primary) 30%));font-size:13px;line-height:1.7}
+.note-hero-art .nowen-image-fallback{min-height:260px}
+@media(max-width:760px){body{background-attachment:scroll}.note-hero-art .nowen-image-fallback{min-height:180px}}
