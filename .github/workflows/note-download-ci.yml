@@ -21,6 +21,7 @@ jobs:
           node --check assets/js/note-release-v1.js
           node --check assets/js/note-site-v1.js
           node --check assets/js/help-app-v3.js
+          node --check assets/js/nowen-ui-v2.js
       - name: Release and route contract tests
         run: node --test tests/download-center.test.cjs
       - name: Install isolated browser test tooling
