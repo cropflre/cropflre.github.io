@@ -132,6 +132,7 @@
       <section class="home-section"><div class="section-head"><div><span>PRODUCTS</span><h2>选择产品</h2></div><p>统一设计语言，按产品独立维护内容。</p></div><div class="product-grid">${productCards()}</div></section>
       ${recentSection()}
       <section class="home-section soft-section"><div class="section-head"><div><span>POPULAR</span><h2>热门教程</h2></div><p>Nowen Note + Nowen Reader</p></div><div class="topic-grid">${popularCards()}</div></section>
+      <div class="nowen-home-legal" style="max-width:1318px;margin:auto;padding:0 38px 20px;font-size:12px"><a href="privacy/">Nowen Note Windows 隐私政策</a> · <a href="privacy/en/">Privacy Policy (English)</a></div>
       <section class="home-section trust-row"><div><b>基于真实代码维护</b><span>教程以各产品当前主分支能力为事实基线。</span></div><div><b>真实产品截图</b><span>Reader 教程直接使用项目仓库中的当前界面截图。</span></div><div><b>持续扩展</b><span>Video 与书签继续沿用同一套文档引擎接入。</span></div></section>`;
     document.body.dataset.view = 'home';
     document.title = 'NOWEN 开源实验室 · 笔记、阅读与数字生活';

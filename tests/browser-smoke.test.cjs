@@ -189,3 +189,37 @@ test('NOWEN UI v2: branded home, light/dark, responsive and reduced-motion suppo
     await page.close();
   }finally{await browser.close();}
 });
+
+
+test('Microsoft Store privacy pages: both languages, mobile, keyboard and dark theme',async()=>{
+  for(const [engineName,engine] of [['chromium',chromium],['firefox',firefox],['webkit',webkit]]){
+    const browser=await engine.launch({headless:true});
+    try {
+      const page=await browser.newPage({viewport:{width:375,height:812},reducedMotion:'reduce'});
+      const errors=[];page.on('pageerror',err=>errors.push(err.message));
+      await page.goto(base+'/privacy/');
+      assert.match(await page.locator('h1').innerText(),/Windows 桌面版隐私政策/);
+      assert.equal(await page.locator('.privacy-paper section').count(),13);
+      assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://nowen.cn/privacy/');
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,engineName+' Chinese overflow');
+      await page.locator('.privacy-lang').click();
+      await page.waitForURL('**/privacy/en/');
+      assert.match(await page.locator('h1').innerText(),/Windows Desktop Privacy Policy/);
+      assert.equal(await page.locator('.privacy-paper section').count(),13);
+      assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true,engineName+' English overflow');
+      await page.evaluate(()=>localStorage.setItem('nowen-help-theme','dark'));
+      await page.reload();
+      assert.equal(await page.locator('html').getAttribute('data-theme'),'dark');
+      assert.deepEqual(errors,[]);
+      if(engineName==='chromium'){
+        const dir=path.join(root,'test-artifacts');await fs.mkdir(dir,{recursive:true});
+        await page.screenshot({path:path.join(dir,'nowen-desktop-privacy-en-mobile.png'),fullPage:false});
+        await page.setViewportSize({width:1280,height:900});
+        await page.goto(base+'/privacy/');
+        assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
+        await page.screenshot({path:path.join(dir,'nowen-desktop-privacy-zh-desktop.png'),fullPage:false});
+      }
+      await page.close();
+    } finally {await browser.close();}
+  }
+});

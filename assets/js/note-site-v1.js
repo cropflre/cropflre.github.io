@@ -62,7 +62,8 @@
   function footer() {
     return '<footer class="note-site-footer"><span>NOWEN · 开源实验室</span>' +
       '<div>' + link('#/note/tutorials', '帮助文档') + link('#/note/community', '社区') +
-      link(APP + '/issues', '反馈问题', '', ' target="_blank" rel="noopener noreferrer"') + '</div></footer>';
+      link(APP + '/issues', '反馈问题', '', ' target="_blank" rel="noopener noreferrer"') +
+      link('privacy/', 'Windows 隐私政策', '', ' target="_blank" rel="noopener noreferrer"') + '</div></footer>';
   }
   function screenshot(name, alt, shape, eager) {
     const isQa = name.indexOf('qa:') === 0;
