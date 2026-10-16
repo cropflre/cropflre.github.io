@@ -103,3 +103,10 @@
 @media(max-width:760px){.note-site{padding:0 18px}.note-navigation{align-items:flex-start;flex-direction:column;gap:3px;padding:12px 0}.note-nav-items{gap:2px}.note-navigation a{padding:7px 9px;font-size:12px}.note-hero{grid-template-columns:1fr;padding:55px 0}.note-hero h1{font-size:clamp(36px,8vw,48px)}.note-hero-text>p{font-size:15px}.note-hero-art img{aspect-ratio:16/10}.note-section{padding:38px 0}.note-shot-grid{grid-template-columns:1fr 1fr}.note-shot-grid img{height:240px}.note-steps{grid-template-columns:1fr}.note-download-teaser{align-items:flex-start;flex-direction:column}.note-heading{padding:49px 0 30px}.note-platform-panel{padding:19px}.note-feature-grid{grid-template-columns:1fr 1fr}.note-version-list{grid-template-columns:1fr}.note-version-list p{min-height:0}}
 @media(max-width:510px){.note-site{padding:0 14px}.note-values{grid-template-columns:1fr}.note-shot-grid{grid-template-columns:1fr}.note-shot-grid img{height:auto;max-height:310px}.note-shot-grid .note-shot-mobile img{max-height:340px;object-fit:contain}.note-actions{align-items:stretch}.note-actions .note-cta{width:100%}.note-platform-tabs{gap:6px}.note-platform-tabs button{padding:9px 11px;font-size:12px}.note-platform-panel{padding:14px}.note-panel-head h2{font-size:20px}.note-package-grid{flex-direction:column;align-items:stretch}.note-panel-body>.note-cta,.note-panel-body>.note-secondary{width:100%}.note-feature-grid{grid-template-columns:1fr}.note-site-footer{align-items:flex-start;flex-direction:column}.note-code{font-size:11px}.note-code-head{flex-wrap:wrap}}
 @media(prefers-reduced-motion:reduce){.note-site *{transition:none!important;scroll-behavior:auto!important}}
+
+/* v1.5.2 editorial update, reusing the existing design tokens. */
+.note-release-highlight .note-values article{min-height:128px}
+.note-release-highlight .note-values b{font-size:15px;letter-spacing:-.02em}
+.note-release-highlight .note-inline-links{margin-top:20px}
+.note-feature-placeholder{padding:18px;text-align:center;background:linear-gradient(150deg,var(--panel-soft),var(--panel));font-weight:600}
+.note-version-list article:first-child{border-color:var(--brand)}
