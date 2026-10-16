@@ -263,7 +263,7 @@
       '<p>v1.5.2 已正式发布：更直观的文件中心、更有边界的 AI 协作和可复盘的任务系统。</p></section>' +
       '<section class="note-section"><div class="note-section-heading"><span>NEW IN v1.5.2 · 已发布</span><h2>这次更新了什么？</h2>' +
       '<p>以下功能已进入正式版；部分 AI、Native 和同步能力仍受权限、平台和服务端配置限制。</p></div><div class="note-feature-grid">' +
-      feature('文件中心焕新', '资源管理器式导航、标签、智能文件夹、上传队列与回收站；AI 根据元数据生成建议，用户确认后才整理。', 'v1.5.2 已发布', '', '#/note/file-manager') +
+      feature('文件中心焕新', '资源管理器式导航、标签、智能文件夹、上传队列与回收站；AI 根据元数据生成建议，用户确认后才整理。', 'v1.5.2 已发布', '', '#/note/attachments') +
       feature('MCP 深度协作', 'AI 在授权范围内管理知识树、个人任务与文件；重要写入需要预览确认与版本校验。', 'v1.5.2 已发布', '', '#/note/mcp') +
       feature('AI 任务与复盘', 'AI 生成任务并确认创建，支持今日完成清单、任务归档、详情保存笔记及 Excel / Markdown 导出。', 'v1.5.2 已发布', '', '#/note/tasks') +
       feature('多端同步保护', '增强单篇笔记同步回执、个人目录同步、冲突说明与删除恢复保护；不同平台的离线能力仍有差异。', 'v1.5.2 已发布', '', '#/note/sync-troubleshooting') +
