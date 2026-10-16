@@ -1,46 +1,36 @@
-# 官网下载中心 · 正式发布与开发状态审计
+# 官网下载中心 · v1.5.2 正式版审计
 
-核对日期：2026-10-15。网站源仓库 cropflre/cropflre.github.io 的 master 为 GitHub Pages 正式部署分支。应用 cropflre/nowen-note 的 release/v1.5.2 是开发分支，不是正式下载数据源。
+核对日期：2026-10-16。Nowen Note 的 GitHub Release [v1.5.2](https://github.com/cropflre/nowen-note/releases/tag/v1.5.2) 已公开发布（`draft=false`、`prerelease=false`），发布时间 `2026-10-16T15:05:51Z`。官网由 `cropflre/cropflre.github.io` 的 `master` 分支部署。
 
-## 最新正式发布
+## 已验证正式附件
 
-GitHub Releases API 核验结果：**v1.5.1**，2026-10-08T16:17:56Z，非 draft、非 prerelease。逐项大小与官方下载 URL 写入 assets/data/nowen-note-stable.json，禁止按版本拼造 URL。
-
-| 平台 | 核实的附件类型 | 状态与展示 |
+| 平台 | v1.5.2 实际附件 | 下载中心 |
 | --- | --- | --- |
-| Windows | setup.exe、portable.exe | 已正式发布；推荐安装版 |
-| macOS | arm64.dmg、x64.dmg | 已正式发布；必须让用户自行选芯片 |
-| Linux | x86_64.AppImage、amd64.deb | 已正式发布；类型分列 |
-| Linux Lite | Lite 的 AppImage 和 DEB | 已正式发布；在其他选项中单列 |
-| Android | Nowen-Note-1.5.1.apk | 已正式发布；不使用 QA / debug 包 |
-| 浏览器扩展 | nowen-clipper-0.5.0.zip | 正式 GitHub ZIP 0.5.0；Chrome Web Store 的当前版本另查 |
-| 飞牛 fnOS | nowen-note-1.5.1.fpk | 已正式发布；主要适配 x86-64 |
-| 绿联 UGOS | 没有 .upk 正式附件 | 安装包暂未提供；展示 Docker 部署 |
-| Docker 与其他 NAS | cropflre/nowen-note 镜像 + 官方 Compose | 已有部署方式；不是 Release 附件 |
-| iOS / HarmonyOS | 没有正式安装附件 | 项目工程存在，不代表可下载安装 |
+| Windows | `Nowen-Note-1.5.2-setup.exe` / `portable.exe` | 安装版优先；便携版折叠 |
+| macOS | `Nowen-Note-1.5.2-arm64.dmg` / `x64.dmg`（另有 ZIP） | 按芯片分开，不凭 UA 猜架构 |
+| Linux | `amd64.deb` / `x86_64.AppImage` | 正式版与 Lite 分开 |
+| Android | `Nowen-Note-1.5.2.apk` | 仅正式 APK |
+| 浏览器插件 | `nowen-clipper-0.5.0.zip` | 商店版版本以商店为准，不写成 1.5.2 |
+| 飞牛 fnOS | `nowen-note-1.5.2.fpk` | 按设备兼容性安装 |
+| 绿联 UGOS | 无 `.upk` | 不伪造安装链接，提供 Docker |
+| Docker/NAS | 镜像、Docker Compose | 不属于 Release 附件；强调持久化、备份和 HTTPS |
+| iOS / HarmonyOS | 无正式直接下载的安装包 | 仅说明工程状态 |
 
-自动排除 blockmap、latest*.yml 和其他更新元数据。GitHub API 失败时读取已经核对的本地快照并给出提示，不能把请求失败误写成平台不支持。
+下载回退快照来自 GitHub Release 的真实附件名称、字节数和下载 URL：`assets/data/nowen-note-stable.json`。动态下载使用 `assets/js/note-release-v1.js` 验证 GitHub 最新正式 Release，过滤 blockmap、更新 YAML 等元数据。API 不可用时回退到核实的本地清单；不能跨版本混用附件。旧缓存若比新正式回退清单更旧，应优先使用新清单。
 
-## 分支功能状态核对
+## v1.5.2 官网宣传边界
 
-| 功能 | 源码 / 验收资料 | 官网状态 |
-| --- | --- | --- |
-| Markdown、富文本、知识树、AI 辅助写作 | README、docs/tutorials/editor-markdown.md、docs/screenshots/desktop-ai-writing.png | v1.5.1 已发布；配真实截图 |
-| 桌面本地模式、Android、Docker 自托管 | README、docker-compose.yml、.github/workflows/release.yml | 有正式发行渠道，但各平台边界需说明 |
-| 离线工作区、多端同步 | README、docs/qa/v1.5.2/android-acceptance-matrix.md | 正式版存在相关功能；不承诺三端实时无冲突 |
-| AI 智能生成任务 | backend/src/routes/ai-task-plan.ts、backend/src/services/task-composer.ts、docs/qa/ai-task-composer-p0.md | v1.5.2 开发候选，不能标已发布 |
-| 每日任务完成汇总、任务归档、任务转笔记 | backend/src/routes/task-digest.ts、任务生命周期代码与相关开发记录 | 需逐项对照代码、回归及正式包；暂只作为开发中方向 |
-| 文件管理、附件分类、标签筛选 | docs/tutorials/file-manager.md、backend/tests/file-manager-organization.test.ts | 基础能力可介绍；新的交互增强仍需验收 |
-| TXT 笔记、循环删除修复 | docs/tutorials/editor-plaintext.md、docs/qa/artifacts/task-recurrence-deletion | 分支材料不足以确认所有平台正式可用；不提前宣传 |
-| 数据保护、备份恢复、NAS HTTPS | README、docker-compose.yml、docker-compose.https.yml | 正式版有基础能力，必须提示先备份再升级 |
-| Android v1.5.2 完整验收 | docs/qa/v1.5.2/stage3/android-status.md | **PARTIAL / NOT_EXECUTED**，不可标全部 PASS |
+- **文件中心**：导航、标签、智能文件夹、文件回收站、个人文件夹同步、AI 基于元数据的整理和语义搜索。AI 整理需用户确认，不把文件字节或笔记正文宣称为输入。
+- **MCP**：Personal API Token 范围内操作知识树、个人任务与文件；高风险操作要明确授权、预览确认、版本校验。HTTP 接入仅可选本机回环，要求认证。
+- **任务**：AI 任务创建需确认，支持今日完成清单、任务归档、详情存笔记和 Excel / Markdown 导出。
+- **编辑与同步**：单篇同步回执、离线目录保护、纯文本笔记、中文排版、Mermaid 和 Markdown 修复。不承诺任何 Android、NAS 或网络组合都不存在冲突。
+- **发布渠道**：GitHub EXE 可能未签名；macOS 首次打开受系统安全检查限制；Microsoft Store 打包适配不意味着已经上架。
+- **升级安全**：升级前备份 SQLite、附件、部署配置；回滚应用 / Docker 镜像不会回滚持久化数据库。
 
-v1.5.2 阶段三 Android 确有独立 QA APK 的 Native/API Bridge 真机证据，但不是完整生产 APK 的 GUI、多端联动、WAN、附件、升级矩阵。不能把“代码合并”“测试通过”“安装成功”三者混同。
+产品截图使用 v1.5.2 标签下存在的 `docs/screenshots/` 文件；没有经过核实的新功能截图时使用中性占位，不伪称截图。官网首页、产品、功能、版本和静态 SEO 页面都统一按 v1.5.2 正式版描述。
 
-## 风险、事实基线和维护
+## 维护说明
 
-- 发布状态由正式 Releases API 决定。动态下载列表同一版本内取附件；新版本如果缺某平台包，不跨版本借旧链接。
-- 回退清单经人工核对后维护。正式发布新版本后更新 assets/data/nowen-note-stable.json；商店版号与 GitHub ZIP 可能不同，不能混写。
-- Docker 示例来自应用仓库 Compose：官方镜像 cropflre/nowen-note，内部端口 3001，持久化根目录 /app/data。首次安装需改默认密码，公网需 HTTPS，升级需备份数据库与附件。
-- 旧 tutorials 文档可能带旧版本尾注。安装命令优先以 README、实际 Compose 和正式 tag 核对。
-- 官网 master 部署工作流不变。PR 需通过自动化，之后仍须人工验证 Edge、Android 和 iPhone Safari 的真实下载与安装行为，以及 Lighthouse。
+- 新的正式 Release 发布后，从 GitHub API 重新生成并核对离线清单，不手拼 URL。
+- CI 浏览器测试用于官网体验回归，不代表所有 Android 真机或 NAS 多端同步验收完成。
+- `.github/workflows/pages.yml` 不变；发布后复核旧教程路由、响应式、下载状态及站点缓存。
