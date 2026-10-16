@@ -37,7 +37,7 @@ test('rejects drafts, prereleases, malformed tags, redirected or executable URLs
   const malformed = {...snapshot, assets:[{
     name:'Nowen-Note-1.5.2-setup.exe', size:100, browser_download_url:'https://evil.example/download.exe'
   },{name:'Nowen-Note-1.5.2-setup.exe', size:100,
-    browser_download_url:'https://github.com/cropflre/nowen-note/releases/download/v1.5.2/Nowen-Note-1.5.2-setup.exe'
+    browser_download_url:'https://github.com/cropflre/nowen-note/releases/download/v1.5.3/Nowen-Note-1.5.2-setup.exe'
   },{name:'latest.yml',size:100, browser_download_url:'https://github.com/cropflre/nowen-note/releases/download/v1.5.2/latest.yml'}]};
   assert.equal(S.validateRelease(malformed).assets.length, 0);
 });
