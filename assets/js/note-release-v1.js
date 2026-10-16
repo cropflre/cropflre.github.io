@@ -74,6 +74,15 @@
     return Number.isFinite(bytes) && bytes > 0 ? (bytes / 1048576).toFixed(1) + ' MB' : '';
   }
 
+  function compareVersions(a, b) {
+    const av = String(a || '').replace(/^v/, '').split('.').map(Number);
+    const bv = String(b || '').replace(/^v/, '').split('.').map(Number);
+    for (let i = 0; i < 3; i++) {
+      if ((av[i] || 0) !== (bv[i] || 0)) return (av[i] || 0) - (bv[i] || 0);
+    }
+    return 0;
+  }
+
   function getCached(storage, now) {
     try {
       const entry = JSON.parse(storage.getItem(CACHE_KEY) || 'null');
@@ -105,9 +114,14 @@
     try { fallback = validateRelease(await fetchJson(FALLBACK, 4500, fetcher)); }
     catch { /* manifest unavailable, API may still work */ }
     const cached = storage && getCached(storage, now);
-    const initial = { release: cached || fallback, source: cached ? 'cached' : fallback ? 'fallback' : 'unavailable' };
+    // A newly verified official fallback must not be hidden by an older browser cache.
+    const newerFallback = cached && fallback && compareVersions(fallback.version, cached.version) > 0;
+    const initial = {
+      release: newerFallback ? fallback : (cached || fallback),
+      source: newerFallback ? 'fallback' : cached ? 'cached' : fallback ? 'fallback' : 'unavailable'
+    };
     if (typeof onUpdate === 'function') onUpdate(initial);
-    if (cached) return initial;
+    if (cached && !newerFallback) return initial;
     try {
       const raw = await fetchJson(API, 6500, fetcher);
       const verified = validateRelease(raw);

@@ -5,10 +5,9 @@
   if (!R) return;
   const APP = 'https://github.com/cropflre/nowen-note';
   const STORE = 'https://chromewebstore.google.com/detail/nowen-note-web-clipper/nglkodhfdbnfielchjpkjhenfaecafpg';
-  const DOCS = APP + '/blob/v1.5.1/docs/tutorials/';
-  const SCREEN = 'https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.1/docs/screenshots/';
-  const DEVELOPMENT = 'v1.5.2';
-  const LOGO = 'https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.1/build/icons/128x128.png';
+  const DOCS = APP + '/blob/v1.5.2/docs/tutorials/';
+  const SCREEN = 'https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.2/docs/screenshots/';
+  const LOGO = 'https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.2/build/icons/128x128.png';
   const platforms = [
     ['windows', 'Windows'], ['mac', 'macOS'], ['linux', 'Linux'],
     ['android', 'Android'], ['extension', '浏览器插件'], ['fnos', '飞牛 fnOS'],
@@ -66,14 +65,12 @@
       link('privacy/', 'Windows 隐私政策', '', ' target="_blank" rel="noopener noreferrer"') + '</div></footer>';
   }
   function screenshot(name, alt, shape, eager) {
-    const isQa = name.indexOf('qa:') === 0;
-    const src = isQa ? 'https://raw.githubusercontent.com/cropflre/nowen-note/release/v1.5.2/docs/qa/artifacts/task-composer/' + name.slice(3) : SCREEN + name;
-    return '<img class="note-shot ' + (shape || '') + '" src="' + src +
-      '" alt="' + esc(alt + (isQa ? '（开发 QA 截图，未正式发布）' : '')) + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async"' + (eager ? ' fetchpriority="high"' : '') + ' />';
+    return '<img class="note-shot ' + (shape || '') + '" src="' + SCREEN + esc(name) +
+      '" alt="' + esc(alt) + '" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async"' + (eager ? ' fetchpriority="high"' : '') + ' />';
   }
   function feature(title, body, label, img, href) {
     return '<article class="note-feature-card">' +
-      (img ? screenshot(img, title + '界面截图') : '<div class="note-feature-placeholder" aria-label="尚无经核验的新功能截图">正式界面截图待验收</div>') +
+      (img ? screenshot(img, title + '界面截图') : '<div class="note-feature-placeholder" aria-label="此功能暂无正式截图">功能界面截图持续补充</div>') +
       '<div class="note-feature-copy"><span class="note-feature-label">' + esc(label) + '</span><h3>' +
       esc(title) + '</h3><p>' + esc(body) + '</p>' +
       link(href, '了解更多 →', 'note-quiet') + '</div></article>';
@@ -88,13 +85,21 @@
       link(APP, 'GitHub ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div>' +
       '<p class="note-fine">桌面端可本地使用；跨设备同步需要连接同一服务端。在线演示不适合存放真实资料。</p></div>' +
       '<div class="note-hero-art"><div class="note-hero-image-preview" aria-hidden="true"><span>NOWEN / WORKSPACE</span><strong>让每一条记录，<br />都找到自己的位置。</strong><small>Markdown · Knowledge · AI · Self-hosted</small></div>' + screenshot('desktop-ai-writing.png', 'Nowen Note 桌面端 AI 写作界面', '', true) + '</div></section>' +
-      '<section class="note-section"><div class="note-section-heading"><span>WHY NOWEN</span><h2>从日常记录到长期积累</h2></div>' +
+      '<section class="note-section note-release-highlight"><div class="note-section-heading"><span>NEW IN v1.5.2</span><h2>不止于记录，更好地整理和行动</h2>' +
+       '<p>2026-10-16 正式发布 · 文件整理、AI 协作、任务复盘与同步保护。</p></div><div class="note-values">' +
+       '<article><b>文件中心升级</b><p>文件夹、标签、智能文件夹、回收站与 AI 元数据整理。</p></article>' +
+       '<article><b>MCP 能力扩展</b><p>让 AI 在授权范围内操作知识树、个人任务和文件。</p></article>' +
+       '<article><b>任务成果沉淀</b><p>今日完成汇总、任务归档、详情另存笔记。</p></article>' +
+       '<article><b>同步安全加固</b><p>更精确的同步确认、离线目录恢复与冲突保护。</p></article></div>' +
+       '<div class="note-inline-links">' + link('#/note/changelog', '查看 v1.5.2 更新亮点 →', 'note-secondary') +
+       link(APP + '/releases/tag/v1.5.2', 'GitHub 正式版本 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div></section>' +
+       '<section class="note-section"><div class="note-section-heading"><span>WHY NOWEN</span><h2>从日常记录到长期积累</h2></div>' +
       '<div class="note-values"><article><b>01 · 数据自主掌控</b><p>支持桌面本地使用，也能将服务部署在自己的 NAS 或服务器。</p></article>' +
       '<article><b>02 · 笔记有条理</b><p>用知识树整理 Markdown、富文本与附件，查找更方便。</p></article>' +
       '<article><b>03 · AI 与任务协作</b><p>写作辅助、知识问答与日常任务放在一个工作空间。</p></article>' +
       '<article><b>04 · 多设备访问</b><p>Web、桌面与 Android 均有正式版；跨端同步请按教程配置。</p></article></div></section>' +
       '<section class="note-section"><div class="note-section-heading"><span>IN THE APP</span><h2>真实界面，真实工作流</h2>' +
-      '<p>以下截图来自 v1.5.1 正式代码标签，非概念设计。</p></div><div class="note-shot-grid">' +
+      '<p>以下截图来自 v1.5.2 正式代码标签，非概念设计。</p></div><div class="note-shot-grid">' +
       '<figure>' + screenshot('desktop-ai-writing.png', '桌面端笔记与 AI 助手') + '<figcaption>桌面端 · 记录与创作</figcaption></figure>' +
       '<figure class="note-shot-mobile">' + screenshot('mobile-editor.png', 'Android 移动端编辑器') + '<figcaption>移动端 · 随时记录</figcaption></figure></div></section>' +
       '<section class="note-section note-download-teaser"><div><span class="note-kicker">GET STARTED</span>' +
@@ -181,7 +186,7 @@
         guide('#/note/nas', 'NAS 部署教程') + '　' + guide(DOCS + 'docker-deploy.md', 'Docker Compose 文档');
     }
     if (selected === 'ios') body = '<p>当前正式 Release 没有 iOS 或 HarmonyOS 可直接分发的安装包。项目存在相关工程，但这不代表已上架或可下载。</p>' +
-      link(APP + '/blob/release/v1.5.2/docs/iOS-Release.md', '了解 iOS 开发进展 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"');
+      link(APP + '/blob/v1.5.2/docs/iOS-Release.md', '了解 iOS 开发进展 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"');
     return header + '<div class="note-panel-body">' + body + '</div>';
   }
 
@@ -241,9 +246,9 @@
       '<p class="note-fine">未找到适合的附件？' +
       link(R.RELEASES, '查看 GitHub Releases 备用下载入口 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') +
       '　' + link('#/note/quick-start', '新手入门', 'note-quiet') + '</p></section>' +
-      '<section class="note-section note-release-warning"><h2>' + DEVELOPMENT + ' 正在开发</h2>' +
-      '<p>当前下载中心只展示最新正式 Release。功能分支中的变化不会提前作为正式版发布。</p>' +
-      link('#/note/changelog', '查看版本状态 →', 'note-secondary') + '</section>');
+      '<section class="note-section note-release-warning"><h2>v1.5.2 升级须知</h2>' +
+      '<p>本版涉及文件管理与多端同步。升级前请备份数据库和附件；镜像回滚不会恢复数据。安装包仅来自正式 Release。</p>' +
+      link('#/note/changelog', '查看版本说明 →', 'note-secondary') + '</section>');
     document.title = '下载 Nowen Note · Windows / macOS / Linux / Android / NAS';
     bindDownload();
     R.load(function (next) {
@@ -254,34 +259,38 @@
     });
   }
   function renderFeatures() {
-    frame('features', '<section class="note-heading"><span class="note-kicker">PRODUCT FEATURES</span><h1>把想法整理成成果</h1>' +
-      '<p>先了解正式版已有能力；v1.5.2 新增内容明确标注为开发中。</p></section>' +
-      '<section class="note-section"><div class="note-section-heading"><span>AVAILABLE · 正式版</span><h2>日常使用的核心功能</h2></div><div class="note-feature-grid">' +
-      feature('Markdown 与富文本', '在熟悉的编辑器中记录笔记，按照内容选择合适格式。', 'v1.5.1 已发布', 'desktop-ai-writing.png', '#/note/advanced-content-blocks') +
-      feature('手机随时记录', '移动端创建、编辑笔记；连接服务端后按同一账号访问。', 'v1.5.1 已发布', 'mobile-editor.png', '#/note/quick-start') +
-      feature('AI 辅助写作', '整理文字、总结内容，让创作更高效；需要先配置 AI 服务。', 'v1.5.1 已发布', 'settings-ai.png', '#/note/ai') +
+    frame('features', '<section class="note-heading"><span class="note-kicker">PRODUCT FEATURES · v1.5.2</span><h1>从灵感记录，到长期积累</h1>' +
+      '<p>v1.5.2 已正式发布：更直观的文件中心、更有边界的 AI 协作和可复盘的任务系统。</p></section>' +
+      '<section class="note-section"><div class="note-section-heading"><span>NEW IN v1.5.2 · 已发布</span><h2>这次更新了什么？</h2>' +
+      '<p>以下功能已进入正式版；部分 AI、Native 和同步能力仍受权限、平台和服务端配置限制。</p></div><div class="note-feature-grid">' +
+      feature('文件中心焕新', '资源管理器式导航、标签、智能文件夹、上传队列与回收站；AI 根据元数据生成建议，用户确认后才整理。', 'v1.5.2 已发布', '', '#/note/file-manager') +
+      feature('MCP 深度协作', 'AI 在授权范围内管理知识树、个人任务与文件；重要写入需要预览确认与版本校验。', 'v1.5.2 已发布', '', '#/note/mcp') +
+      feature('AI 任务与复盘', 'AI 生成任务并确认创建，支持今日完成清单、任务归档、详情保存笔记及 Excel / Markdown 导出。', 'v1.5.2 已发布', '', '#/note/tasks') +
+      feature('多端同步保护', '增强单篇笔记同步回执、个人目录同步、冲突说明与删除恢复保护；不同平台的离线能力仍有差异。', 'v1.5.2 已发布', '', '#/note/sync-troubleshooting') +
+      feature('写作更顺手', '新增纯文本笔记、中文排版与阅读位置恢复，修复 Mermaid 折叠、Markdown 列表等编辑问题。', 'v1.5.2 已发布', 'desktop-ai-writing.png', '#/note/advanced-content-blocks') +
+      feature('备份与部署', '支持选择每日备份时区、可选 Caddy HTTPS 部署，并强化附件授权和版本发布校验。', 'v1.5.2 已发布', '', '#/note/backup-restore-drill') +
       '</div></section>' +
-      '<section class="note-section"><div class="note-section-heading"><span>IN DEVELOPMENT</span><h2>' + DEVELOPMENT + ' 开发中</h2>' +
-      '<p>代码分支存在不等于已发版，也不等于通过 Android 或 NAS 真机验收。</p></div><div class="note-feature-grid">' +
-      feature('AI 生成与整理任务', '把自然语言想法整理为可执行的待办，具体交互仍需验收。', '开发 QA 截图 · 未正式发布', 'qa:desktop-light-en.png', '#/note/changelog') +
-      feature('任务复盘与归档', '目标是汇总每日成果，并安全保存已完成任务。', '开发中 · 不属于当前正式版', '', '#/note/changelog') +
-      feature('附件管理体验升级', '目标是让图片、文档与附件更好查找和整理。', '开发中 · 不属于当前正式版', '', '#/note/changelog') +
+      '<section class="note-section"><div class="note-section-heading"><span>EVERYDAY WORKFLOW</span><h2>熟悉的笔记能力，持续完善</h2></div><div class="note-feature-grid">' +
+      feature('Markdown 与富文本', '选择合适的编辑方式，用统一知识树整理笔记。', '持续维护', 'desktop-ai-writing.png', '#/note/advanced-content-blocks') +
+      feature('手机随时记录', 'Android 客户端支持日常记录；跨设备访问需要正确配置服务端和账号。', '持续维护', 'mobile-editor.png', '#/note/quick-start') +
+      feature('AI 辅助写作', '总结、改写与知识问答，模型由你选择，在线服务可能发送相关文本。', '持续维护', 'settings-ai.png', '#/note/ai') +
       '</div></section>');
-    document.title = 'Nowen Note 核心功能 · 已发布与开发中';
+    document.title = 'Nowen Note v1.5.2 核心功能 · 文件、AI 与同步';
   }
   function renderChangelog() {
-    frame('changelog', '<section class="note-heading"><span class="note-kicker">RELEASE STATUS</span><h1>版本与更新</h1>' +
-      '<p>安装请以 GitHub 正式 Release 为准，开发计划不代表已经发布。</p><div id="noteChangelogLive" aria-live="polite">' + meta() + '</div></section>' +
-      '<section class="note-section note-version-list"><article><span class="note-feature-label">已发布记录 · 2026-10-08</span><h2>v1.5.1</h2>' +
-      '<p>任务自动化与 AI 助手体验、移动端可靠性、数据保护与故障排查改进。</p>' +
-      link(APP + '/releases/tag/v1.5.1', '查看正式更新内容 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
-      '<article><span class="note-feature-label">2026-10-15 审计状态：开发中</span><h2>v1.5.2</h2>' +
-      '<p>任务生成、每日汇总与归档、附件管理、文件标签等需求处于开发及验收阶段。多端同步与 NAS 场景需重点回归验证。最终发布内容以正式 Release 为准。</p>' +
-      link(APP + '/tree/release/v1.5.2', '查看开发分支 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article></section>' +
+    const seq = ++generation;
+    frame('changelog', '<section class="note-heading"><span class="note-kicker">RELEASE NOTES</span><h1>版本与更新</h1>' +
+      '<p>了解实际发布的功能、安装包与数据安全说明。</p><div id="noteChangelogLive" aria-live="polite">' + meta() + '</div></section>' +
+      '<section class="note-section note-version-list"><article><span class="note-feature-label">最新正式版 · 2026-10-16</span><h2>v1.5.2</h2>' +
+      '<p><strong>文件中心</strong>：网盘式导航、智能文件夹、回收站、AI 元数据整理。<strong>MCP</strong>：扩展授权知识树、个人任务与文件操作，重要写入预览确认。<strong>任务</strong>：AI 生成、今日完成清单、归档、详情存笔记、导出。<strong>编辑与同步</strong>：纯文本笔记、中文排版、单篇同步回执、目录恢复保护。</p>' +
+      link(APP + '/releases/tag/v1.5.2', '查看 v1.5.2 正式更新 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+      '<article><span class="note-feature-label">上一正式版 · 2026-10-08</span><h2>v1.5.1</h2><p>任务提醒摘要、AI 助手、Android 同步体验、加密与安全改进。</p>' +
+      link(APP + '/releases/tag/v1.5.1', '查看 v1.5.1 更新 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article></section>' +
+      '<section class="note-section note-release-warning"><h2>升级前请备份</h2><p>数据库、附件及部署配置应独立备份。回退程序 / Docker 镜像不会还原持久化数据。</p>' +
+      link('#/note/backup-restore-drill', '备份与恢复教程 →', 'note-secondary') + '</section>' +
       '<section class="note-section">' + link(APP + '/blob/main/CHANGELOG.md', '完整历史更新日志 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') +
       '　' + link('#/note/download', '下载最新正式版 →', 'note-cta') + '</section>');
-    document.title = 'Nowen Note 版本更新 · 正式版与开发状态';
-    const seq = generation;
+    document.title = 'Nowen Note v1.5.2 更新日志 · 最新正式版';
     R.load(function (releaseState) {
       if (generation !== seq || !document.getElementById('noteChangelogLive')) return;
       snapshot = releaseState;

@@ -122,8 +122,8 @@
         </div>
         <figure class="studio-preview">
           <div class="studio-preview-window">
-            <div class="studio-preview-top"><span class="studio-preview-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>NOWEN NOTE / WORKSPACE</span><span>SCREENSHOT v1.5.1</span></div>
-            <img class="studio-preview-image" src="https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.1/docs/screenshots/desktop-ai-writing.png" alt="Nowen Note v1.5.1 正式版桌面端笔记和 AI 写作的真实界面" width="880" height="660" decoding="async" />
+            <div class="studio-preview-top"><span class="studio-preview-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>NOWEN NOTE / WORKSPACE</span><span>SCREENSHOT v1.5.2</span></div>
+            <img class="studio-preview-image" src="https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.2/docs/screenshots/desktop-ai-writing.png" alt="Nowen Note v1.5.2 正式版桌面端笔记和 AI 写作的真实界面" width="880" height="660" decoding="async" />
             <figcaption>来自正式版本的产品截图 · 非概念设计</figcaption>
           </div>
           <div class="studio-float"><div class="studio-float-icon" aria-hidden="true">✧</div><div><b>你的空间，由你掌控</b><span>Local-first · Self-hosted</span></div></div>
