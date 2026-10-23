@@ -86,12 +86,12 @@
       '<p class="note-fine">桌面端可本地使用；跨设备同步需要连接同一服务端。在线演示不适合存放真实资料。</p></div>' +
       '<div class="note-hero-art"><div class="note-hero-image-preview" aria-hidden="true"><span>NOWEN / WORKSPACE</span><strong>让每一条记录，<br />都找到自己的位置。</strong><small>Markdown · Knowledge · AI · Self-hosted</small></div>' + screenshot('desktop-ai-writing.png', 'Nowen Note 桌面端 AI 写作界面', '', true) + '</div></section>' +
       '<section class="note-section note-release-highlight"><div class="note-section-heading"><span>NEW IN v1.5.3 · 更新速览</span><h2>笔记更顺手，管理更安心</h2>' +
-       '<p>2026-10-23 代码更新 · 优化目录编辑、图片安全转存、加密笔记与日历提醒；正式可下载版本以 GitHub Releases 为准。</p></div><div class="note-values">' +
+       '<p>2026-10-23 正式发布 · 优化目录编辑、图片安全转存、加密笔记与日历提醒；正式可下载版本以 GitHub Releases 为准。</p></div><div class="note-values">' +
        '<article><b>笔记管理更顺手</b><p>收藏笔记搜索、目录拖拽修复、移动端编辑稳定性提升。</p></article>' +
        '<article><b>图片处理更安心</b><p>一键扫描转存外链图、图片旋转保存、分享链接优化。</p></article>' +
        '<article><b>加密与附件保护</b><p>支持解除整篇笔记加密，个人范围一键转存外链图片。</p></article>' +
        '<article><b>更多体验修复</b><p>多级目录拖拽、收藏搜索、节假日日历与任务通知优化。</p></article></div>' +
-       '<p class="note-fine">v1.5.3 更新内容已进入 main；Workspace、个人应用 Studio 和插件扩展平台 V3 均规划在 v1.6.0，不属于本版。升级前请备份，安装包仅从已公开的正式 Release 获取。</p>' +
+       '<p class="note-fine">v1.5.3 已正式发布；Workspace、个人应用 Studio 和插件扩展平台 V3 均规划在 v1.6.0，不属于本版。升级前请备份，安装包仅从已公开的正式 Release 获取。</p>' +
        '<div class="note-inline-links">' + link('#/note/changelog', '查看 v1.5.3 更新亮点 →', 'note-secondary') +
        link(APP + '/blob/main/CHANGELOG.md', 'GitHub 更新日志 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div></section>' +
       '<section class="note-section"><div class="note-section-heading"><span>WHY NOWEN</span><h2>从日常记录到长期积累</h2></div>' +
@@ -261,15 +261,15 @@
   }
   function renderFeatures() {
     frame('features', '<section class="note-heading"><span class="note-kicker">PRODUCT FEATURES · v1.5.3</span><h1>记录、整理，让日常写作更顺手</h1>' +
-      '<p>v1.5.3 代码已更新至 main：笔记目录、图片管理、加密保护与日历提醒持续优化。Workspace、个人应用 Studio、插件扩展平台 V3 统一规划在 v1.6.0。正式下载版本与各平台可用性以 GitHub Releases 为准。</p></section>' +
+      '<p>v1.5.3 已正式发布：笔记目录、图片管理、加密保护与日历提醒持续优化。Workspace、个人应用 Studio、插件扩展平台 V3 统一规划在 v1.6.0。正式下载版本与各平台可用性以 GitHub Releases 为准。</p></section>' +
       '<section class="note-section"><div class="note-section-heading"><span>NEW IN v1.5.3 · 更新内容</span><h2>这次更新了什么？</h2>' +
       '<p>下面介绍版本代码中的能力，并非所有客户端均已正式分发；扩展、AI、Native 功能仍受配置、平台和权限边界限制。</p></div><div class="note-feature-grid">' +
-      feature('笔记目录与收藏', '修复多级笔记拖拽错位，恢复“全部笔记”入口，支持搜索收藏笔记。', 'v1.5.3 代码更新', '', '#/note/changelog') +
-      feature('外链图片安全转存', '个人笔记内一键扫描与转存外链图片，优化图片旋转保存和分享链接扩展名。', 'v1.5.3 代码更新', '', '#/note/attachments') +
-      feature('移动端编辑优化', '修复移动端代码块异常重建和斜杠菜单交互问题，改善编辑稳定性。', 'v1.5.3 代码更新', '', '#/note/advanced-content-blocks') +
-      feature('解除笔记加密', '整篇加密笔记解锁后可通过明确确认解除加密；敏感操作仍须遵守原有权限与数据保护规则。', 'v1.5.3 代码更新', '', '#/note/changelog') +
-      feature('日历与通知', '中国大陆节假日日历、PushPlus 中文 JSON 摘要，以及 Webhook 服务商回执和时区问题修复。', 'v1.5.3 代码更新', '', '#/note/tasks') +
-      feature('多端稳定性', '改进 Android 连接错误提示与 macOS 依赖校验，完善发布构建验证和故障防护。', 'v1.5.3 代码更新', '', '#/note/backup-restore-drill') +
+      feature('笔记目录与收藏', '修复多级笔记拖拽错位，恢复“全部笔记”入口，支持搜索收藏笔记。', 'v1.5.3 正式发布', '', '#/note/changelog') +
+      feature('外链图片安全转存', '个人笔记内一键扫描与转存外链图片，优化图片旋转保存和分享链接扩展名。', 'v1.5.3 正式发布', '', '#/note/attachments') +
+      feature('移动端编辑优化', '修复移动端代码块异常重建和斜杠菜单交互问题，改善编辑稳定性。', 'v1.5.3 正式发布', '', '#/note/advanced-content-blocks') +
+      feature('解除笔记加密', '整篇加密笔记解锁后可通过明确确认解除加密；敏感操作仍须遵守原有权限与数据保护规则。', 'v1.5.3 正式发布', '', '#/note/changelog') +
+      feature('日历与通知', '中国大陆节假日日历、PushPlus 中文 JSON 摘要，以及 Webhook 服务商回执和时区问题修复。', 'v1.5.3 正式发布', '', '#/note/tasks') +
+      feature('多端稳定性', '改进 Android 连接错误提示与 macOS 依赖校验，完善发布构建验证和故障防护。', 'v1.5.3 正式发布', '', '#/note/backup-restore-drill') +
       '</div></section>' +
       '<section class="note-section"><div class="note-section-heading"><span>EVERYDAY WORKFLOW</span><h2>熟悉的笔记能力，持续完善</h2></div><div class="note-feature-grid">' +
       feature('Markdown 与富文本', '选择合适的编辑方式，用统一知识树整理笔记。', '持续维护', 'desktop-ai-writing.png', '#/note/advanced-content-blocks') +
@@ -281,10 +281,10 @@
   function renderChangelog() {
     const seq = ++generation;
     frame('changelog', '<section class="note-heading"><span class="note-kicker">RELEASE NOTES · v1.5.3</span><h1>版本与更新</h1>' +
-      '<p>v1.5.3 代码更新已进入 main；实际公开发布状态和安装包以 GitHub 正式 Releases 为准。</p><div id="noteChangelogLive" aria-live="polite">' + meta() + '</div></section>' +
-      '<section class="note-section note-version-list"><article><span class="note-feature-label">v1.5.3 · 2026-10-23 · 代码更新</span><h2>笔记编辑、图片管理与稳定性提升</h2>' +
+      '<p>v1.5.3 已正式发布；各平台安装包和下载链接以 GitHub 正式 Releases 为准。</p><div id="noteChangelogLive" aria-live="polite">' + meta() + '</div></section>' +
+      '<section class="note-section note-version-list"><article><span class="note-feature-label">v1.5.3 · 2026-10-23 · 正式发布</span><h2>笔记编辑、图片管理与稳定性提升</h2>' +
       '<p><strong>笔记编辑：</strong>修复嵌套知识树拖拽（#869）、移动端代码块与斜杠菜单问题，恢复“全部笔记”入口并新增收藏笔记搜索。<strong>图片与加密：</strong>个人笔记外链图一键转存、图片旋转保存、分享链接兼容性优化，支持永久解除整篇笔记加密（#875）。<strong>日历与任务：</strong>中国大陆节假日（#848）、PushPlus 中文任务摘要、Webhook 回执和时区修复（#867）、MCP 提醒改进（#871）。<strong>稳定性：</strong>完善 Android 连接提示、macOS 依赖校验及发布构建验证。</p>' +
-      '<p class="note-fine">截至 2026-10-23，v1.5.3 Release 仍为草稿。页面展示更新内容，不提供未经正式发布的下载地址；正式发布后实时下载中心会核验并显示对应资产。</p>' +
+      '<p class="note-fine">v1.5.3 已在 GitHub 正式发布。下载中心动态核验已公开的 Release 附件；未核验的安装包不展示。</p>' +
       link(APP + '/blob/main/CHANGELOG.md', '查看 v1.5.3 完整更新日志 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
       '<article><span class="note-feature-label">下一阶段 · v1.6.0 开发计划</span><h2>Workspace · App Studio · 扩展平台 V3</h2>' +
       '<p>完整工作台 Workspace、个人应用 Studio 和插件扩展平台 V3 均已调整至 v1.6.0 开发计划，**不属于 v1.5.3 的正式发布内容**。具体范围、交付时间和发布状态以开发与验收结果为准。</p></article>' +
