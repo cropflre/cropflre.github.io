@@ -85,13 +85,13 @@
       link(APP, 'GitHub ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div>' +
       '<p class="note-fine">桌面端可本地使用；跨设备同步需要连接同一服务端。在线演示不适合存放真实资料。</p></div>' +
       '<div class="note-hero-art"><div class="note-hero-image-preview" aria-hidden="true"><span>NOWEN / WORKSPACE</span><strong>让每一条记录，<br />都找到自己的位置。</strong><small>Markdown · Knowledge · AI · Self-hosted</small></div>' + screenshot('desktop-ai-writing.png', 'Nowen Note 桌面端 AI 写作界面', '', true) + '</div></section>' +
-      '<section class="note-section note-release-highlight"><div class="note-section-heading"><span>NEW IN v1.5.3 · 更新速览</span><h2>从笔记工具，走向可扩展的个人工作台</h2>' +
+      '<section class="note-section note-release-highlight"><div class="note-section-heading"><span>NEW IN v1.5.3 · 更新速览</span><h2>个人应用与插件生态，继续升级</h2>' +
        '<p>2026-10-23 代码更新 · 个人应用 Studio、扩展平台 V3、笔记安全与编辑体验持续升级；正式可下载版本以 GitHub Releases 为准。</p></div><div class="note-values">' +
-       '<article><b>个人应用工作台</b><p>无代码模板、AI 辅助生成草稿、预览运行与历史版本恢复。</p></article>' +
+       '<article><b>个人应用 Studio</b><p>无代码模板、AI 辅助生成草稿、预览运行与历史版本恢复。</p></article>' +
        '<article><b>扩展平台 V3</b><p>插件统一管理、受控运行、仪表盘与按资源授权的数据访问。</p></article>' +
        '<article><b>加密与附件保护</b><p>支持解除整篇笔记加密，个人范围一键转存外链图片。</p></article>' +
        '<article><b>更多体验修复</b><p>多级目录拖拽、收藏搜索、节假日日历与任务通知优化。</p></article></div>' +
-       '<p class="note-fine">v1.5.3 更新内容已进入 main；升级请先备份，安装包仅从已公开的正式 Release 获取。</p>' +
+       '<p class="note-fine">v1.5.3 更新内容已进入 main；完整「工作台（Workspace）」调整至 v1.6.0 开发，不属于本版。升级请先备份，安装包仅从已公开的正式 Release 获取。</p>' +
        '<div class="note-inline-links">' + link('#/note/changelog', '查看 v1.5.3 更新亮点 →', 'note-secondary') +
        link(APP + '/blob/main/CHANGELOG.md', 'GitHub 更新日志 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div></section>' +
       '<section class="note-section"><div class="note-section-heading"><span>WHY NOWEN</span><h2>从日常记录到长期积累</h2></div>' +
@@ -260,8 +260,8 @@
     });
   }
   function renderFeatures() {
-    frame('features', '<section class="note-heading"><span class="note-kicker">PRODUCT FEATURES · v1.5.3</span><h1>记录、组织，并构建自己的工作台</h1>' +
-      '<p>v1.5.3 代码已更新至 main：个人应用、插件 V3、编辑稳定性和日程自动化增强。正式下载版本与各平台可用性以 GitHub Releases 为准。</p></section>' +
+    frame('features', '<section class="note-heading"><span class="note-kicker">PRODUCT FEATURES · v1.5.3</span><h1>记录、组织，创建自己的应用</h1>' +
+      '<p>v1.5.3 代码已更新至 main：个人应用 Studio、插件 V3、编辑稳定性和日程自动化增强。完整「工作台（Workspace）」将于 v1.6.0 开发，不属于本版。正式下载版本与各平台可用性以 GitHub Releases 为准。</p></section>' +
       '<section class="note-section"><div class="note-section-heading"><span>NEW IN v1.5.3 · 更新内容</span><h2>这次更新了什么？</h2>' +
       '<p>下面介绍版本代码中的能力，并非所有客户端均已正式分发；扩展、AI、Native 功能仍受配置、平台和权限边界限制。</p></div><div class="note-feature-grid">' +
       feature('个人应用 Studio', '从个人应用库选择模板，无代码编辑、预览运行；AI 可提出草稿和多轮改动，需确认后应用，支持历史版本恢复。', 'v1.5.3 代码更新', '', '#/note/changelog') +
@@ -282,10 +282,12 @@
     const seq = ++generation;
     frame('changelog', '<section class="note-heading"><span class="note-kicker">RELEASE NOTES · v1.5.3</span><h1>版本与更新</h1>' +
       '<p>v1.5.3 代码更新已进入 main；实际公开发布状态和安装包以 GitHub 正式 Releases 为准。</p><div id="noteChangelogLive" aria-live="polite">' + meta() + '</div></section>' +
-      '<section class="note-section note-version-list"><article><span class="note-feature-label">v1.5.3 · 2026-10-23 · 代码更新</span><h2>个人应用工作台与扩展平台 V3</h2>' +
+      '<section class="note-section note-version-list"><article><span class="note-feature-label">v1.5.3 · 2026-10-23 · 代码更新</span><h2>个人应用 Studio 与扩展平台 V3</h2>' +
       '<p><strong>个人应用 Studio：</strong>新增无代码应用库、可运行模板、AI 草稿审阅、多轮编辑及历史版本恢复。<strong>扩展平台 V3：</strong>统一应用管理，增加受控运行时、资源授权与安装校验。<strong>写作与安全：</strong>修复嵌套知识树拖拽（#869）、移动端代码块与斜杠菜单问题，支持永久解密（#875）、收藏搜索、图片旋转保存和一键转存外链图。<strong>效率：</strong>中国大陆节假日（#848）、PushPlus 中文任务摘要、Webhook 回执和时区修复（#867）、MCP 提醒改进（#871）。</p>' +
       '<p class="note-fine">截至 2026-10-23，v1.5.3 Release 仍为草稿。页面展示更新内容，不提供未经正式发布的下载地址；正式发布后实时下载中心会核验并显示对应资产。</p>' +
       link(APP + '/blob/main/CHANGELOG.md', '查看 v1.5.3 完整更新日志 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+      '<article><span class="note-feature-label">下一阶段 · v1.6.0 开发计划</span><h2>工作台（Workspace）</h2>' +
+      '<p>完整的 Workspace 功能将放在 v1.6.0 开发。此模块与 v1.5.3 的个人应用 Studio 不同，目前属于后续版本规划；具体功能范围、交付时间和发布状态以开发与验收结果为准。</p></article>' +
       '<article><span class="note-feature-label">上一公开正式版 · 2026-10-16</span><h2>v1.5.2</h2>' +
       '<p><strong>文件中心：</strong>网盘式导航、标签、智能文件夹、回收站、AI 元数据整理。<strong>MCP：</strong>授权知识树、任务和文件操作。<strong>任务：</strong>AI 生成、今日完成清单、归档、详情存笔记和报表导出。<strong>同步：</strong>单篇同步回执、目录恢复保护；v1.5.2 已发布。</p>' +
       link(APP + '/releases/tag/v1.5.2', '查看 v1.5.2 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
