@@ -27,3 +27,34 @@
 @media (max-width: 600px) {
   .site-icp-footer { padding-inline: 16px; }
 }
+
+/* Lightweight, accessible PV / UV totals shared by all public entry points. */
+.site-visit-stats {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  margin-bottom: 7px;
+  color: var(--color-text-secondary, #576077);
+  font-size: 12px;
+  line-height: 1.7;
+}
+.site-visit-stat { display: inline-flex; align-items: baseline; gap: 6px; white-space: nowrap; }
+.site-visit-stat strong {
+  color: var(--color-text-primary, #171b31);
+  font: 700 13px/1.5 var(--font-technical, "SFMono-Regular", Consolas, monospace);
+  font-variant-numeric: tabular-nums;
+}
+.site-visit-divider {
+  width: 1px;
+  height: 13px;
+  background: var(--color-border, rgba(76, 88, 135, .15));
+}
+.site-icp-meta { display: flex; justify-content: center; flex-wrap: wrap; align-items: center; gap: 0 4px; }
+.site-icp-provider { font-size: 11px; color: var(--color-text-muted, #7d849c); }
+.site-icp-provider a { padding: 6px 2px; }
+@media (max-width: 430px) {
+  .site-visit-stats { gap: 6px 11px; }
+  .site-visit-stat { gap: 5px; }
+}
