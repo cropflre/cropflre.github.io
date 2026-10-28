@@ -25,11 +25,14 @@ async function mock(page) {
    status:200,contentType:'application/javascript',
    body:"window.NOWEN_GUESTBOOK_CONFIG={apiBaseUrl:'https://guestbook-api.test',turnstileSiteKey:''};"
  }));
- await page.route('https://guestbook-api.test/**',route=>route.fulfill({
-   status:200,contentType:'application/json',
-   headers:{'Access-Control-Allow-Origin':'*'},
-   body:JSON.stringify({items:[{id:'1',nickname:injected,content:injected,admin_reply:injected,created_at:1790000000}],hasMore:false,page:1})
- }));
+ await page.route('https://guestbook-api.test/**',route=>{
+   const admin=route.request().url().includes('/api/guestbook/admin/');
+   return route.fulfill({
+     status:admin?401:200,contentType:'application/json',
+     headers:{'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'Authorization, Content-Type'},
+     body:JSON.stringify(admin?{error:'unauthorized'}:{items:[{id:'1',nickname:injected,content:injected,admin_reply:injected,created_at:1790000000}],hasMore:false,page:1})
+   });
+ });
 }
 for(const [name,engine] of [['Chromium',chromium],['Firefox',firefox],['WebKit',webkit]]) {
  test(name+': guestbook displays safe plain text and graceful disabled submission',async()=>{
