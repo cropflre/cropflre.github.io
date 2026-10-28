@@ -17,7 +17,7 @@ test('public guestbook is a standalone accessible route with privacy and ICP',()
 });
 test('public config never embeds the Turnstile secret or admin token',()=>{
  const c=read('assets/js/guestbook-config.js');
- assert.match(c,/turnstileSiteKey: ''/);
+ assert.match(c,/turnstileSiteKey: '(?:0x[A-Za-z0-9_-]+)?'/);
  assert.doesNotMatch(c,/SECRET_KEY:|GUESTBOOK_ADMIN_TOKEN:|Bearer [a-z0-9]{32}/i);
  const frontend=read('assets/js/guestbook.js');
  assert.match(frontend,/turnstile\.render/);
