@@ -8,7 +8,7 @@
     {
       "binding": "DB",
       "database_name": "nowen-site-stats",
-      "database_id": "REPLACE_WITH_D1_DATABASE_ID",
+      "database_id": "fe85a2cf-3ee5-4618-8887-295ae4d1cc7a",
       "migrations_dir": "migrations"
     }
   ]
