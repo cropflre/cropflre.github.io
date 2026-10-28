@@ -2,5 +2,5 @@
 window.NOWEN_GUESTBOOK_CONFIG = Object.freeze({
   apiBaseUrl: window.NOWEN_VISITS_CONFIG?.apiBaseUrl || '',
   // Configure after creating a Turnstile widget for nowen.cn; never put the Secret Key here.
-  turnstileSiteKey: ''
+  turnstileSiteKey: '0x4AAAAAAFpKJQQOBxaCYJcC'
 });
