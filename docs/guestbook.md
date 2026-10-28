@@ -14,7 +14,7 @@
 
 Dashboard → Turnstile → Add widget；名称 nowen-guestbook，允许 Hostnames: nowen.cn，按需加入 www.nowen.cn。
 
-获得 Site Key（公开）和 Secret Key（私密）。将 Site Key 写到 assets/js/guestbook-config.js 的 turnstileSiteKey。Secret Key 只能通过 Worker Secret 设置：
+获得 Site Key（公开）和 Secret Key（私密）。Site Key 填到 assets/js/guestbook-config.js 的 turnstileSiteKey。**`wrangler secret put` 后面是变量名 `TURNSTILE_SECRET_KEY`，不能直接填写以 `0x` 开头的 Key。只有出现 `Enter a secret value` 时才粘贴私密 Secret Key**：
 
     cd cropflre.github.io/workers/site-stats
     npx wrangler secret put TURNSTILE_SECRET_KEY
@@ -36,7 +36,9 @@ Dashboard → Turnstile → Add widget；名称 nowen-guestbook，允许 Hostnam
     npx wrangler deploy
 
 新增 migrations/0002_guestbook.sql，创建独立 guestbook_messages 表，不修改计数表。旧 0001 的 IF NOT EXISTS / INSERT OR IGNORE 不会清空 PV/UV。
-如果 Wrangler 网络故障，可以在 D1 控制台手动执行 0002_guestbook.sql；需注意手动创建表不会更新 Wrangler 迁移跟踪记录。
+如果 Wrangler 报 `fetch failed` 或 `Client network socket disconnected before secure TLS connection was established`，不要删除 D1 或重建已有的 PV/UV 计数表。可在 Cloudflare Dashboard → D1 → `nowen-site-stats` → 控制台，只执行 `migrations/0002_guestbook.sql` 的两个 `CREATE ... IF NOT EXISTS` 语句。再运行 `SELECT name FROM sqlite_master WHERE type='table' AND name='guestbook_messages';` 核验。手工执行不会自动登记到 Wrangler 的 `d1_migrations` 表，之后重试幂等迁移时需再次核对状态。
+
+如误执行 `wrangler secret put 0x4AAAA...`，只会创建错误命名的 Worker Secret，不会绑定到 `env.TURNSTILE_SECRET_KEY`。先在 `npx wrangler secret list` 核对，再到 Cloudflare Worker → Settings → Variables and Secrets 删除错误变量，随后用正确名称上传 Secret。如果私密 Key 已公开在聊天、日志或仓库中，请在 Turnstile Widget → Settings → Rotate Secret Key 轮换；Cloudflare 默认轮换存在约两小时的旧密钥有效期。
 
 验证现有 /api/stats 仍返回 PV/UV，新的 GET /api/guestbook/messages 返回包含 items 的 JSON。
 
