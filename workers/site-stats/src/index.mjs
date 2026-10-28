@@ -1,3 +1,4 @@
+import { handleGuestbook } from './guestbook.mjs';
 // Lightweight NOWEN site counter. D1 stores only SHA-256 of a random browser ID.
 const ORIGINS = new Set(['https://nowen.cn', 'https://www.nowen.cn']);
 const permitted = (origin, env) => ORIGINS.has(origin) || Boolean(env.DEV_ORIGIN && origin === env.DEV_ORIGIN);
@@ -43,6 +44,7 @@ async function count(db, id, path) {
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin') || '', url = new URL(request.url);
+    if (url.pathname.startsWith('/api/guestbook/')) return handleGuestbook(request, env);
     if (request.method === 'OPTIONS') return response(null, permitted(origin,env)?204:403, origin,env);
     if (!['/api/stats','/api/visit'].includes(url.pathname)) return response({error:'not_found'},404,origin,env);
     if ((url.pathname==='/api/stats' && request.method!=='GET') ||

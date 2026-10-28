@@ -1,0 +1,22 @@
+<!doctype html><html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="NOWEN 留言板数据使用和隐私说明"><link rel="canonical" href="https://nowen.cn/guestbook/privacy/">
+<title>留言板隐私说明 · NOWEN</title><link rel="stylesheet" href="../../assets/css/nowen-ui-v2.css">
+<link rel="stylesheet" href="../../assets/css/guestbook.css">
+<script>try{document.documentElement.dataset.theme=localStorage.getItem('nowen-help-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light'}</script>
+</head><body>
+<header class="gb-header"><nav class="gb-nav"><a class="gb-logo" href="/"><span class="gb-logo-icon">N</span><span>NOWEN <small>开源实验室</small></span></a><div class="gb-nav-links"><a href="/guestbook/">返回留言板</a><a href="/">官网首页</a></div></nav></header>
+<main class="gb-shell" style="max-width:840px">
+<div class="gb-eyebrow"><span class="gb-dot"></span> GUESTBOOK / PRIVACY</div>
+<h1>留言板隐私说明</h1>
+<p class="gb-muted">更新于 2026 年 10 月 28 日 · 适用于 nowen.cn/guestbook/，不适用于 Nowen Note 客户端。</p>
+<section class="gb-card" style="padding:30px;margin-top:28px;line-height:1.85">
+<h2>留言会保存什么？</h2>
+<p>提交后会保存昵称（可以匿名）、留言正文、随机留言编号、提交时间、审核状态；审核后还会保存官方回复和审核时间。通过审核的昵称、正文、时间、官方回复会对网站访客公开。未审核或被拒绝的内容不会公开展示。</p>
+<h2>反垃圾与数据处理</h2>
+<p>提交时需使用 Cloudflare Turnstile 人机验证；Worker 会向 Cloudflare 验证挑战令牌。限流会临时使用请求 IP 作为限制键，但 D1 留言表不存原始 IP、手机号、邮箱或站内账号。Cloudflare 作为基础设施服务方可能另外处理网络安全日志。请勿在留言中填入个人敏感信息。</p>
+<h2>保存多久，如何删除？</h2>
+<p>留言默认保留至管理员删除。你可以通过 <a href="https://github.com/cropflre/cropflre.github.io/issues">官网 GitHub Issues</a> 说明昵称和大致发布时间提出删除请求，管理员会核实后处理；请勿在公开 Issue 中发布身份证号、联系方式或其他敏感信息。</p>
+<h2>其他说明</h2><p>留言区不能上传文件或图片；昵称并非实名认证。其他网站访问统计请参见 <a href="/site-analytics/">访问统计与隐私说明</a>。</p>
+</section></main><footer class="gb-footer"><a href="/guestbook/">返回留言板</a><span>NOWEN 开源实验室 · 粤ICP备2026067978号-1</span></footer>
+</body></html>

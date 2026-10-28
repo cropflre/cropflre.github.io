@@ -11,5 +11,15 @@
       "database_id": "fe85a2cf-3ee5-4618-8887-295ae4d1cc7a",
       "migrations_dir": "migrations"
     }
+  ],
+  "ratelimits": [
+    {
+      "name": "GUESTBOOK_LIMITER",
+      "namespace_id": "71342026",
+      "simple": {
+        "limit": 5,
+        "period": 60
+      }
+    }
   ]
 }
