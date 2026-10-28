@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<meta name="robots" content="noindex,nofollow" /><title>留言审核 · NOWEN</title>
+<link rel="stylesheet" href="../../assets/css/nowen-ui-v2.css" /><link rel="stylesheet" href="../../assets/css/guestbook.css" />
+<script>try {document.documentElement.dataset.theme=localStorage.getItem('nowen-help-theme')|| (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');} catch {document.documentElement.dataset.theme='light'}</script>
+<script defer src="../../assets/js/site-visits-config.js"></script><script defer src="../../assets/js/guestbook-config.js"></script>
+<script defer src="../../assets/js/guestbook-admin.js"></script></head>
+<body><header class="gb-header"><nav class="gb-nav" aria-label="主导航"><a class="gb-logo" href="/"><span class="gb-logo-icon">N</span><span>NOWEN <small>开源实验室</small></span></a><div class="gb-nav-links"><a href="/guestbook/">返回留言板</a><a href="/">官网首页</a></div></nav></header>
+<main class="gb-shell gb-admin-shell">
+  <div class="gb-eyebrow"><span class="gb-dot"></span> NOWEN / MODERATION</div>
+  <h1>留言审核</h1><p class="gb-muted">仅站长使用。管理员密钥只保存在当前页面的内存中，不会存入浏览器存储。</p>
+  <section class="gb-card gb-admin-login" id="gbLoginPanel">
+    <label for="gbAdminToken">管理员 API Token</label>
+    <div class="gb-admin-login-row"><input type="password" id="gbAdminToken" autocomplete="off" spellcheck="false" placeholder="粘贴 Wrangler Secret 中设置的管理密钥" /><button id="gbLogin" type="button" class="gb-primary">进入审核</button></div>
+  </section>
+  <div id="gbAdminPanel" hidden>
+    <div class="gb-admin-toolbar"><label for="gbStatus">查看</label><select id="gbStatus"><option value="pending">待审核</option><option value="approved">已公开</option><option value="rejected">已拒绝</option></select><button class="gb-quiet" type="button" id="gbAdminRefresh">刷新</button><button class="gb-quiet" type="button" id="gbLogout">退出</button></div>
+    <div id="gbAdminList" class="gb-admin-list" aria-live="polite"></div>
+  </div>
+  <p id="gbAdminNotice" class="gb-hint" aria-live="polite"></p>
+</main>
+<footer class="gb-footer"><a href="/guestbook/">← 返回留言板</a><span>NOWEN 开源实验室</span></footer>
+</body></html>

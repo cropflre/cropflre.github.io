@@ -25,8 +25,12 @@ jobs:
           node --check assets/js/site-visits.js
           node --check assets/js/site-visits-config.js
           node --check workers/site-stats/src/index.mjs
+          node --check workers/site-stats/src/guestbook.mjs
+          node --check assets/js/guestbook.js
+          node --check assets/js/guestbook-admin.js
+          node --check assets/js/guestbook-config.js
       - name: Release and route contract tests
-        run: node --test tests/download-center.test.cjs tests/privacy-policy.test.cjs tests/icp-footer.test.cjs tests/site-visits.test.cjs tests/site-stats-worker.test.mjs
+        run: node --test tests/download-center.test.cjs tests/privacy-policy.test.cjs tests/icp-footer.test.cjs tests/site-visits.test.cjs tests/site-stats-worker.test.mjs tests/guestbook-worker.test.mjs tests/guestbook-static.test.cjs
       - name: Install isolated browser test tooling
         run: |
           npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
