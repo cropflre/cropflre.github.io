@@ -16,9 +16,21 @@ for(const [p,dir] of pages) test(p+' has self-hosted stats and retains ICP',()=>
 });
 const src=fs.readFileSync(path.join(root,'assets/js/site-visits.js'),'utf8');
 const config=fs.readFileSync(path.join(root,'assets/js/site-visits-config.js'),'utf8');
-test('statistics require explicit endpoint configuration',()=>{
- assert.match(config,/apiBaseUrl: ''/);
- assert.match(config,/cloudflareWebAnalyticsToken: ''/);
+test('public endpoint configuration is HTTPS and dashboard beacon stays opt-in',()=>{
+ const sandbox={window:{}};
+ vm.runInNewContext(config,sandbox);
+ const settings=sandbox.window.NOWEN_VISITS_CONFIG;
+ assert.equal(typeof settings.apiBaseUrl,'string');
+ if (settings.apiBaseUrl) {
+  const endpoint=new URL(settings.apiBaseUrl);
+  assert.equal(endpoint.protocol,'https:');
+  assert.equal(endpoint.pathname,'/');
+  assert.equal(endpoint.username,'');
+  assert.equal(endpoint.password,'');
+  assert.equal(endpoint.search,'');
+  assert.equal(endpoint.hash,'');
+ }
+ assert.ok(settings.cloudflareWebAnalyticsToken==='' || /^[a-f0-9]{32}$/i.test(settings.cloudflareWebAnalyticsToken));
 });
 function simulate(hostname,apiBaseUrl='',token='',storage=true){
  const items={nowen_site_pv:{textContent:'—'},nowen_site_uv:{textContent:'—'},group:{hidden:true}};
