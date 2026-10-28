@@ -224,3 +224,7 @@ MIT © cropflre
 ## 官网访问计数
 
 使用 Cloudflare Workers + D1 自建 PV/UV，Cloudflare Web Analytics 仪表盘可选。未部署前统计默认禁用、不继承旧计数。详见 [部署、隐私与回滚指南](docs/site-analytics.md)。
+
+## NOWEN 留言板
+
+/guestbook/ 支持免注册留言、审核后公开、官方回复和站长管理，使用既有 Cloudflare Workers + D1，配置 Turnstile 和管理员 Worker Secret 后才能接收投稿。详见 docs/guestbook.md。
