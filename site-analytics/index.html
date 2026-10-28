@@ -1,0 +1,11 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NOWEN 官网访问统计与隐私说明</title><link rel="canonical" href="https://nowen.cn/site-analytics/">
+<style>:root{color-scheme:light dark;font-family:system-ui,"PingFang SC",sans-serif;line-height:1.75}body{max-width:760px;margin:auto;padding:24px 20px 60px;color:light-dark(#22283b,#eef1fb);background:light-dark(#f8f9fd,#111422)}a{color:light-dark(#5855db,#a8b0ff)}h2{font-size:1.18rem;margin-top:28px}</style></head>
+<body><nav><a href="/">← 返回 NOWEN 官网</a></nav><main>
+<h1>官网访问统计与隐私说明</h1><p>更新日期：2026 年 10 月 28 日。本页说明官方网站访问统计，不适用于 Nowen Note Windows 客户端。</p>
+<h2>统计什么？</h2><p>本站使用 Cloudflare Workers + D1 保存累计浏览（PV）和独立浏览器标识数（UV）。有效路由访问计一次，同一路径短时间内重复刷新去重。UV 是浏览器近似统计，非自然人人数。</p>
+<h2>保存哪些数据？</h2><p>首次访问时浏览器在本站 localStorage 中生成随机标识。D1 只保存该标识的 SHA-256 摘要、首次/最近计数时间、最近访问的站内路由及累计 PV/UV。不将原始 IP、完整 URL 查询参数或笔记内容写入统计表；Cloudflare 基础设施可能另有安全或访问日志。</p>
+<h2>如何停止或重置？</h2><p>关闭本站的本地存储权限后，本站仅读取汇总值而不上传新的访客标识。清除 nowen.cn 的网站数据可删除浏览器标识，再次启用时可能被计为新访客。问题可联系 <a href="https://github.com/cropflre/cropflre.github.io/issues">GitHub 官网 Issues</a>，请勿公开发布敏感信息。</p>
+<h2>可选的分析后台</h2><p>站点可能另外启用 Cloudflare Web Analytics Beacon，用于后台趋势和性能分析，但不用于页脚计数。详见 <a href="https://developers.cloudflare.com/web-analytics/about/">Cloudflare 文档</a>。不蒜子的历史统计不会自动迁移。</p>
+</main><footer><small>NOWEN 开源实验室 · <a href="/">官网首页</a> · <a href="/privacy/">Windows 隐私政策</a> · 粤ICP备2026067978号-1</small></footer></body></html>

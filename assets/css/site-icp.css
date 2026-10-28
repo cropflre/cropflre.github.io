@@ -58,3 +58,6 @@
   .site-visit-stats { gap: 6px 11px; }
   .site-visit-stat { gap: 5px; }
 }
+
+/* Hide unavailable counters; never display placeholder values as metrics. */
+.site-visit-stats[hidden] { display: none !important; }

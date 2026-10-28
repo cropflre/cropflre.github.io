@@ -220,3 +220,7 @@ MIT © cropflre
 发行数据由 assets/js/note-release-v1.js 验证 GitHub 最新正式 Release、过滤不适合用户的更新元数据、分类 Windows/macOS/Linux/Android/浏览器扩展/fnOS/UGOS，并在 API 限流时回退 assets/data/nowen-note-stable.json。回退清单在 2026-10-16 核验正式发布的 v1.5.2，包含实际公开的 Windows/macOS/Linux/Android/fnOS 和剪藏扩展附件；2026-10-23 已更新官网 v1.5.3 产品亮点与更新日志；完整工作台（Workspace）、个人应用 Studio 和插件扩展平台 V3 均已调整至 v1.6.0 开发计划，v1.5.3 仅宣传笔记、图片、安全、日历与稳定性更新。v1.5.3 当日已正式发布；下载中心实时读取 GitHub 公开 Release，旧版回退清单不得伪造为 v1.5.3，也不得手拼附件 URL。详见 docs/download-center-release-audit.md。
 
 代码由 assets/js/note-site-v1.js 和 assets/css/note-site-v1.css 实现，保留现有原生静态站点及 GitHub Pages 发布流程。开发预览执行 python -m http.server 3000。单测执行 node --test tests/download-center.test.cjs；PR 上 .github/workflows/note-download-ci.yml 会执行三引擎浏览器测试，测试内容含老路由、响应式、安装包与断网降级。正式合并前仍应人工抽测真实 Edge、Android 浏览器、iPhone Safari 的下载与安装，并检查 Lighthouse。
+
+## 官网访问计数
+
+使用 Cloudflare Workers + D1 自建 PV/UV，Cloudflare Web Analytics 仪表盘可选。未部署前统计默认禁用、不继承旧计数。详见 [部署、隐私与回滚指南](docs/site-analytics.md)。
