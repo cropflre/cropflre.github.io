@@ -1,0 +1,47 @@
+/* Nowen Note x 节点小宝 — AI setup handoff. Scope to one guide only. */
+.iepose-ai-wizard{
+  margin:24px 0 38px;padding:clamp(18px,3vw,28px);
+  color:var(--text);background:var(--panel);
+  border:1px solid var(--line);border-radius:20px;
+  box-shadow:var(--color-shadow,var(--shadow));
+}
+.iepose-ai-heading{display:flex;align-items:flex-start;gap:13px;margin-bottom:12px}
+.iepose-ai-mark{display:grid;place-items:center;flex:0 0 42px;height:42px;border-radius:13px;
+  color:var(--brand);background:var(--brand-soft);font-size:21px}
+.prose .iepose-ai-heading h2{margin:0 0 4px;line-height:1.35;font-size:clamp(19px,2.2vw,23px)}
+.iepose-ai-eyebrow{display:block;margin-bottom:3px;font-size:11px;letter-spacing:.11em;font-weight:750;color:var(--brand)}
+.iepose-ai-wizard .iepose-ai-intro{color:var(--muted);font-size:14px;margin:12px 0 20px}
+.iepose-ai-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.iepose-ai-field{display:flex;flex-direction:column;gap:7px;min-width:0}
+.iepose-ai-field span{font-size:12px;font-weight:700;color:var(--text)}
+.iepose-ai-field select{width:100%;min-width:0;max-width:100%;padding:11px 28px 11px 12px;
+  border:1px solid var(--line-strong);border-radius:11px;appearance:auto;
+  background:var(--panel-soft);color:var(--text);font:inherit;font-size:13px}
+.iepose-ai-field select:focus-visible,.iepose-ai-wizard textarea:focus-visible{
+  outline:3px solid var(--brand);outline-offset:2px}
+.iepose-ai-actions{display:flex;gap:11px;align-items:center;flex-wrap:wrap;margin-top:20px}
+.iepose-ai-actions button,.iepose-ai-actions a{
+  min-height:44px;display:inline-flex;align-items:center;justify-content:center;
+  border-radius:11px;padding:10px 17px;font-size:14px;font-weight:730;
+  text-decoration:none;cursor:pointer;line-height:1.35}
+.iepose-ai-actions button{border:1px solid transparent;background:var(--brand);color:#fff}
+.iepose-ai-actions a{border:1px solid var(--line-strong);color:var(--text);background:var(--panel-soft)}
+.iepose-ai-actions button:hover{filter:brightness(.96)}
+.iepose-ai-actions a:hover{border-color:var(--brand);color:var(--brand)}
+.iepose-ai-wizard .iepose-ai-status{min-height:1.6em;margin:12px 0 8px;
+  font-size:12px;font-weight:650;color:var(--muted)}
+.iepose-ai-wizard details{margin-top:13px;padding:12px;border:1px solid var(--line);
+  background:var(--panel-soft);border-radius:12px}
+.iepose-ai-wizard summary{font-size:13px;font-weight:700;cursor:pointer}
+.iepose-ai-wizard textarea{width:100%;min-height:230px;margin-top:12px;padding:12px;
+  resize:vertical;border:1px solid var(--line-strong);border-radius:10px;
+  font-family:var(--font-technical,monospace);font-size:12px;line-height:1.65;
+  background:var(--panel);color:var(--text);box-sizing:border-box}
+.iepose-ai-footnote{margin:14px 0 0;color:var(--muted);font-size:12px;line-height:1.65}
+.iepose-ai-footnote strong{color:var(--text)}
+@media(max-width:850px){.iepose-ai-fields{grid-template-columns:1fr}.iepose-ai-actions{align-items:stretch}}
+@media(max-width:480px){
+  .iepose-ai-actions button,.iepose-ai-actions a{width:100%;text-align:center}
+  .iepose-ai-wizard{padding:16px;margin-inline:0}
+}
+@media(prefers-reduced-motion:reduce){.iepose-ai-actions *{transition:none!important}}
