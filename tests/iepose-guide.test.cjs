@@ -109,3 +109,15 @@ test('AI tasks distinguish remote methods and protect existing NAS installations
   assert.match(api.buildPrompt({ nas: 'nope', tool: 'bad', mode: 'bad' }), /暂时不清楚/);
   assert.equal(api.TOOLS.qoder.url, 'https://qoder.cn/');
 });
+
+
+test('AI setup guide assets use a shared non-empty cache bust revision', () => {
+  const targets = ['assets/js/help-iepose-v1.js', 'assets/js/help-iepose-ai-v1.js', 'assets/css/help-iepose-ai-v1.css'];
+  const revisions = targets.map(asset => {
+    const escaped = asset.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const match = index.match(new RegExp(escaped + '\\?v=([a-zA-Z0-9-]+)'));
+    assert.ok(match, 'missing cache revision for ' + asset);
+    return match[1];
+  });
+  assert.ok(revisions.every(revision => revision === revisions[0]), 'guide assets must use same revision');
+});
