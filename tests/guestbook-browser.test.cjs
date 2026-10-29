@@ -19,49 +19,27 @@ test.before(async()=>{
  });
 });
 test.after(async()=>new Promise(resolve=>server.close(resolve)));
-const injected='<img src=x onerror="window.__injected=true">';
-async function mock(page) {
- await page.route('**/assets/js/guestbook-config.js',route=>route.fulfill({
-   status:200,contentType:'application/javascript',
-   body:"window.NOWEN_GUESTBOOK_CONFIG={apiBaseUrl:'https://guestbook-api.test',turnstileSiteKey:''};"
- }));
- await page.route('https://guestbook-api.test/**',route=>{
-   const admin=route.request().url().includes('/api/guestbook/admin/');
-   return route.fulfill({
-     status:admin?401:200,contentType:'application/json',
-     headers:{'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'Authorization, Content-Type'},
-     body:JSON.stringify(admin?{error:'unauthorized'}:{items:[{id:'1',nickname:injected,content:injected,admin_reply:injected,created_at:1790000000}],hasMore:false,page:1})
-   });
- });
+async function mockAdmin(page){
+ await page.route('**/assets/js/guestbook-config.js',route=>route.fulfill({status:200,contentType:'application/javascript',body:"window.NOWEN_GUESTBOOK_CONFIG={apiBaseUrl:'https://guestbook-api.test',turnstileSiteKey:''};"}));
+ await page.route('https://guestbook-api.test/**',route=>route.fulfill({status:401,contentType:'application/json',headers:{'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'Authorization, Content-Type'},body:'{"error":"unauthorized"}'}));
 }
 for(const [name,engine] of [['Chromium',chromium],['Firefox',firefox],['WebKit',webkit]]) {
- test(name+': guestbook displays safe plain text and graceful disabled submission',async()=>{
-   const browser=await engine.launch({headless:true});
-   try{
-     const page=await browser.newPage({viewport:{width:390,height:844}});
-     const errors=[];page.on('pageerror',e=>errors.push(e.message));
-     await mock(page);
-     await page.goto(base+'/guestbook/',{waitUntil:'domcontentloaded'});
-     await page.locator('.gb-message-card').first().waitFor({timeout:10000});
-     assert.match(await page.locator('h1').first().innerText(),/把你的想法/);
-     assert.equal(await page.locator('.gb-message-content').innerText(),injected);
-     assert.equal(await page.locator('.gb-reply p').innerText(),injected);
-     assert.equal(await page.locator('.gb-message-card img').count(),0);
-     assert.equal(await page.evaluate(()=>window.__injected===true),false);
-     assert.equal(await page.locator('#gbSubmit').isDisabled(),true);
-     assert.match(await page.locator('#submitNotice').innerText(),/暂未开放/);
-     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
-     await page.locator('#themeToggle').click();
-     assert.equal(await page.locator('html').getAttribute('data-theme'), 'dark');
-     assert.deepEqual(errors,[]);
-   } finally{await browser.close();}
+ test(name+': legacy guestbook redirects visitors to official community',async()=>{
+  const browser=await engine.launch({headless:true});
+  try{
+   const page=await browser.newPage({viewport:{width:390,height:844}});
+   await page.route('https://community.nowen.cn/**',route=>route.fulfill({status:200,contentType:'text/html; charset=utf-8',body:'<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"></head><body><h1>弄文社区</h1></body></html>'}));
+   await page.goto(base+'/guestbook/',{waitUntil:'domcontentloaded'});
+   await page.waitForURL('https://community.nowen.cn/',{timeout:12000});
+   assert.match(await page.locator('h1').innerText(),/弄文社区/);
+  }finally{await browser.close()}
  });
 }
 test('Chromium: admin surface does not persist authentication token',async()=>{
  const browser=await chromium.launch({headless:true});
  try {
    const page=await browser.newPage();
-   await mock(page);
+   await mockAdmin(page);
    await page.goto(base+'/guestbook/admin/');
    assert.equal(await page.locator('#gbAdminPanel').isHidden(),true);
    await page.locator('#gbAdminToken').fill('a'.repeat(64));

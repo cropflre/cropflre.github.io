@@ -1,60 +1,24 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-  <meta name="theme-color" content="#f8f9fd" />
-  <meta name="description" content="NOWEN 开源实验室留言板：匿名分享产品建议、使用感受，与开发者交流。" />
-  <link rel="canonical" href="https://nowen.cn/guestbook/" />
-  <title>留言与交流 · NOWEN 开源实验室</title>
-  <link rel="stylesheet" href="../assets/css/nowen-ui-v2.css" />
-  <link rel="stylesheet" href="../assets/css/guestbook.css" />
-  <script>
-    try { const saved=localStorage.getItem('nowen-help-theme');
-      document.documentElement.dataset.theme=saved||((matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');
-    } catch { document.documentElement.dataset.theme='light'; }
-  </script>
-  <script defer src="../assets/js/site-visits-config.js"></script>
-  <script defer src="../assets/js/guestbook-config.js"></script>
-  <script defer src="../assets/js/guestbook.js"></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,follow">
+<meta name="theme-color" content="#f8f9fd">
+<meta name="description" content="NOWEN 原留言板已经整合到弄文社区，请前往社区交流与反馈。">
+<link rel="canonical" href="https://community.nowen.cn/">
+<meta http-equiv="refresh" content="0;url=https://community.nowen.cn/">
+<title>留言板已迁移至弄文社区 · NOWEN</title>
+<link rel="stylesheet" href="../assets/css/nowen-ui-v2.css">
+<link rel="stylesheet" href="../assets/css/guestbook.css">
 </head>
 <body>
-<a class="gb-skip" href="#guestbookMain">跳转到留言内容</a>
-<header class="gb-header">
-  <nav class="gb-nav" aria-label="主导航">
-    <a class="gb-logo" href="/"><span class="gb-logo-icon" aria-hidden="true">N</span><span>NOWEN <small>开源实验室</small></span></a>
-    <div class="gb-nav-links"><a href="/">首页</a><a href="/#/note">Nowen Note</a><a href="/download/">下载中心</a><a href="/guestbook/" aria-current="page">留言板</a></div>
-    <button type="button" class="gb-theme" id="themeToggle" aria-label="切换深浅色模式">◐</button>
-  </nav>
-</header>
-<main id="guestbookMain" class="gb-shell">
-  <div class="gb-eyebrow"><span class="gb-dot"></span> NOWEN COMMUNITY / GUESTBOOK</div>
-  <section class="gb-hero" aria-labelledby="gbTitle">
-    <h1 id="gbTitle">把你的想法，<em>留在这里。</em></h1>
-    <p>功能建议、使用感受，或者一句鼓励，都欢迎分享。每条留言会经过审核后公开展示。</p>
-  </section>
-  <div class="gb-grid">
-    <section class="gb-card gb-compose" aria-labelledby="formTitle">
-      <div class="gb-section-heading"><div><span class="gb-subtitle">SAY HELLO</span><h2 id="formTitle">写一条留言</h2></div><span class="gb-section-icon" aria-hidden="true">✎</span></div>
-      <form id="guestbookForm" novalidate>
-        <label for="gbNickname">你的昵称 <span class="gb-muted">选填</span></label>
-        <input id="gbNickname" type="text" maxlength="24" autocomplete="nickname" placeholder="匿名访客" />
-        <label for="gbContent">留言内容 <span class="gb-required">*</span></label>
-        <textarea id="gbContent" rows="6" minlength="3" maxlength="500" required placeholder="关于 NOWEN，你有什么想说的？"></textarea>
-        <div class="gb-form-meta"><span>建议反馈、体验分享、功能想法</span><span id="gbChars">0 / 500</span></div>
-        <div class="gb-honeypot" aria-hidden="true"><label for="gbWebsite">网址（请留空）</label><input id="gbWebsite" name="website" tabindex="-1" autocomplete="off" /></div>
-        <div class="gb-verify" id="turnstileContainer" aria-label="人机验证"></div>
-        <p id="submitNotice" class="gb-hint" aria-live="polite">正在检查留言服务…</p>
-        <button id="gbSubmit" class="gb-primary" type="submit" disabled>提交留言 <span aria-hidden="true">↗</span></button>
-        <p class="gb-note">提交即表示你理解：留言将在审核通过后公开，请勿填写手机号、邮箱、密码等敏感信息。<a href="/guestbook/privacy/">留言板隐私说明</a></p>
-      </form>
-    </section>
-    <section class="gb-messages" aria-labelledby="messagesTitle">
-      <div class="gb-section-heading gb-public-title"><div><span class="gb-subtitle">OPEN CONVERSATION</span><h2 id="messagesTitle">大家的留言</h2></div><button type="button" id="gbRefresh" class="gb-quiet">刷新 ↻</button></div>
-      <div id="gbList" class="gb-list" aria-live="polite" aria-busy="true"><p class="gb-list-empty">正在加载留言…</p></div>
-      <div class="gb-pages"><button id="gbPrev" class="gb-quiet" type="button" disabled>← 上一页</button><span id="gbPage">第 1 页</span><button id="gbNext" class="gb-quiet" type="button" disabled>下一页 →</button></div>
-    </section>
-  </div>
-</main>
-<footer class="gb-footer"><span>NOWEN 开源实验室 · <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">粤ICP备2026067978号-1</a></span><span><a href="/site-analytics/">统计与隐私</a> · <a href="/guestbook/admin/">站长管理</a> · <a href="https://github.com/cropflre/nowen-note/issues">GitHub Issues</a></span></footer>
+<main id="guestbookMain" class="gb-shell" style="max-width:720px;min-height:75vh;display:grid;place-content:center;text-align:center;padding:32px 20px">
+<section class="gb-card" style="padding:clamp(26px,6vw,48px)">
+<span class="gb-eyebrow">NOWEN COMMUNITY</span>
+<h1>留言板已迁移到弄文社区</h1>
+<p>为了让交流与问题反馈集中在同一个地方，官网留言板现已停止提供独立留言入口。请前往弄文社区继续讨论。</p>
+<p><a class="gb-primary" href="https://community.nowen.cn/" style="display:inline-flex;text-decoration:none">进入弄文社区 ↗</a></p>
+<p class="gb-muted" style="font-size:12px">未自动跳转？点击上方按钮。历史留言数据不会因此被清空。</p>
+</section></main>
+<footer class="gb-footer"><a href="/">NOWEN 官网</a><a href="/guestbook/privacy/">历史留言数据与隐私说明</a></footer>
 </body></html>

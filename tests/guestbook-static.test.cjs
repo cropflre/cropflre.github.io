@@ -5,15 +5,15 @@ const fs=require('node:fs');
 const path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const read=f=>fs.readFileSync(path.join(root,f),'utf8');
-test('public guestbook is a standalone accessible route with privacy and ICP',()=>{
+test('public guestbook is retired and points to NOWEN Community',()=>{
  const html=read('guestbook/index.html');
- for(const s of ['id="guestbookForm"','id="gbContent"','id="gbList"','id="turnstileContainer"','aria-live="polite"','href="/guestbook/admin/"','粤ICP备2026067978号-1']){
-   assert.ok(html.includes(s),s);
- }
- assert.match(html,/maxlength="500"/);
- assert.match(html,/src="\.\.\/assets\/js\/guestbook\.js"/);
- assert.match(read('index.html'),/href="\/guestbook\/">留言板/);
- assert.match(read('sitemap.xml'),/https:\/\/nowen\.cn\/guestbook\//);
+ assert.match(html,/http-equiv="refresh" content="0;url=https:\/\/community\.nowen\.cn\/"/);
+ assert.match(html,/href="https:\/\/community\.nowen\.cn\/"/);
+ assert.match(html,/name="robots" content="noindex,follow"/);
+ for(const id of ['guestbookForm','gbContent','gbSubmit','turnstileContainer'])assert.ok(!html.includes('id="'+id+'"'),id);
+ assert.doesNotMatch(read('index.html'),/href="\/guestbook\/"[^>]*>留言板/);
+ assert.doesNotMatch(read('sitemap.xml'),/https:\/\/nowen\.cn\/guestbook\//);
+ assert.match(read('guestbook/privacy/index.html'),/历史留言/);
 });
 test('public config never embeds the Turnstile secret or admin token',()=>{
  const c=read('assets/js/guestbook-config.js');
