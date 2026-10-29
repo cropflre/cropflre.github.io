@@ -228,3 +228,12 @@ MIT © cropflre
 ## NOWEN 留言板
 
 /guestbook/ 支持免注册留言、审核后公开、官方回复和站长管理，使用既有 Cloudflare Workers + D1，配置 Turnstile 和管理员 Worker Secret 后才能接收投稿。详见 docs/guestbook.md。
+
+
+## NAS 节点小宝远程访问教程
+
+- 官网直达：[#/note/nas-iepose-remote](https://nowen.cn/#/note/nas-iepose-remote)
+- 帮助中心栏目：「多端、部署与离线」；首页快捷入口：「NAS 远程访问教程」
+- 覆盖 NAS Docker 端口确认、节点小宝安装绑定、内网穿透 / 异地组网、Android 登录及 API / WebSocket 排障
+- 官方参考：[节点小宝内网穿透](https://iepose.com/helpcenter_v3/docs/9-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F.html)、[设备组网](https://iepose.com/helpcenter_v3/docs/7.1-%E8%AE%BE%E5%A4%87%E7%BB%84%E7%BD%91.html) 与 [Nowen Note 反向代理兼容说明](https://github.com/cropflre/nowen-note/blob/main/docs/reverse-proxy-compatibility.md)
+- 测试：运行 `node --test tests/iepose-guide.test.cjs`；浏览器回归覆盖常规教程路由、移动端与全局搜索
