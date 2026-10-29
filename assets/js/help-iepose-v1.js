@@ -6,7 +6,7 @@
   const article = {
   "slug": "nas-iepose-remote",
   "group": "clients",
-  "title": "NAS 使用节点小宝远程访问 Nowen Note（新手图文步骤）",
+  "title": "NAS 使用节点小宝远程访问 Nowen Note（新手一步步教程）",
   "summary": "从确认 NAS IP 与 Docker 端口、安装绑定节点小宝，到内网穿透 / 异地组网、手机登录和 API 报错排查，一次设置成功。",
   "keywords": "节点小宝 iepose 内网穿透 异地组网 NAS 绿联 UGOS 飞牛 fnOS 极空间 群晖 群晖套件 Docker 外网 远程访问 手机登录 API health websocket 认证 HTML",
   "updated": "2026-10-29",
