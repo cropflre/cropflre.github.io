@@ -6,11 +6,11 @@ const path=require('node:path');
 const root=path.resolve(__dirname,'..');
 const read=p=>fs.readFileSync(path.join(root,p),'utf8');
 const URL='https://community.nowen.cn';
-test('navigation includes external community and retains existing guestbook',()=>{
+test('navigation prioritizes official community and retires the guestbook',()=>{
  const home=read('index.html');
  assert.match(home,/class="header-link header-community"/);
  assert.ok(home.includes('href="'+URL+'" target="_blank" rel="noopener noreferrer"'));
- assert.match(home,/href="\/guestbook\/">留言板/);
+ assert.doesNotMatch(home,/href="\/guestbook\/"[^>]*>留言板/);
  assert.match(read('assets/css/nowen-ui-v2.css'),/\.header-actions \.header-community\{display:inline-flex/);
 });
 test('homepage, docs and download routes link to community',()=>{

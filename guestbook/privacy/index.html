@@ -5,18 +5,18 @@
 <link rel="stylesheet" href="../../assets/css/guestbook.css">
 <script>try{document.documentElement.dataset.theme=localStorage.getItem('nowen-help-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');}catch{document.documentElement.dataset.theme='light'}</script>
 </head><body>
-<header class="gb-header"><nav class="gb-nav"><a class="gb-logo" href="/"><span class="gb-logo-icon">N</span><span>NOWEN <small>开源实验室</small></span></a><div class="gb-nav-links"><a href="/guestbook/">返回留言板</a><a href="/">官网首页</a></div></nav></header>
+<header class="gb-header"><nav class="gb-nav"><a class="gb-logo" href="/"><span class="gb-logo-icon">N</span><span>NOWEN <small>开源实验室</small></span></a><div class="gb-nav-links"><a href="https://community.nowen.cn/">弄文社区</a><a href="/">官网首页</a></div></nav></header>
 <main class="gb-shell" style="max-width:840px">
 <div class="gb-eyebrow"><span class="gb-dot"></span> GUESTBOOK / PRIVACY</div>
 <h1>留言板隐私说明</h1>
-<p class="gb-muted">更新于 2026 年 10 月 28 日 · 适用于 nowen.cn/guestbook/，不适用于 Nowen Note 客户端。</p>
+<p class="gb-muted">更新于 2026 年 10 月 29 日 · 仅说明旧 nowen.cn/guestbook/ 留言数据的处理方式；新弄文社区的隐私规则以其页面为准。</p>
 <section class="gb-card" style="padding:30px;margin-top:28px;line-height:1.85">
-<h2>留言会保存什么？</h2>
-<p>提交后会保存昵称（可以匿名）、留言正文、随机留言编号、提交时间、审核状态；审核后还会保存官方回复和审核时间。通过审核的昵称、正文、时间、官方回复会对网站访客公开。未审核或被拒绝的内容不会公开展示。</p>
-<h2>反垃圾与数据处理</h2>
-<p>提交时需使用 Cloudflare Turnstile 人机验证；Worker 会向 Cloudflare 验证挑战令牌。限流会临时使用请求 IP 作为限制键，但 D1 留言表不存原始 IP、手机号、邮箱或站内账号。Cloudflare 作为基础设施服务方可能另外处理网络安全日志。请勿在留言中填入个人敏感信息。</p>
+<h2>历史留言保留哪些内容？</h2>
+<p>旧留言板保存过昵称（可以匿名）、留言正文、随机留言编号、提交时间、审核状态，以及可能添加的官方回复和审核时间。历史数据保留在原 D1 数据库中；旧页面下线不会自动删除或迁移这些数据。</p>
+<h2>原留言服务的反垃圾与数据处理</h2>
+<p>旧服务提交时要求 Cloudflare Turnstile 人机验证，并按 IP 限流。原 D1 留言表不存原始 IP、手机号、邮箱或站内账号；Cloudflare 作为基础设施服务方可能另外处理网络安全日志。官网已移除旧留言表单，新的交流请前往<a href="https://community.nowen.cn/">弄文社区</a>。</p>
 <h2>保存多久，如何删除？</h2>
 <p>留言默认保留至管理员删除。你可以通过 <a href="https://github.com/cropflre/cropflre.github.io/issues">官网 GitHub Issues</a> 说明昵称和大致发布时间提出删除请求，管理员会核实后处理；请勿在公开 Issue 中发布身份证号、联系方式或其他敏感信息。</p>
-<h2>其他说明</h2><p>留言区不能上传文件或图片；昵称并非实名认证。其他网站访问统计请参见 <a href="/site-analytics/">访问统计与隐私说明</a>。</p>
-</section></main><footer class="gb-footer"><a href="/guestbook/">返回留言板</a><span>NOWEN 开源实验室 · 粤ICP备2026067978号-1</span></footer>
+<h2>其他说明</h2><p>旧留言板不支持上传文件或图片，昵称并非实名认证。其他网站访问统计请参见 <a href="/site-analytics/">访问统计与隐私说明</a>。</p>
+</section></main><footer class="gb-footer"><a href="https://community.nowen.cn/">前往弄文社区</a><span>NOWEN 开源实验室 · 粤ICP备2026067978号-1</span></footer>
 </body></html>

@@ -5,10 +5,10 @@
 <script>try {document.documentElement.dataset.theme=localStorage.getItem('nowen-help-theme')|| (matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');} catch {document.documentElement.dataset.theme='light'}</script>
 <script defer src="../../assets/js/site-visits-config.js"></script><script defer src="../../assets/js/guestbook-config.js"></script>
 <script defer src="../../assets/js/guestbook-admin.js"></script></head>
-<body><header class="gb-header"><nav class="gb-nav" aria-label="主导航"><a class="gb-logo" href="/"><span class="gb-logo-icon">N</span><span>NOWEN <small>开源实验室</small></span></a><div class="gb-nav-links"><a href="/guestbook/">返回留言板</a><a href="/">官网首页</a></div></nav></header>
+<body><header class="gb-header"><nav class="gb-nav" aria-label="主导航"><a class="gb-logo" href="/"><span class="gb-logo-icon">N</span><span>NOWEN <small>开源实验室</small></span></a><div class="gb-nav-links"><a href="https://community.nowen.cn/">进入弄文社区</a><a href="/">官网首页</a></div></nav></header>
 <main class="gb-shell gb-admin-shell">
   <div class="gb-eyebrow"><span class="gb-dot"></span> NOWEN / MODERATION</div>
-  <h1>留言审核</h1><p class="gb-muted">仅站长使用。管理员密钥只保存在当前页面的内存中，不会存入浏览器存储。</p>
+  <h1>历史留言管理</h1><p class="gb-muted">旧留言板已迁移至弄文社区；此页面保留历史留言处理能力。仅站长使用。管理员密钥只保存在当前页面的内存中，不会存入浏览器存储。</p>
   <section class="gb-card gb-admin-login" id="gbLoginPanel">
     <label for="gbAdminToken">管理员 API Token</label>
     <div class="gb-admin-login-row"><input type="password" id="gbAdminToken" autocomplete="off" spellcheck="false" placeholder="粘贴 Wrangler Secret 中设置的管理密钥" /><button id="gbLogin" type="button" class="gb-primary">进入审核</button></div>
@@ -19,5 +19,5 @@
   </div>
   <p id="gbAdminNotice" class="gb-hint" aria-live="polite"></p>
 </main>
-<footer class="gb-footer"><a href="/guestbook/">← 返回留言板</a><span>NOWEN 开源实验室</span></footer>
+<footer class="gb-footer"><a href="https://community.nowen.cn/">← 前往弄文社区</a><span>NOWEN 开源实验室</span></footer>
 </body></html>
