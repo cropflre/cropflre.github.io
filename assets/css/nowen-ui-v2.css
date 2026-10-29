@@ -55,6 +55,12 @@ body{font-family:var(--font-ui);background:var(--color-bg-primary);color:var(--c
 .header-link{color:var(--color-text-secondary);font-weight:600}
 .header-download{background:linear-gradient(125deg,#5959e4,#464bc2);color:#fff;border:1px solid rgba(125,129,250,.28);border-radius:12px;box-shadow:0 7px 19px rgba(77,75,196,.15);font-size:12px;min-height:40px;padding-inline:17px}
 .header-download:hover{transform:translateY(-2px);filter:brightness(1.07)}
+/* Keep the official community visible even when ordinary header links collapse on mobile. */
+.header-actions .header-community{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:8px 12px;border-radius:10px;border:1px solid color-mix(in srgb,var(--color-primary) 22%,var(--color-border));background:var(--brand-soft);color:var(--color-primary);white-space:nowrap}
+.header-community:hover{background:color-mix(in srgb,var(--brand-soft) 76%,var(--color-primary) 24%);color:var(--color-primary-dark)}
+.header-community svg{flex:none}
+@media(max-width:600px){.header-actions .header-community{width:36px;min-height:36px;height:36px;padding:0}.header-community-label{display:none}}
+
 [data-theme="dark"] .header-download{background:linear-gradient(130deg,#7879ea,#5655b9);color:#fff}
 .icon-btn{border-radius:11px}
 

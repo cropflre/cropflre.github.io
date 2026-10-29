@@ -117,7 +117,7 @@
           <h1>把想法留下。<br /><em>让知识自由生长。</em></h1>
           <p>从一段笔记，到一本书、一部影片。NOWEN 开源实验室用轻巧、开放的工具，让每个人拥有自己的数字空间。安装、使用与故障排查，都可以在这里找到答案。</p>
           <div class="hero-search search-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="heroSearch" type="search" placeholder="搜索教程、设备安装、NAS 部署、MCP…" autocomplete="off" /><kbd>Enter</kbd></div>
-          <div class="hero-links"><a class="hero-download-link" href="#/note/download">免费下载 Nowen Note ↗</a><a href="#/note/quick-start">Note 5 分钟上手</a><a href="#/note/nas-iepose-remote">NAS 远程访问教程</a><a href="#/reader/quick-start">Reader 快速部署</a><a href="#/reader/opds">OPDS</a><a href="#/note/mcp">MCP</a></div>
+          <div class="hero-links"><a class="hero-download-link" href="#/note/download">免费下载 Nowen Note ↗</a><a href="https://community.nowen.cn" target="_blank" rel="noopener noreferrer">进入弄文社区 ↗</a><a href="#/note/quick-start">Note 5 分钟上手</a><a href="#/note/nas-iepose-remote">NAS 远程访问教程</a><a href="#/reader/quick-start">Reader 快速部署</a><a href="#/reader/opds">OPDS</a><a href="#/note/mcp">MCP</a></div>
         <div class="hero-meta" aria-label="产品理念"><span>开源协作</span><span>数据自主</span><span>跨设备使用</span></div>
         </div>
         <figure class="studio-preview">

@@ -47,6 +47,15 @@
   function communityCards(compact = false) {
     return `
       <div class="community-v5-cards ${compact ? 'is-compact' : ''}">
+        <article class="community-v5-card forum-card">
+          <div class="community-forum-icon" aria-hidden="true">↗</div>
+          <div class="community-v5-copy">
+            <span class="community-v5-kicker">OFFICIAL COMMUNITY</span>
+            <h3>${escapeHtml(community.forum.name)}</h3>
+            <p>${escapeHtml(community.forum.description)}</p>
+            <a class="community-forum-link" href="${escapeHtml(community.forum.url)}" target="_blank" rel="noopener noreferrer">进入弄文社区 <span aria-hidden="true">↗</span></a>
+          </div>
+        </article>
         <article class="community-v5-card wechat-card">
           <div class="community-v5-copy">
             <span class="community-v5-kicker">微信公众号</span>
@@ -80,15 +89,16 @@
 
   function productSection() {
     return `<section class="community-v5-product community-v5">
-      <div class="community-v5-heading"><div><span>COMMUNITY</span><h2>加入 Nowen 社区</h2></div><p>关注公众号获取项目动态，加入 QQ 群交流使用与部署问题。</p></div>
+      <div class="community-v5-heading"><div><span>COMMUNITY</span><h2>加入 Nowen 社区</h2></div><p>前往弄文社区发帖讨论、提交建议，也可关注公众号或加入 QQ 群。</p></div>
       ${communityCards(false)}
     </section>`;
   }
 
   function articleSection() {
     return `<aside class="community-v5-article community-v5" aria-label="Nowen Note 社区与支持">
-      <div><span>需要交流或获取项目动态？</span><b>微信公众号 · ${escapeHtml(community.wechat.name)}</b><small>QQ 群 ${escapeHtml(qqNumber)}</small></div>
+      <div><span>需要交流或反馈问题？</span><b>弄文社区 · 官方讨论与反馈</b><small>也可关注公众号或加入 QQ 群 ${escapeHtml(qqNumber)}</small></div>
       <div class="community-v5-article-actions">
+        <a class="community-forum-link" href="https://community.nowen.cn" target="_blank" rel="noopener noreferrer">进入弄文社区 ↗</a>
         <button class="secondary-community-btn community-qr-open" type="button">公众号二维码</button>
         <button class="community-copy-btn" type="button" data-copy-community="${escapeHtml(qqNumber)}">复制 QQ 群号</button>
         <a href="#/note/community">更多 →</a>
