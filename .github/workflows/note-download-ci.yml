@@ -22,6 +22,7 @@ jobs:
           node --check assets/js/note-site-v1.js
           node --check assets/js/help-app-v3.js
           node --check assets/js/help-iepose-v1.js
+          node --check assets/js/help-iepose-ai-v1.js
           node --check assets/js/nowen-ui-v2.js
           node --check assets/js/site-visits.js
           node --check assets/js/site-visits-config.js
