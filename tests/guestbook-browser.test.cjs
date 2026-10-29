@@ -28,7 +28,7 @@ for(const [name,engine] of [['Chromium',chromium],['Firefox',firefox],['WebKit',
   const browser=await engine.launch({headless:true});
   try{
    const page=await browser.newPage({viewport:{width:390,height:844}});
-   await page.route('https://community.nowen.cn/**',route=>route.fulfill({status:200,contentType:'text/html',body:'<html><body><h1>弄文社区</h1></body></html>'}));
+   await page.route('https://community.nowen.cn/**',route=>route.fulfill({status:200,contentType:'text/html; charset=utf-8',body:'<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"></head><body><h1>弄文社区</h1></body></html>'}));
    await page.goto(base+'/guestbook/',{waitUntil:'domcontentloaded'});
    await page.waitForURL('https://community.nowen.cn/',{timeout:12000});
    assert.match(await page.locator('h1').innerText(),/弄文社区/);
