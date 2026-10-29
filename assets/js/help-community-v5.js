@@ -9,6 +9,11 @@
 
   note.meta = note.meta || {};
   note.meta.community = {
+    forum: {
+      name: '弄文社区',
+      url: 'https://community.nowen.cn',
+      description: '官方交流社区：发布 Bug 反馈、功能建议、使用交流和作品分享，讨论内容可追踪。'
+    },
     wechat: {
       name: 'Nowen开源实验室',
       label: '微信公众号',
@@ -26,13 +31,19 @@
     note.articles.push({
       slug: 'community',
       group: 'support',
-      title: '微信公众号、QQ 群与问题反馈',
-      summary: '关注 Nowen开源实验室公众号、加入 QQ 群，并选择合适的问题反馈渠道。',
-      keywords: '微信公众号 公众号 微信 Nowen开源实验室 Nowen开源实验室 QQ群 QQ 群 1093473044 社区 交流 反馈 Issues',
-      updated: '2026-08-20',
+      title: '弄文社区、微信公众号与 QQ 群',
+      summary: '前往弄文社区发帖提问、反馈 Bug 与建议，也可以通过公众号和 QQ 群交流。',
+      keywords: '弄文社区 community.nowen.cn 反馈 Bug 功能建议 微信公众号 公众号 QQ群 1093473044 交流 Issues',
+      updated: '2026-10-29',
       time: '3 分钟',
       body: `
-        <p>除了 GitHub Issues，Nowen Note 也提供微信公众号与 QQ 群，方便获取项目动态、交流使用经验和讨论部署问题。</p>
+        <p>现在可以直接在 <a href="https://community.nowen.cn" target="_blank" rel="noopener noreferrer">弄文社区（community.nowen.cn）↗</a> 提问、发布使用经验、提交 Bug 反馈和功能建议。微信公众号和 QQ 群继续作为补充交流渠道。</p>
+        <section class="community-article-card community-article-forum">
+          <span class="community-kicker">OFFICIAL COMMUNITY</span>
+          <h2>弄文社区 · 交流与反馈</h2>
+          <p>选择弄文笔记、弄文阅读、弄文影视等板块，发表问题或建议，按状态持续跟进。</p>
+          <a class="community-forum-link" href="https://community.nowen.cn" target="_blank" rel="noopener noreferrer">进入弄文社区 <span aria-hidden="true">↗</span></a>
+        </section>
         <div class="community-article-grid">
           <section class="community-article-card">
             <span class="community-kicker">WECHAT</span>
@@ -52,7 +63,8 @@
         </div>
         <h2>遇到问题应该发到哪里？</h2>
         <table><thead><tr><th>渠道</th><th>适合内容</th></tr></thead><tbody>
-          <tr><td>微信公众号</td><td>关注项目动态、版本与社区内容。</td></tr>
+          <tr><td><a href="https://community.nowen.cn" target="_blank" rel="noopener noreferrer">弄文社区 ↗</a></td><td>正式的发帖、交流、Bug 与功能建议反馈入口。</td></tr>
+           <tr><td>微信公众号</td><td>关注项目动态、版本与社区内容。</td></tr>
           <tr><td>QQ 群 1093473044</td><td>使用交流、快速讨论、部署经验与一般问题。</td></tr>
           <tr><td>GitHub Issues</td><td>可稳定复现的 Bug、明确功能建议、需要长期跟踪的问题。</td></tr>
         </tbody></table>

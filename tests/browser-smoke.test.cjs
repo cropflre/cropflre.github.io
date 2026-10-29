@@ -172,6 +172,12 @@ test('Existing help center: cross-product search, theme, community and mobile me
     assert.match(await page.locator('#docsSidebar').getAttribute('class'),/open/);
     await page.goto(base+'/#/note/community');
     assert.ok(await page.locator('.article-wrap').count()===1);
+    assert.equal(await page.locator('a.header-community').getAttribute('href'),'https://community.nowen.cn');
+    assert.equal(await page.locator('a.header-community').isVisible(),true);
+    assert.ok(await page.locator('a.community-forum-link').count()>0);
+    await page.goto(base+'/#/');
+    await page.locator('.community-v5-section').waitFor({timeout:15000});
+    assert.equal(await page.locator('.community-v5-card.forum-card .community-forum-link').getAttribute('href'),'https://community.nowen.cn');
     await page.goto(base+'/download/');
     assert.match(await page.locator('main').innerText(),/Windows|macOS/);
     assert.deepEqual(errors,[]);
@@ -194,6 +200,8 @@ test('NOWEN UI v2: branded home, light/dark, responsive and reduced-motion suppo
       assert.equal(await page.locator('.product-card').count(),4);
       assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://nowen.cn/');
       assert.equal(await page.locator('a.header-download').getAttribute('href'),'#/note/download');
+      assert.equal(await page.locator('a.header-community').getAttribute('href'),'https://community.nowen.cn');
+      assert.equal(await page.locator('a.header-community').getAttribute('target'),'_blank');
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
       assert.match(await page.locator('body').evaluate(node=>getComputedStyle(node).color),/^rgb\(/);
       assert.equal(await page.locator('link[href="assets/css/nowen-ui-v2.css"]').count(),1);
