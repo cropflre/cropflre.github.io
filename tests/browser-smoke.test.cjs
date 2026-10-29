@@ -69,6 +69,34 @@ for (const [engineName, engine] of [['Chromium',chromium],['Firefox',firefox],['
     } finally { await browser.close(); }
   });
 }
+for (const [engineName, engine] of [['Chromium', chromium], ['Firefox', firefox], ['WebKit Safari', webkit]]) {
+  test(engineName + ': NAS AI guide can build a task for selected tool and access mode', async () => {
+    const browser = await engine.launch({ headless: true });
+    try {
+      const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+      const errors = [];
+      page.on('pageerror', error => errors.push(error.message));
+      await page.goto(base + '/#/note/nas-iepose-remote', { waitUntil: 'domcontentloaded' });
+      await page.locator('#ieposeAiWizard').waitFor({ timeout: 10000 });
+      assert.match(await page.locator('h1').innerText(), /节点小宝/);
+      await page.locator('[data-iepose-nas]').selectOption('fnos');
+      await page.locator('[data-iepose-tool]').selectOption('doubao');
+      await page.locator('[data-iepose-mode]').selectOption('tunnel');
+      assert.equal(await page.locator('[data-iepose-ai-open]').getAttribute('href'), 'https://www.doubao.com/');
+      await page.locator('[data-iepose-ai-copy]').click();
+      const prompt = await page.locator('[data-iepose-ai-preview]').inputValue();
+      assert.match(prompt, /飞牛 fnOS/);
+      assert.match(prompt, /豆包/);
+      assert.match(prompt, /内网穿透/);
+      assert.match(prompt, /未经确认不得扫描/);
+      assert.match(prompt, /\/api\/health/);
+      assert.equal(await page.locator('[data-iepose-ai-details]').getAttribute('open'), '');
+      assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), true);
+      assert.deepEqual(errors, []);
+    } finally { await browser.close(); }
+  });
+}
+
 test('Chromium: responsive no overflow on all required widths', async () => {
   const browser=await chromium.launch({headless:true});
   try {
