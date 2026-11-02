@@ -151,8 +151,8 @@
     if (selected === 'linux') body = '<p>AppImage 适合直接运行；Debian / Ubuntu 用户可选择 DEB。当前附件为 x86-64 架构。</p>' +
       '<div class="note-package-grid">' + buttonAsset('linuxAppImage', '下载 AppImage', true) +
       buttonAsset('linuxDeb', '下载 DEB', false) + '</div>' +
-      '<details><summary>其他版本：Linux Lite（轻量版）</summary><div class="note-package-grid">' +
-      buttonAsset('linuxLiteAppImage', 'Lite AppImage', false) + buttonAsset('linuxLiteDeb', 'Lite DEB', false) + '</div></details>' +
+      (x.linuxLiteAppImage || x.linuxLiteDeb ? '<details><summary>其他版本：Linux Lite（轻量版）</summary><div class="note-package-grid">' +
+      buttonAsset('linuxLiteAppImage', 'Lite AppImage', false) + buttonAsset('linuxLiteDeb', 'Lite DEB', false) + '</div></details>' : '') +
       '<p class="note-fine">AppImage 下载后需要赋予执行权限：chmod +x 文件名.AppImage；DEB 可使用系统软件包管理器安装。</p>' +
       guide(DOCS + 'desktop.md', 'Linux 使用说明');
     if (selected === 'android') body = '<p>正式发布的 APK，不包含调试包、内测包或验收包。</p>' +
