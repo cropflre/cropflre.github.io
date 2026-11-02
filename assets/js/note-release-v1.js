@@ -46,6 +46,12 @@
     if (/^Nowen-Note-Lite-v?\d+\.\d+\.\d+-amd64\.deb$/i.test(name)) return 'linuxLiteDeb';
     if (/^Nowen-Note-v?\d+\.\d+\.\d+\.apk$/i.test(name)) return 'androidApk';
     if (/^nowen-note-v?\d+\.\d+\.\d+\.fpk$/i.test(name)) return 'fnosFpk';
+    if (/^amd64_io\.nowen\.note_\d+\.\d+\.\d+\.\d+\.upk$/i.test(name)) return 'ugosAmd64';
+    if (/^arm64_io\.nowen\.note_\d+\.\d+\.\d+\.\d+\.upk$/i.test(name)) return 'ugosArm64';
+    if (/^Nowen-Note-Lite-v?\d+\.\d+\.\d+-setup\.exe$/i.test(name)) return 'winLiteSetup';
+    if (/^Nowen-Note-Lite-v?\d+\.\d+\.\d+-portable\.exe$/i.test(name)) return 'winLitePortable';
+    if (/^nowen-clipper-\d+\.\d+\.\d+-edge\.zip$/i.test(name)) return 'clipperEdgeZip';
+    if (/^nowen-clipper-\d+\.\d+\.\d+-firefox\.zip$/i.test(name)) return 'clipperFirefoxZip';
     if (/^nowen-note-v?\d+\.\d+\.\d+\.upk$/i.test(name)) return 'ugosUpk';
     if (/^nowen-clipper-(\d+\.\d+\.\d+)\.zip$/i.test(name)) return 'clipperZip';
     return null;
@@ -126,6 +132,7 @@
       const raw = await fetchJson(API, 6500, fetcher);
       const verified = validateRelease(raw);
       if (!verified) throw new Error('Invalid official release');
+      if (fallback && compareVersions(verified.version, fallback.version) < 0) throw new Error('Older API release than verified fallback');
       if (storage) {
         try { storage.setItem(CACHE_KEY, JSON.stringify({ at: now, data: raw })); }
         catch { /* storage may be disabled */ }

@@ -8,26 +8,31 @@ const root = path.resolve(__dirname, '..');
 const snapshot = JSON.parse(fs.readFileSync(path.join(root, 'assets/data/nowen-note-stable.json'), 'utf8'));
 const official = S.validateRelease(snapshot);
 
-test('fallback is verified v1.5.2 with non-empty supported assets', () => {
-  assert.equal(official.version, 'v1.5.2');
-  assert.ok(official.assets.length >= 10);
-  assert.ok(official.assets.every(a => a.url.startsWith('https://github.com/cropflre/nowen-note/releases/download/v1.5.2/')));
-  assert.ok(official.assets.every(a => !/\.blockmap|\.yml$/i.test(a.name)));
+test('fallback is verified v1.5.4 with supported installation assets', () => {
+  assert.equal(official.version, 'v1.5.4');
+  assert.equal(official.assets.length, 17);
+  assert.ok(official.assets.every(a=>a.url.startsWith('https://github.com/cropflre/nowen-note/releases/download/v1.5.4/')));
+  assert.ok(official.assets.every(a=>!/\.blockmap|\.ya?ml$/i.test(a.name)));
 });
-test('matrix maps the real stable release correctly', () => {
-  const m = S.matrix(official);
-  assert.equal(m.winSetup.name, 'Nowen-Note-1.5.2-setup.exe');
-  assert.equal(m.winPortable.name, 'Nowen-Note-1.5.2-portable.exe');
-  assert.equal(m.macArm.name, 'Nowen-Note-1.5.2-arm64.dmg');
-  assert.equal(m.macIntel.name, 'Nowen-Note-1.5.2-x64.dmg');
-  assert.equal(m.linuxAppImage.name, 'Nowen-Note-1.5.2-x86_64.AppImage');
-  assert.equal(m.linuxDeb.name, 'Nowen-Note-1.5.2-amd64.deb');
-  assert.equal(m.linuxLiteAppImage.name, 'Nowen-Note-Lite-1.5.2-x86_64.AppImage');
-  assert.equal(m.linuxLiteDeb.name, 'Nowen-Note-Lite-1.5.2-amd64.deb');
-  assert.equal(m.androidApk.name, 'Nowen-Note-1.5.2.apk');
-  assert.equal(m.fnosFpk.name, 'nowen-note-1.5.2.fpk');
-  assert.equal(m.clipperZip.name, 'nowen-clipper-0.5.0.zip');
-  assert.equal(m.ugosUpk, undefined);
+test('matrix maps real v1.5.4 packages and excludes unavailable Linux Lite', () => {
+  const m=S.matrix(official);
+  assert.equal(m.winSetup.name,'Nowen-Note-1.5.4-setup.exe');
+  assert.equal(m.winPortable.name,'Nowen-Note-1.5.4-portable.exe');
+  assert.equal(m.winLiteSetup.name,'Nowen-Note-Lite-1.5.4-setup.exe');
+  assert.equal(m.winLitePortable.name,'Nowen-Note-Lite-1.5.4-portable.exe');
+  assert.equal(m.macArm.name,'Nowen-Note-1.5.4-arm64.dmg');
+  assert.equal(m.macIntel.name,'Nowen-Note-1.5.4-x64.dmg');
+  assert.equal(m.linuxAppImage.name,'Nowen-Note-1.5.4-x86_64.AppImage');
+  assert.equal(m.linuxDeb.name,'Nowen-Note-1.5.4-amd64.deb');
+  assert.equal(m.linuxLiteAppImage,undefined);
+  assert.equal(m.linuxLiteDeb,undefined);
+  assert.equal(m.androidApk.name,'Nowen-Note-1.5.4.apk');
+  assert.equal(m.fnosFpk.name,'nowen-note-1.5.4.fpk');
+  assert.equal(m.ugosAmd64.name,'amd64_io.nowen.note_1.5.4.0001.upk');
+  assert.equal(m.ugosArm64.name,'arm64_io.nowen.note_1.5.4.0001.upk');
+  assert.equal(m.clipperZip.name,'nowen-clipper-0.5.0.zip');
+  assert.equal(m.clipperEdgeZip.name,'nowen-clipper-0.5.0-edge.zip');
+  assert.equal(m.clipperFirefoxZip.name,'nowen-clipper-0.5.0-firefox.zip');
 });
 test('rejects drafts, prereleases, malformed tags, redirected or executable URLs', () => {
   for (const fields of [{draft:true}, {prerelease:true}, {tag_name:'v1.5.2-rc.1'},
@@ -65,7 +70,7 @@ test('API failure uses verified local manifest and does not confuse failure with
       {ok:true,json:async()=>snapshot} : {ok:false,status:403}
   });
   assert.equal(result.source,'fallback');
-  assert.equal(result.release.version,'v1.5.2');
+  assert.equal(result.release.version,'v1.5.4');
   assert.deepEqual(seen,['fallback']);
 });
 test('fresh cache avoids API fetch; stale cache permits a new formal release', async () => {
@@ -78,28 +83,38 @@ test('fresh cache avoids API fetch; stale cache permits a new formal release', a
   const second=await S.load(null,{storage,fetch:fetcher,now:100100});
   assert.equal(second.source,'cached');
   assert.equal(calls,2+1); // first manifest + API, second manifest
-  const next={...snapshot,tag_name:'v1.5.3',html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.3',assets:[]};
+  const next={...snapshot,tag_name:'v1.5.5',html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.5',assets:[]};
   const newer=await S.load(null,{storage,fetch:async url=>({
     ok:true,json:async()=>url.includes('api.github.com')?next:snapshot
   }),now:100000+11*60*1000});
-  assert.equal(newer.release.version,'v1.5.3');
+  assert.equal(newer.release.version,'v1.5.5');
   assert.deepEqual(Object.keys(S.matrix(newer.release)),[]);
 });
-test('a newly verified v1.5.2 fallback supersedes a cached older v1.5.1',async()=>{
-  const old={...snapshot,tag_name:'v1.5.1',
-    html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.1',assets:[]};
+test('stale API release cannot replace newer verified fallback',async()=>{
+  const old={...snapshot,tag_name:'v1.5.3',
+    html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.3',assets:[]};
+  const result=await S.load(null,{storage:null,fetch:async url=>({
+    ok:true,json:async()=>url.includes('api.github.com')?old:snapshot
+  })});
+  assert.equal(result.release.version,'v1.5.4');
+  assert.equal(result.source,'fallback');
+});
+test('a newly verified v1.5.4 fallback supersedes a cached older v1.5.3',async()=>{
+  const old={...snapshot,tag_name:'v1.5.3',
+    html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.3',assets:[]};
   const cache=new Map([['nowen-note-release-v1',JSON.stringify({at:100000,data:old})]]);
   const result=await S.load(null,{now:100100,storage:{
     getItem:k=>cache.get(k)||null,setItem:(k,v)=>cache.set(k,v)
   },fetch:async url=>url.includes('api.github.com')
     ? {ok:false,status:429} : {ok:true,json:async()=>snapshot}});
-  assert.equal(result.release.version,'v1.5.2');
+  assert.equal(result.release.version,'v1.5.4');
   assert.equal(result.source,'fallback');
 });
-test('website release copy never calls v1.5.2 in development',()=>{
-  const site=fs.readFileSync(path.join(root,'assets/js/note-site-v1.js'),'utf8');
-  assert.match(site,/v1.5.2 已发布/);
-  assert.doesNotMatch(site,/v1.5.2 开发中|v1.5.2 正在开发|开发中 · 不属于当前正式版/);
+test('website v1.5.4 release promotion does not imply 1.6.0 features ship',()=>{
+ const site=fs.readFileSync(path.join(root,'assets/js/note-site-v1.js'),'utf8');
+ assert.match(site,/v1\.5\.4 已正式发布/);
+ assert.match(site,/v1\.6\.0/);
+ assert.doesNotMatch(site,/NEW IN v1\.5\.3|PRODUCT FEATURES · v1\.5\.3/);
 });
 test('new routes do not collide with documented article slugs', () => {
   const data = ['assets/js/help-data-v2.js','assets/js/help-note-v4.js','assets/js/help-community-v5.js']

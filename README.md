@@ -219,6 +219,8 @@ MIT © cropflre
 
 发行数据由 assets/js/note-release-v1.js 验证 GitHub 最新正式 Release、过滤不适合用户的更新元数据、分类 Windows/macOS/Linux/Android/浏览器扩展/fnOS/UGOS，并在 API 限流时回退 assets/data/nowen-note-stable.json。回退清单在 2026-10-16 核验正式发布的 v1.5.2，包含实际公开的 Windows/macOS/Linux/Android/fnOS 和剪藏扩展附件；2026-10-23 已更新官网 v1.5.3 产品亮点与更新日志；完整工作台（Workspace）、个人应用 Studio 和插件扩展平台 V3 均已调整至 v1.6.0 开发计划，v1.5.3 仅宣传笔记、图片、安全、日历与稳定性更新。v1.5.3 当日已正式发布；下载中心实时读取 GitHub 公开 Release，旧版回退清单不得伪造为 v1.5.3，也不得手拼附件 URL。详见 docs/download-center-release-audit.md。
 
+**2026-11-02 · v1.5.4 更新：**官网产品介绍、功能页、更新日志和静态下载页已同步正式 Release v1.5.4。离线回退清单已从该版本 Release API 的 17 个直接安装附件重新核验，补充 Windows Lite、绿联 AMD64 / ARM64 UPK、Edge / Firefox 插件包；本版缺少的 Linux Lite 不借用旧版本。Microsoft Store 入口采用项目内正式 Store ID，但商店渠道状态由微软独立维护。离线体验仅宣传桌面完整版个人笔记和受管附件范围；Workspace、个人应用 Studio 与扩展平台 V3 仍属于 v1.6.0 规划。合并到 master 前需经过功能分支 PR 的浏览器回归与人工验收。
+
 代码由 assets/js/note-site-v1.js 和 assets/css/note-site-v1.css 实现，保留现有原生静态站点及 GitHub Pages 发布流程。开发预览执行 python -m http.server 3000。单测执行 node --test tests/download-center.test.cjs；PR 上 .github/workflows/note-download-ci.yml 会执行三引擎浏览器测试，测试内容含老路由、响应式、安装包与断网降级。正式合并前仍应人工抽测真实 Edge、Android 浏览器、iPhone Safari 的下载与安装，并检查 Lighthouse。
 
 ## 官网访问计数
