@@ -34,3 +34,16 @@
 - 新的正式 Release 发布后，从 GitHub API 重新生成并核对离线清单，不手拼 URL。
 - CI 浏览器测试用于官网体验回归，不代表所有 Android 真机或 NAS 多端同步验收完成。
 - `.github/workflows/pages.yml` 不变；发布后复核旧教程路由、响应式、下载状态及站点缓存。
+
+## v1.5.4 正式版补充核验（2026-11-02）
+
+GitHub Release [v1.5.4](https://github.com/cropflre/nowen-note/releases/tag/v1.5.4) 已发布（非 Draft、非 Prerelease），发布时间 `2026-11-02T07:49:18Z`。离线回退清单现为本次正式发布的 **17 个实际可安装附件**，排除更新 YAML、blockmap 和 Android AAB 等非直接安装资产。链接和大小来自 Release API，不拼接 URL。
+
+- Windows：正式安装 / 便携版，以及 Lite 安装 / 便携版；GitHub 直装 EXE 未签名，Microsoft Store 发布独立。
+- macOS：Intel 和 Apple Silicon 的 DMG（macOS 12+）；此次未做 Developer ID 签名或 Apple 公证。
+- Linux：x86_64 AppImage、amd64 DEB；**v1.5.4 没有 Linux Lite 附件**，不得复用旧版。
+- Android：正式 APK；浏览器剪藏：通用 ZIP、Edge ZIP 和 Firefox ZIP。商店更新与 GitHub 不必同版本。
+- 飞牛：FPK；绿联：`amd64_io.nowen.note_1.5.4.0001.upk`、`arm64_io.nowen.note_1.5.4.0001.upk`，官网按架构区分。
+- Docker：备份持久化数据库、附件和配置。回退镜像不会还原数据。
+
+官网只宣传 v1.5.4 已交付的 AI 修改审核、Markdown 章节折叠、图片预览和附件恢复、NAS 桌面完整版个人笔记与受管附件离线、DOCX 1GB 导入等能力。Workspace / App Studio / 扩展平台 V3 仍属于 v1.6.0 规划，离线范围不等于全部模块。已有真实截图仍说明来源 v1.5.2，避免伪称新界面。本次通过功能分支及 PR 待验收，不直接推送生产 master。
