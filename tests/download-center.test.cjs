@@ -83,12 +83,21 @@ test('fresh cache avoids API fetch; stale cache permits a new formal release', a
   const second=await S.load(null,{storage,fetch:fetcher,now:100100});
   assert.equal(second.source,'cached');
   assert.equal(calls,2+1); // first manifest + API, second manifest
-  const next={...snapshot,tag_name:'v1.5.3',html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.3',assets:[]};
+  const next={...snapshot,tag_name:'v1.5.5',html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.5',assets:[]};
   const newer=await S.load(null,{storage,fetch:async url=>({
     ok:true,json:async()=>url.includes('api.github.com')?next:snapshot
   }),now:100000+11*60*1000});
-  assert.equal(newer.release.version,'v1.5.3');
+  assert.equal(newer.release.version,'v1.5.5');
   assert.deepEqual(Object.keys(S.matrix(newer.release)),[]);
+});
+test('stale API release cannot replace newer verified fallback',async()=>{
+  const old={...snapshot,tag_name:'v1.5.3',
+    html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.3',assets:[]};
+  const result=await S.load(null,{storage:null,fetch:async url=>({
+    ok:true,json:async()=>url.includes('api.github.com')?old:snapshot
+  })});
+  assert.equal(result.release.version,'v1.5.4');
+  assert.equal(result.source,'fallback');
 });
 test('a newly verified v1.5.4 fallback supersedes a cached older v1.5.3',async()=>{
   const old={...snapshot,tag_name:'v1.5.3',
