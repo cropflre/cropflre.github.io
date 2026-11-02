@@ -132,6 +132,7 @@
       const raw = await fetchJson(API, 6500, fetcher);
       const verified = validateRelease(raw);
       if (!verified) throw new Error('Invalid official release');
+      if (fallback && compareVersions(verified.version, fallback.version) < 0) throw new Error('Older API release than verified fallback');
       if (storage) {
         try { storage.setItem(CACHE_KEY, JSON.stringify({ at: now, data: raw })); }
         catch { /* storage may be disabled */ }
