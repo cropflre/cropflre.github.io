@@ -2,6 +2,17 @@ name: Note download center CI
 on:
   pull_request:
     branches: [master]
+  push:
+    branches: [master]
+    paths:
+      - 'assets/data/nowen-note-stable.json'
+      - 'assets/js/note-site-v1.js'
+      - 'assets/js/note-release-v1.js'
+      - 'note/index.html'
+      - 'download/index.html'
+      - 'index.html'
+      - 'tests/**'
+      - '.github/workflows/note-download-ci.yml'
   workflow_dispatch:
 
 permissions:
