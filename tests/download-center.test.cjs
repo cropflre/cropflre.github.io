@@ -16,20 +16,20 @@ test('fallback is verified v1.5.5 with supported installation assets', () => {
 });
 test('matrix maps real v1.5.5 packages and excludes unavailable Linux Lite', () => {
   const m=S.matrix(official);
-  assert.equal(m.winSetup.name,'Nowen-Note-1.5.4-setup.exe');
-  assert.equal(m.winPortable.name,'Nowen-Note-1.5.4-portable.exe');
-  assert.equal(m.winLiteSetup.name,'Nowen-Note-Lite-1.5.4-setup.exe');
-  assert.equal(m.winLitePortable.name,'Nowen-Note-Lite-1.5.4-portable.exe');
-  assert.equal(m.macArm.name,'Nowen-Note-1.5.4-arm64.dmg');
-  assert.equal(m.macIntel.name,'Nowen-Note-1.5.4-x64.dmg');
-  assert.equal(m.linuxAppImage.name,'Nowen-Note-1.5.4-x86_64.AppImage');
-  assert.equal(m.linuxDeb.name,'Nowen-Note-1.5.4-amd64.deb');
+  assert.equal(m.winSetup.name,'Nowen-Note-1.5.5-setup.exe');
+  assert.equal(m.winPortable.name,'Nowen-Note-1.5.5-portable.exe');
+  assert.equal(m.winLiteSetup.name,'Nowen-Note-Lite-1.5.5-setup.exe');
+  assert.equal(m.winLitePortable.name,'Nowen-Note-Lite-1.5.5-portable.exe');
+  assert.equal(m.macArm.name,'Nowen-Note-1.5.5-arm64.dmg');
+  assert.equal(m.macIntel.name,'Nowen-Note-1.5.5-x64.dmg');
+  assert.equal(m.linuxAppImage.name,'Nowen-Note-1.5.5-x86_64.AppImage');
+  assert.equal(m.linuxDeb.name,'Nowen-Note-1.5.5-amd64.deb');
   assert.equal(m.linuxLiteAppImage,undefined);
   assert.equal(m.linuxLiteDeb,undefined);
-  assert.equal(m.androidApk.name,'Nowen-Note-1.5.4.apk');
-  assert.equal(m.fnosFpk.name,'nowen-note-1.5.4.fpk');
-  assert.equal(m.ugosAmd64.name,'amd64_io.nowen.note_1.5.4.0001.upk');
-  assert.equal(m.ugosArm64.name,'arm64_io.nowen.note_1.5.4.0001.upk');
+  assert.equal(m.androidApk.name,'Nowen-Note-1.5.5.apk');
+  assert.equal(m.fnosFpk.name,'nowen-note-1.5.5.fpk');
+  assert.equal(m.ugosAmd64.name,'amd64_io.nowen.note_1.5.5.0001.upk');
+  assert.equal(m.ugosArm64.name,'arm64_io.nowen.note_1.5.5.0001.upk');
   assert.equal(m.clipperZip.name,'nowen-clipper-0.5.0.zip');
   assert.equal(m.clipperEdgeZip.name,'nowen-clipper-0.5.0-edge.zip');
   assert.equal(m.clipperFirefoxZip.name,'nowen-clipper-0.5.0-firefox.zip');
@@ -112,7 +112,7 @@ test('a newly verified v1.5.5 fallback supersedes a cached older v1.5.3',async()
 });
 test('website v1.5.5 release promotion does not imply 1.6.0 features ship',()=>{
  const site=fs.readFileSync(path.join(root,'assets/js/note-site-v1.js'),'utf8');
- assert.match(site,/v1\.5\.4 已正式发布/);
+ assert.match(site,/v1\.5\.5 已正式发布/);
  assert.match(site,/v1\.6\.0/);
  assert.doesNotMatch(site,/NEW IN v1\.5\.3|PRODUCT FEATURES · v1\.5\.3/);
 });
