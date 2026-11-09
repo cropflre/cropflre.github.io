@@ -39,14 +39,14 @@ for (const [engineName, engine] of [['Chromium',chromium],['Firefox',firefox],['
     try {
       await page.goto(base + '/#/note/download',{waitUntil:'domcontentloaded'});
       await page.locator('#noteReleaseMeta strong').waitFor({timeout:15000});
-      assert.match(await page.locator('#noteReleaseMeta').innerText(),/v1\.5\.4/);
+      assert.match(await page.locator('#noteReleaseMeta').innerText(),/v1\.5\.5/);
       await page.getByRole('tab',{name:'macOS'}).click();
       assert.equal(await page.locator('a[href$="-arm64.dmg"]').count(),1);
       assert.equal(await page.locator('a[href$="-x64.dmg"]').count(),1);
       await page.getByRole('tab',{name:'Windows'}).click();
-      assert.equal(await page.locator('a[href$="Nowen-Note-1.5.4-setup.exe"]').count(),1);
+      assert.equal(await page.locator('a[href$="Nowen-Note-1.5.5-setup.exe"]').count(),1);
       await page.locator('summary').first().click();
-      assert.equal(await page.locator('a[href$="Nowen-Note-1.5.4-portable.exe"]').count(),1);
+      assert.equal(await page.locator('a[href$="Nowen-Note-1.5.5-portable.exe"]').count(),1);
       await page.getByRole('tab',{name:'绿联 UGOS'}).click();
       assert.equal(await page.locator('a[href$=".upk"]').count(),2);
       await page.getByRole('tab',{name:'飞牛 fnOS'}).click();
@@ -56,7 +56,7 @@ for (const [engineName, engine] of [['Chromium',chromium],['Firefox',firefox],['
       await page.getByRole('tab',{name:'浏览器插件'}).click();
       assert.equal(await page.locator('a[href*="chromewebstore.google.com"]').count(),1);
       await page.getByRole('tab',{name:'Docker / NAS'}).click();
-      assert.match(await page.locator('.note-code').innerText(),/--branch v1\.5\.4/);
+      assert.match(await page.locator('.note-code').innerText(),/--branch v1\.5\.5/);
       await page.goto(base + '/#/note/quick-start');
       assert.match(await page.locator('h1').first().innerText(),/快速|上手|入门/);
       await page.goto(base + '/#/reader/quick-start');
