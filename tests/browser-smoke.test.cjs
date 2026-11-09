@@ -117,17 +117,17 @@ test('Chromium: responsive no overflow on all required widths', async () => {
     }
   } finally { await browser.close(); }
 });
-test('Chromium: newer formal release with missing assets never reuses v1.5.4 downloads',async()=>{
+test('Chromium: newer formal release with missing assets never reuses v1.5.5 downloads',async()=>{
   const browser=await chromium.launch({headless:true});
   const page=await browser.newPage();
-  const release={tag_name:'v1.5.5',published_at:'2026-11-03T00:00:00Z',
-    html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.5',
+  const release={tag_name:'v1.5.6',published_at:'2026-11-10T00:00:00Z',
+    html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.6',
     draft:false,prerelease:false,assets:[]};
   await page.route('https://api.github.com/repos/cropflre/nowen-note/releases/latest',route=>
     route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(release)}));
   try {
     await page.goto(base+'/#/note/download');
-    await page.locator('#noteReleaseMeta strong').getByText('v1.5.5').waitFor({timeout:15000});
+    await page.locator('#noteReleaseMeta strong').getByText('v1.5.6').waitFor({timeout:15000});
     assert.equal(await page.locator('.note-platform-panel a[href$="-setup.exe"]').count(),0);
     assert.match(await page.locator('.note-platform-panel').innerText(),/未提供安装包/);
   } finally {await browser.close();}

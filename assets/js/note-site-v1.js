@@ -6,7 +6,7 @@
   const APP = 'https://github.com/cropflre/nowen-note';
   const STORE = 'https://chromewebstore.google.com/detail/nowen-note-web-clipper/nglkodhfdbnfielchjpkjhenfaecafpg';
   const MS_STORE = 'https://apps.microsoft.com/detail/9MZ7Z6S39LL3';
-  const DOCS = APP + '/blob/v1.5.4/docs/tutorials/';
+  const DOCS = APP + '/blob/v1.5.5/docs/tutorials/';
   const SCREEN = 'https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.2/docs/screenshots/';
   const LOGO = 'https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.2/build/icons/128x128.png';
   const platforms = [
@@ -86,15 +86,15 @@
       link(APP, 'GitHub ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div>' +
       '<p class="note-fine">桌面端可本地使用；跨设备同步需要连接同一服务端。在线演示不适合存放真实资料。</p></div>' +
       '<div class="note-hero-art"><div class="note-hero-image-preview" aria-hidden="true"><span>NOWEN / WORKSPACE</span><strong>让每一条记录，<br />都找到自己的位置。</strong><small>Markdown · Knowledge · AI · Self-hosted</small></div>' + screenshot('desktop-ai-writing.png', 'Nowen Note 桌面端 AI 写作界面', '', true) + '</div></section>' +
-      '<section class="note-section note-release-highlight"><div class="note-section-heading"><span>NEW IN v1.5.4 · 更新速览</span><h2>AI 协作更安心，离线使用更自由</h2>' +
-      '<p>2026-11-02 正式发布 · AI 修改可预览后确认，Markdown 长文档支持章节折叠，图片预览和 NAS 离线体验持续改进。</p></div><div class="note-values">' +
-      '<article><b>AI 写作先预览</b><p>编辑器内获得修改建议，确认后再应用；笔记本 Agent 支持逐项审核草稿。</p></article>' +
-      '<article><b>Markdown 章节折叠</b><p>按标题层级折叠长篇笔记，搜索命中隐藏内容时自动展开，正文不变。</p></article>' +
-      '<article><b>原图与附件更可靠</b><p>全屏原图预览与缩放手势增强，上传响应丢失后可恢复附件引用。</p></article>' +
-      '<article><b>NAS 离线继续写</b><p>桌面完整版可缓存个人笔记和受管附件，恢复连接后回传待同步修改。</p></article></div>' +
-      '<p class="note-fine">v1.5.4 已正式发布；首次缓存需要联网，离线范围不覆盖所有共享功能。Workspace、个人应用 Studio 和扩展平台 V3 仍规划在 v1.6.0。升级前请备份。</p>' +
-      '<div class="note-inline-links">' + link('#/note/changelog', '查看 v1.5.4 更新亮点 →', 'note-secondary') +
-      link(APP + '/releases/tag/v1.5.4', 'GitHub 正式发布 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div></section>' +
+      '<section class="note-section note-release-highlight"><div class="note-section-heading"><span>NEW IN v1.5.5 · 更新速览</span><h2>跨端同步更及时，桌面体验更可靠</h2>' +
+      '<p>2026-11-09 正式发布 · 加强 Web / PC / Android 双向同步、知识树冲突恢复、桌面登录恢复与统一交互动效。</p></div><div class="note-values">' +
+      '<article><b>Web / PC / Android 双向同步</b><p>在线时改进变更通知和打开中笔记的更新；并发编辑保留两端正文，避免静默覆盖。</p></article>' +
+      '<article><b>知识树冲突修复</b><p>完善结构差异处理前的预检与操作意图验证，优化跨设备首次引导状态。</p></article>' +
+      '<article><b>桌面恢复更清晰</b><p>首次下载进度、登录恢复及后端失败重试提供更明确的提示和操作入口。</p></article>' +
+      '<article><b>交互与编辑优化</b><p>统一核心动效、响应布局，修复 Word 粘贴图片与手机分享弹窗裁切。</p></article></div>' +
+      '<p class="note-fine">v1.5.5 已正式发布。实时同步需联网并连接同一服务端，不能保证所有弱网场景零延迟或零冲突。macOS GitHub 包未签名公证；升级前请备份。Workspace / App Studio / 扩展平台 V3 留在 v1.6.0 规划。</p>' +
+      '<div class="note-inline-links">' + link('#/note/changelog', '查看 v1.5.5 更新亮点 →', 'note-secondary') +
+      link(APP + '/releases/tag/v1.5.5', 'GitHub 正式发布 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div></section>' +
       '<section class="note-section"><div class="note-section-heading"><span>WHY NOWEN</span><h2>从日常记录到长期积累</h2></div>' +
       '<div class="note-values"><article><b>01 · 数据自主掌控</b><p>支持桌面本地使用，也能将服务部署在自己的 NAS 或服务器。</p></article>' +
       '<article><b>02 · 笔记有条理</b><p>用知识树整理 Markdown、富文本与附件，查找更方便。</p></article>' +
@@ -194,7 +194,7 @@
         guide('#/note/nas', 'NAS 部署教程') + '　' + guide(DOCS + 'docker-deploy.md', 'Docker Compose 文档');
     }
     if (selected === 'ios') body = '<p>当前正式 Release 没有 iOS 或 HarmonyOS 可直接分发的安装包。项目存在相关工程，但这不代表已上架或可下载。</p>' +
-      link(APP + '/blob/v1.5.4/docs/iOS-Release.md', '了解 iOS 开发进展 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"');
+      link(APP + '/blob/v1.5.5/docs/iOS-Release.md', '了解 iOS 开发进展 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"');
     return header + '<div class="note-panel-body">' + body + '</div>';
   }
 
@@ -267,45 +267,45 @@
     });
   }
   function renderFeatures() {
-    frame('features', '<section class="note-heading"><span class="note-kicker">PRODUCT FEATURES · v1.5.4</span><h1>让写作、阅读和同步更顺手</h1>' +
-      '<p>2026-11-02 正式发布：AI 修改可先预览确认，Markdown 支持章节折叠，图片预览与 NAS 离线体验升级。Workspace、个人应用 Studio 和扩展平台 V3 仍规划在 v1.6.0。</p></section>' +
-      '<section class="note-section"><div class="note-section-heading"><span>NEW IN v1.5.4 · 更新内容</span><h2>这次更新了什么？</h2>' +
-      '<p>部分功能需要配置 AI 模型、管理员权限或 NAS 服务；桌面离线支持范围有限，具体以正式发布说明为准。</p></div><div class="note-feature-grid">' +
-      feature('AI 写作与审核', '编辑器 AI 助手生成修改建议，先预览再确认；笔记本 Agent 的草稿支持逐项检查。', 'v1.5.4 正式发布', '', '#/note/ai') +
-      feature('复用 Skills 指令', '自定义 Skills 可复用写作规则与步骤，仅提供指令，不执行脚本或额外获取权限。', 'v1.5.4 正式发布', '', '#/note/changelog') +
-      feature('Markdown 章节折叠', '长篇笔记按标题折叠，搜索命中隐藏章节时自动展开，折叠不会修改正文。', 'v1.5.4 正式发布', '', '#/note/advanced-content-blocks') +
-      feature('原图与附件', '全屏原图缩放拖动、双指手势、HEIC/HEIF 预览，以及上传异常后恢复附件引用。', 'v1.5.4 正式发布', '', '#/note/attachments') +
-      feature('NAS 离线使用', '桌面完整版联网登录 NAS 后可准备个人笔记和受管附件副本，恢复连接后同步待提交修改。', 'v1.5.4 正式发布', '', '#/note/offline-workspace') +
-      feature('导入与兼容性', 'DOCX 导入上限提高到 1 GB，浏览器剪藏并发请求隔离，加强 Android 本地优先模式。', 'v1.5.4 正式发布', '', '#/note/changelog') +
+    frame('features', '<section class="note-heading"><span class="note-kicker">PRODUCT FEATURES · v1.5.5</span><h1>同步更及时，交互更顺手</h1>' +
+      '<p>2026-11-09 正式发布：完善 Web、PC、Android 在线同步通知、冲突修复预检、桌面启动恢复和交互动效。Workspace、个人应用 Studio 与扩展平台 V3 仍规划在 v1.6.0。</p></section>' +
+      '<section class="note-section"><div class="note-section-heading"><span>NEW IN v1.5.5 · 更新内容</span><h2>这次更新了什么？</h2>' +
+      '<p>多端同步需要在线连接同一个服务端及账号；弱网和并发编辑仍可能有待处理冲突。</p></div><div class="note-feature-grid">' +
+      feature('双向实时同步', 'Web / PC / Android 在线变更通知、正在打开的笔记自动更新；并发编辑保留两端正文。', 'v1.5.5 正式发布', '', '#/note/changelog') +
+      feature('知识树冲突修复', '优化目录结构差异修复预检与用户操作意图校验，减少新手引导状态不一致。', 'v1.5.5 正式发布', '', '#/note/changelog') +
+      feature('桌面启动与恢复', '改善首次下载进度、本机账号登录恢复和后台失败后的重试体验。', 'v1.5.5 正式发布', '', '#/note/offline-workspace') +
+      feature('统一动效与响应式', '统一核心界面交互动效，修复窗口从窄到宽时的工作区布局恢复。', 'v1.5.5 正式发布', '', '#/note/changelog') +
+      feature('编辑器与分享', '修复 Word 粘贴图片、Markdown 换行展示与手机端分享弹窗裁切。', 'v1.5.5 正式发布', '', '#/note/attachments') +
+      feature('AI 标识与兼容性', '完善 AI 生成内容标识、个人日记授权接口、鸿蒙导出及历史数据库兼容。', 'v1.5.5 正式发布', '', '#/note/changelog') +
       '</div></section>' +
       '<section class="note-section"><div class="note-section-heading"><span>EVERYDAY WORKFLOW</span><h2>熟悉的笔记能力，持续完善</h2></div><div class="note-feature-grid">' +
       feature('Markdown 与富文本', '选择合适的编辑方式，用统一知识树整理笔记。', '持续维护', 'desktop-ai-writing.png', '#/note/advanced-content-blocks') +
       feature('手机随时记录', 'Android 客户端支持日常记录；跨设备访问需要正确配置服务端和账号。', '持续维护', 'mobile-editor.png', '#/note/quick-start') +
       feature('AI 辅助写作', '总结、改写与知识问答，模型由你选择，在线服务可能发送相关文本。', '持续维护', 'settings-ai.png', '#/note/ai') +
-      '</div><p class="note-fine">真实界面截图沿用 v1.5.2 素材，并非 v1.5.4 新功能的界面截图。</p></section>');
-    document.title = 'Nowen Note v1.5.4 功能更新 · AI 写作、折叠与离线';
+      '</div><p class="note-fine">真实界面截图沿用 v1.5.2 素材，并非 v1.5.5 新功能的界面截图。</p></section>');
+    document.title = 'Nowen Note v1.5.5 功能更新 · 多端同步与交互优化';
   }
   function renderChangelog() {
     const seq = ++generation;
-    frame('changelog', '<section class="note-heading"><span class="note-kicker">RELEASE NOTES · v1.5.4</span><h1>版本与更新</h1>' +
-      '<p>v1.5.4 于 2026-11-02 正式发布，各平台安装包以 GitHub 实际 Release 附件为准。</p><div id="noteChangelogLive" aria-live="polite">' + meta() + '</div></section>' +
-      '<section class="note-section note-version-list"><article><span class="note-feature-label">v1.5.4 · 2026-11-02 · 正式发布</span><h2>AI 写作、Markdown 折叠与离线体验升级</h2>' +
-      '<p><strong>AI 协作：</strong>编辑器内 AI 修改先预览后确认、笔记本 Agent 草稿审核、Skills 指令和管理员共享模型。<strong>编辑与阅读：</strong>Markdown 章节折叠、Live 图片预览与 Mermaid 兼容。<strong>图片和附件：</strong>原图预览及双指手势、上传异常恢复、HEIC/HEIF 兼容。<strong>离线与导入：</strong>桌面完整版 NAS 个人笔记和受管附件离线副本、Android 重连处理、DOCX 导入上限 1 GB。</p>' +
-      '<p class="note-fine">首次离线缓存需要联网，离线不覆盖所有工作区。macOS 本版未经 Developer ID 签名及 Apple 公证，Windows GitHub 直接下载 EXE 未签名。商店渠道发布独立。</p>' +
-      link(APP + '/releases/tag/v1.5.4', '查看 v1.5.4 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+    frame('changelog', '<section class="note-heading"><span class="note-kicker">RELEASE NOTES · v1.5.5</span><h1>版本与更新</h1>' +
+      '<p>v1.5.5 于 2026-11-09 正式发布，支持的架构与安装包以 GitHub 实际 Release 附件为准。</p><div id="noteChangelogLive" aria-live="polite">' + meta() + '</div></section>' +
+      '<section class="note-section note-version-list"><article><span class="note-feature-label">v1.5.5 · 2026-11-09 · 正式发布</span><h2>多端同步与桌面体验稳定性更新</h2>' +
+      '<p><strong>多端同步：</strong>改善 Web、PC、Android 在线双向同步通知和打开中笔记自动更新（#910）；并发编辑保留两端正文。<strong>目录与登录：</strong>加强知识树冲突修复预检及首次引导状态。<strong>桌面与界面：</strong>首次下载进度、登录和后端故障恢复，统一动效与窗口响应布局。<strong>编辑与兼容：</strong>修复 Word 图片粘贴、Markdown 换行、移动端分享弹窗及历史数据库兼容。</p>' +
+      '<p class="note-fine">多端同步依赖在线连接同一服务端，并非所有场景无延迟或无冲突。macOS GitHub 包未签名或公证，Windows 直接下载 EXE 未签名；升级前请备份数据库、附件和配置。</p>' +
+      link(APP + '/releases/tag/v1.5.5', '查看 v1.5.5 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+      '<article><span class="note-feature-label">上一正式版 · 2026-11-02</span><h2>v1.5.4 · AI 与离线体验</h2>' +
+      '<p>AI 修改建议先预览再确认、Markdown 章节折叠、原图与附件恢复、桌面完整版 NAS 离线副本和 DOCX 1GB 导入。</p>' +
+      link(APP + '/releases/tag/v1.5.4', '查看 v1.5.4 历史 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
       '<article><span class="note-feature-label">下一阶段 · v1.6.0 规划</span><h2>Workspace · App Studio · 扩展平台 V3</h2>' +
-      '<p>完整工作台 Workspace、个人应用 Studio 与插件扩展平台 V3 仍在 v1.6.0 规划，不属于 v1.5.4 正式交付。</p></article>' +
-      '<article><span class="note-feature-label">上一公开正式版 · 2026-10-23</span><h2>v1.5.3</h2>' +
-      '<p>知识树拖拽与收藏搜索、图片转存、解除笔记加密、节假日日历和多端稳定性修复。</p>' +
-      link(APP + '/releases/tag/v1.5.3', '查看 v1.5.3 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
-      '<article><span class="note-feature-label">更早正式版 · 2026-10-16</span><h2>v1.5.2</h2>' +
-      '<p>文件中心、MCP 授权、AI 任务和多端同步优化。</p>' +
-      link(APP + '/releases/tag/v1.5.2', '查看 v1.5.2 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article></section>' +
-      '<section class="note-section note-release-warning"><h2>升级前请备份</h2><p>数据库、附件及部署配置应独立备份并确认可恢复；回退客户端或 Docker 镜像不会还原持久化数据。</p>' +
+      '<p>完整 Workspace、个人应用 Studio 和扩展平台 V3 不属于 v1.5.5 已交付功能。</p></article>' +
+      '<article><span class="note-feature-label">历史正式版 · 2026-10-23</span><h2>v1.5.3</h2>' +
+      '<p>收藏搜索、图片转存、解除加密及节假日日历等能力。</p>' +
+      link(APP + '/releases/tag/v1.5.3', '查看 v1.5.3 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article></section>' +
+      '<section class="note-section note-release-warning"><h2>升级前请备份</h2><p>数据库、附件及部署配置需独立备份并验证恢复；客户端或 Docker 镜像回退不会恢复持久化数据库。</p>' +
       link('#/note/backup-restore-drill', '备份与恢复教程 →', 'note-secondary') + '</section>' +
       '<section class="note-section">' + link(APP + '/blob/main/CHANGELOG.md', '完整历史更新日志 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') +
       '　' + link('#/note/download', '下载最新公开正式版 →', 'note-cta') + '</section>');
-    document.title = 'Nowen Note v1.5.4 更新日志 · 版本与更新';
+    document.title = 'Nowen Note v1.5.5 更新日志 · 版本与更新';
     R.load(function (releaseState) {
       if (generation !== seq || !document.getElementById('noteChangelogLive')) return;
       snapshot = releaseState;

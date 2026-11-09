@@ -47,3 +47,15 @@ GitHub Release [v1.5.4](https://github.com/cropflre/nowen-note/releases/tag/v1.5
 - Docker：备份持久化数据库、附件和配置。回退镜像不会还原数据。
 
 官网只宣传 v1.5.4 已交付的 AI 修改审核、Markdown 章节折叠、图片预览和附件恢复、NAS 桌面完整版个人笔记与受管附件离线、DOCX 1GB 导入等能力。Workspace / App Studio / 扩展平台 V3 仍属于 v1.6.0 规划，离线范围不等于全部模块。已有真实截图仍说明来源 v1.5.2，避免伪称新界面。本次通过功能分支及 PR 待验收，不直接推送生产 master。
+
+## v1.5.5 正式版核验（2026-11-09）
+
+GitHub [v1.5.5](https://github.com/cropflre/nowen-note/releases/tag/v1.5.5) 已于 **2026-11-09T07:33:35Z** 正式发布（非 Draft、非 Prerelease）。GitHub 共有 **28 个附件**；按现有下载中心过滤规则，直接安装 / 扩展 ZIP 有 **17 个**，其余 blockmap、latest YAML、Android AAB 等不作为普通用户下载按钮。
+
+- Windows：完整版 Setup / Portable，Lite Setup / Portable；不提供未实际发布的 Linux Lite。
+- macOS：Intel x64、Apple Silicon arm64 的 DMG / ZIP；**未 Developer ID 签名或 Apple 公证**，首次打开可能有 Gatekeeper 提示。
+- Linux：AMD64 DEB、x86_64 AppImage；Android：正式签名 APK。
+- fnOS：v1.5.5 FPK；绿联：AMD64 / ARM64 UPK；Clipper：通用、Edge、Firefox ZIP（扩展本身为 0.5.0 版本）。
+- Docker：v1.5.5 AMD64 / ARM64 双架构镜像，升级前备份数据库、附件与部署配置。镜像回退不会回滚数据。
+
+回退清单 assets/data/nowen-note-stable.json 的名称、字节数和 URL 全部取自 **GitHub v1.5.5 正式 Release API**，不拼装链接。官网更新重点为双向同步、知识树冲突处理、桌面启动恢复、动效与 Word 图片粘贴修复；**同步仍取决于在线网络与同一服务端，不能保证零延迟或零冲突**。Workspace、个人应用 Studio、扩展平台 V3 仍属于 v1.6.0 规划。静态截图继续标注原始 v1.5.2 来源。

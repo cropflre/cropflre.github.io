@@ -3,7 +3,7 @@
 <title>Nowen Note（弄文笔记）· 开源 Markdown 笔记与自托管知识库</title>
 <meta name="description" content="Nowen Note（弄文笔记）是一款开源、可自托管的笔记与知识管理工具，支持 Markdown、富文本、AI 写作、任务管理、Windows、Mac、Android 与 NAS / Docker 部署。" />
 <link rel="canonical" href="https://nowen.cn/note/" />
-<meta property="og:title" content="Nowen Note v1.5.4 · AI 写作、Markdown 折叠与离线" /><meta property="og:type" content="website" />
+<meta property="og:title" content="Nowen Note v1.5.5 · 多端同步与桌面稳定性" /><meta property="og:type" content="website" />
 <meta property="og:url" content="https://nowen.cn/note/" />
 <meta property="og:image" content="https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.2/docs/screenshots/desktop-ai-writing.png" />
 <link rel="stylesheet" href="../assets/css/help-v2.css" /><link rel="stylesheet" href="../assets/css/note-site-v1.css" /><link rel="stylesheet" href="../assets/css/nowen-ui-v2.css" /><link rel="stylesheet" href="../assets/css/site-icp.css" />
@@ -12,17 +12,16 @@
 </head>
 <body><main class="note-site">
 <nav class="note-navigation"><a href="../#/">← Nowen 帮助中心</a><div class="note-nav-items"><a href="../#/note">产品介绍</a><a href="../#/note/download">下载中心</a><a href="../#/note/tutorials">教程</a><a href="https://community.nowen.cn" target="_blank" rel="noopener noreferrer">弄文社区 ↗</a></div></nav>
-<header class="note-hero"><div class="note-hero-text"><span class="note-kicker">NOWEN NOTE · 弄文笔记</span><h1>记录灵感，<br />整理成自己的知识库。</h1><p>Nowen Note v1.5.4 已正式发布：AI 修改先预览后确认、Markdown 章节折叠、原图全屏预览及桌面完整版 NAS 离线增强。实际公开安装包以 GitHub Releases 为准。支持本地使用或自托管于 NAS / 服务器。</p>
-<div class="note-actions"><a class="note-cta" href="../#/note/download">免费下载 →</a><a class="note-secondary" href="../#/note">了解产品</a><a class="note-secondary" href="https://github.com/cropflre/nowen-note">GitHub ↗</a></div></div>
+<header class="note-hero"><div class="note-hero-text"><span class="note-kicker">NOWEN NOTE · 弄文笔记</span><h1>记录灵感，<br />整理成自己的知识库。</h1><p>Nowen Note v1.5.5 已正式发布：改善 Web / PC / Android 双向同步、冲突恢复、桌面登录与下载恢复及交互动效。安装包以 GitHub 正式 Release 为准。</p>
+<div class="note-actions"><a class="note-cta" href="../#/note/download">免费下载 →</a><a class="note-secondary" href="../#/note">了解产品</a><a class="note-secondary" href="https://github.com/cropflre/nowen-note/releases/tag/v1.5.5">GitHub Release ↗</a></div></div>
 <div class="note-hero-art"><img src="https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.2/docs/screenshots/desktop-ai-writing.png" alt="Nowen Note 正式版桌面端笔记与 AI 写作界面" width="880" height="660" /></div></header>
-<section class="note-section"><div class="note-section-heading"><span>v1.5.4 · 2026-11-02 正式发布</span><h2>AI 写作、Markdown 折叠与离线体验升级</h2><p>聚焦日常写作和资料整理，部分能力需要 AI 模型与 NAS 配置。</p></div>
-<div class="note-values">
-<article><b>AI 协作</b><p>AI 修改建议先预览确认；笔记本 Agent 可逐项检查草稿，复用自定义 Skills。</p></article>
-<article><b>Markdown 折叠</b><p>按标题折叠长文档章节，搜索隐藏内容时自动展开。</p></article>
-<article><b>图片与附件</b><p>原图预览、双指手势、上传异常恢复及 HEIC/HEIF 兼容性增强。</p></article>
-<article><b>NAS 离线</b><p>桌面完整版联网初始化个人笔记与受管附件副本，恢复连接后同步修改。</p></article></div>
-<p class="note-fine">离线不覆盖所有工作区功能；升级前完整备份数据库、附件及配置。macOS 未经 Apple 公证，Windows GitHub EXE 未签名。Workspace、App Studio 与扩展平台 V3 留在 v1.6.0 规划。</p>
-<p><a class="note-secondary" href="../#/note/changelog">查看 v1.5.4 更新 →</a> <a class="note-secondary" href="https://github.com/cropflre/nowen-note/releases/tag/v1.5.4">GitHub 正式 Release ↗</a></p></section>
+<section class="note-section"><div class="note-section-heading"><span>v1.5.5 · 2026-11-09 正式发布</span><h2>多端同步与桌面稳定性提升</h2><p>重点修复同步可靠性与日常操作问题，保留现有知识管理和 AI 功能。</p></div>
+<div class="note-values"><article><b>多端同步</b><p>在线双向同步通知与打开中笔记更新，并发编辑保留两端内容。</p></article>
+<article><b>知识树冲突修复</b><p>增强目录结构冲突处理的安全预检与用户确认流程。</p></article>
+<article><b>桌面恢复</b><p>优化首次下载进度、本地登录恢复和失败重试。</p></article>
+<article><b>交互与编辑</b><p>统一动效、响应式布局，修复 Word 粘贴图片与手机分享弹窗问题。</p></article></div>
+<p class="note-fine">实时同步依赖同一服务端、账号及在线网络；真实并发冲突仍可能需要处理。升级前备份数据库、附件与配置。macOS 未签名或公证；Windows GitHub 直装 EXE 未签名。Workspace、App Studio 与扩展平台 V3 继续规划在 v1.6.0。</p>
+<p><a class="note-secondary" href="../#/note/changelog">查看 v1.5.5 更新 →</a> <a class="note-secondary" href="https://github.com/cropflre/nowen-note/releases/tag/v1.5.5">GitHub 正式 Release ↗</a></p></section>
 <section class="note-section"><div class="note-section-heading"><h2>一个地方，管理笔记、知识与待办</h2></div>
 <div class="note-values">
 <article><b>Markdown 和富文本</b><p>自由记录，使用知识树分类与管理内容。</p></article>

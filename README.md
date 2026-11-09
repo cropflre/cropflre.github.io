@@ -239,3 +239,5 @@ MIT © cropflre
 - 覆盖 NAS Docker 端口确认、节点小宝安装绑定、内网穿透 / 异地组网、Android 登录及 API / WebSocket 排障
 - 官方参考：[节点小宝内网穿透](https://iepose.com/helpcenter_v3/docs/9-%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F.html)、[设备组网](https://iepose.com/helpcenter_v3/docs/7.1-%E8%AE%BE%E5%A4%87%E7%BB%84%E7%BD%91.html) 与 [Nowen Note 反向代理兼容说明](https://github.com/cropflre/nowen-note/blob/main/docs/reverse-proxy-compatibility.md)
 - 测试：运行 `node --test tests/iepose-guide.test.cjs`；浏览器回归覆盖常规教程路由、移动端与全局搜索
+
+**2026-11-09 · v1.5.5 已上线：**更新产品介绍、功能与更新日志、静态 SEO 页，以及根据 28 个真实 Release 附件筛选的 17 个安装 / 扩展 ZIP 回退清单。Windows、macOS、Linux、Android、fnOS、UGOS、浏览器扩展均按本版实际资产显示；macOS 未签名公证，Windows GitHub EXE 未签名。双向同步需要同一服务端与账号，并发冲突仍可能需要处理。Workspace、App Studio、扩展平台 V3 仍留在 v1.6.0。下载与回归细节见 docs/download-center-release-audit.md。

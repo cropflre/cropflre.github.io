@@ -8,13 +8,13 @@ const root = path.resolve(__dirname, '..');
 const snapshot = JSON.parse(fs.readFileSync(path.join(root, 'assets/data/nowen-note-stable.json'), 'utf8'));
 const official = S.validateRelease(snapshot);
 
-test('fallback is verified v1.5.4 with supported installation assets', () => {
-  assert.equal(official.version, 'v1.5.4');
+test('fallback is verified v1.5.5 with supported installation assets', () => {
+  assert.equal(official.version, 'v1.5.5');
   assert.equal(official.assets.length, 17);
-  assert.ok(official.assets.every(a=>a.url.startsWith('https://github.com/cropflre/nowen-note/releases/download/v1.5.4/')));
+  assert.ok(official.assets.every(a=>a.url.startsWith('https://github.com/cropflre/nowen-note/releases/download/v1.5.5/')));
   assert.ok(official.assets.every(a=>!/\.blockmap|\.ya?ml$/i.test(a.name)));
 });
-test('matrix maps real v1.5.4 packages and excludes unavailable Linux Lite', () => {
+test('matrix maps real v1.5.5 packages and excludes unavailable Linux Lite', () => {
   const m=S.matrix(official);
   assert.equal(m.winSetup.name,'Nowen-Note-1.5.4-setup.exe');
   assert.equal(m.winPortable.name,'Nowen-Note-1.5.4-portable.exe');
@@ -70,7 +70,7 @@ test('API failure uses verified local manifest and does not confuse failure with
       {ok:true,json:async()=>snapshot} : {ok:false,status:403}
   });
   assert.equal(result.source,'fallback');
-  assert.equal(result.release.version,'v1.5.4');
+  assert.equal(result.release.version,'v1.5.5');
   assert.deepEqual(seen,['fallback']);
 });
 test('fresh cache avoids API fetch; stale cache permits a new formal release', async () => {
@@ -83,11 +83,11 @@ test('fresh cache avoids API fetch; stale cache permits a new formal release', a
   const second=await S.load(null,{storage,fetch:fetcher,now:100100});
   assert.equal(second.source,'cached');
   assert.equal(calls,2+1); // first manifest + API, second manifest
-  const next={...snapshot,tag_name:'v1.5.5',html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.5',assets:[]};
+  const next={...snapshot,tag_name:'v1.5.6',html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.6',assets:[]};
   const newer=await S.load(null,{storage,fetch:async url=>({
     ok:true,json:async()=>url.includes('api.github.com')?next:snapshot
   }),now:100000+11*60*1000});
-  assert.equal(newer.release.version,'v1.5.5');
+  assert.equal(newer.release.version,'v1.5.6');
   assert.deepEqual(Object.keys(S.matrix(newer.release)),[]);
 });
 test('stale API release cannot replace newer verified fallback',async()=>{
@@ -96,10 +96,10 @@ test('stale API release cannot replace newer verified fallback',async()=>{
   const result=await S.load(null,{storage:null,fetch:async url=>({
     ok:true,json:async()=>url.includes('api.github.com')?old:snapshot
   })});
-  assert.equal(result.release.version,'v1.5.4');
+  assert.equal(result.release.version,'v1.5.5');
   assert.equal(result.source,'fallback');
 });
-test('a newly verified v1.5.4 fallback supersedes a cached older v1.5.3',async()=>{
+test('a newly verified v1.5.5 fallback supersedes a cached older v1.5.3',async()=>{
   const old={...snapshot,tag_name:'v1.5.3',
     html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.3',assets:[]};
   const cache=new Map([['nowen-note-release-v1',JSON.stringify({at:100000,data:old})]]);
@@ -107,10 +107,10 @@ test('a newly verified v1.5.4 fallback supersedes a cached older v1.5.3',async()
     getItem:k=>cache.get(k)||null,setItem:(k,v)=>cache.set(k,v)
   },fetch:async url=>url.includes('api.github.com')
     ? {ok:false,status:429} : {ok:true,json:async()=>snapshot}});
-  assert.equal(result.release.version,'v1.5.4');
+  assert.equal(result.release.version,'v1.5.5');
   assert.equal(result.source,'fallback');
 });
-test('website v1.5.4 release promotion does not imply 1.6.0 features ship',()=>{
+test('website v1.5.5 release promotion does not imply 1.6.0 features ship',()=>{
  const site=fs.readFileSync(path.join(root,'assets/js/note-site-v1.js'),'utf8');
  assert.match(site,/v1\.5\.4 已正式发布/);
  assert.match(site,/v1\.6\.0/);
