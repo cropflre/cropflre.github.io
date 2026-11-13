@@ -36,6 +36,9 @@ for (const [engineName, engine] of [['Chromium',chromium],['Firefox',firefox],['
     const errors=[];
     page.on('pageerror',e=>errors.push(e.message));
     await page.route('https://api.github.com/repos/cropflre/nowen-note/releases/latest',fakeApi);
+    await page.route('https://download.nowen.cn/**',route=>route.fulfill({
+      status:404,contentType:'application/json',headers:{'access-control-allow-origin':'*'},body:'{}'
+    }));
     try {
       await page.goto(base + '/#/note/download',{waitUntil:'domcontentloaded'});
       await page.locator('#noteReleaseMeta strong').waitFor({timeout:15000});
@@ -69,6 +72,36 @@ for (const [engineName, engine] of [['Chromium',chromium],['Firefox',firefox],['
     } finally { await browser.close(); }
   });
 }
+test('Chromium: verified R2 manifest selects CDN and preserves GitHub fallback and UGOS UPK',async()=>{
+  const browser=await chromium.launch({headless:true});
+  const page=await browser.newPage();
+  const raw=JSON.parse(await fs.readFile(path.join(root,'assets/data/nowen-note-stable.json'),'utf8'));
+  const allowNames=[
+    'Nowen-Note-1.5.5-setup.exe','Nowen-Note-1.5.5-arm64.dmg','Nowen-Note-1.5.5-x64.dmg',
+    'Nowen-Note-1.5.5-x86_64.AppImage','Nowen-Note-1.5.5-amd64.deb','Nowen-Note-1.5.5.apk',
+    'nowen-note-1.5.5-fpk-r1.fpk',
+    'nowen-clipper-0.5.0-edge.zip','nowen-clipper-0.5.0-firefox.zip','nowen-clipper-0.5.0.zip'
+  ];
+  const manifest={schema:1,version:'v1.5.5',assets:allowNames.map(name=>({
+    name,size:raw.assets.find(a=>a.name===name).size
+  }))};
+  await page.route('https://api.github.com/repos/cropflre/nowen-note/releases/latest',fakeApi);
+  await page.route('https://download.nowen.cn/v1.5.5/manifest.json',route=>route.fulfill({
+    status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},
+    body:JSON.stringify(manifest)
+  }));
+  try{
+    await page.goto(base+'/#/note/download');
+    await page.locator('a[href="https://download.nowen.cn/v1.5.5/Nowen-Note-1.5.5-setup.exe"]').waitFor();
+    assert.ok(await page.locator('a[href="https://github.com/cropflre/nowen-note/releases/download/v1.5.5/Nowen-Note-1.5.5-setup.exe"]').count()>0);
+    await page.getByRole('tab',{name:'飞牛 fnOS'}).click();
+    assert.ok(await page.locator('a[href="https://download.nowen.cn/v1.5.5/nowen-note-1.5.5-fpk-r1.fpk"]').count()>0);
+    await page.getByRole('tab',{name:'绿联 UGOS'}).click();
+    assert.equal(await page.locator('a[href$=".upk"]').count(),2);
+    assert.equal(await page.locator('a[href*="download.nowen.cn"][href$=".upk"]').count(),0);
+  }finally{await browser.close();}
+});
+
 for (const [engineName, engine] of [['Chromium', chromium], ['Firefox', firefox], ['WebKit Safari', webkit]]) {
   test(engineName + ': NAS AI guide can build a task for selected tool and access mode', async () => {
     const browser = await engine.launch({ headless: true });
