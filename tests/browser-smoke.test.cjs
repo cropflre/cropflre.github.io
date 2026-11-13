@@ -92,6 +92,7 @@ test('Chromium: verified R2 manifest selects CDN and preserves GitHub fallback a
   }));
   try{
     await page.goto(base+'/#/note/download');
+    await page.getByRole('tab',{name:'Windows'}).click();
     await page.locator('a[href="https://download.nowen.cn/v1.5.5/Nowen-Note-1.5.5-setup.exe"]').waitFor();
     assert.ok(await page.locator('a[href="https://github.com/cropflre/nowen-note/releases/download/v1.5.5/Nowen-Note-1.5.5-setup.exe"]').count()>0);
     await page.getByRole('tab',{name:'飞牛 fnOS'}).click();
