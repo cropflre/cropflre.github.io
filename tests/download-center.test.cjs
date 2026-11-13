@@ -149,7 +149,7 @@ test('stale API release cannot replace newer verified fallback',async()=>{
 test('a newly verified v1.5.5 fallback supersedes a cached older v1.5.3',async()=>{
   const old={...snapshot,tag_name:'v1.5.3',
     html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.3',assets:[]};
-  const cache=new Map([['nowen-note-release-v1',JSON.stringify({at:100000,data:old})]]);
+  const cache=new Map([['nowen-note-release-v2',JSON.stringify({at:100000,data:old})]]);
   const result=await S.load(null,{now:100100,storage:{
     getItem:k=>cache.get(k)||null,setItem:(k,v)=>cache.set(k,v)
   },fetch:async url=>url.includes('api.github.com')
