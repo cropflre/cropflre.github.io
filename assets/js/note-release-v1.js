@@ -9,7 +9,7 @@
   const FALLBACK = 'assets/data/nowen-note-stable.json';
   const RELEASES = 'https://github.com/cropflre/nowen-note/releases';
   const MIRROR = 'https://download.nowen.cn';
-  const CACHE_KEY = 'nowen-note-release-v1';
+  const CACHE_KEY = 'nowen-note-release-v2';
   const CACHE_TTL = 10 * 60 * 1000;
   const allowedTag = /^v\d+\.\d+\.\d+$/;
 
