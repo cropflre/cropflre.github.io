@@ -8,6 +8,7 @@
   const API = 'https://api.github.com/repos/cropflre/nowen-note/releases/latest';
   const FALLBACK = 'assets/data/nowen-note-stable.json';
   const RELEASES = 'https://github.com/cropflre/nowen-note/releases';
+  const MIRROR = 'https://download.nowen.cn';
   const CACHE_KEY = 'nowen-note-release-v1';
   const CACHE_TTL = 10 * 60 * 1000;
   const allowedTag = /^v\d+\.\d+\.\d+$/;
@@ -45,7 +46,7 @@
     if (/^Nowen-Note-Lite-v?\d+\.\d+\.\d+-x86_64\.AppImage$/.test(name)) return 'linuxLiteAppImage';
     if (/^Nowen-Note-Lite-v?\d+\.\d+\.\d+-amd64\.deb$/i.test(name)) return 'linuxLiteDeb';
     if (/^Nowen-Note-v?\d+\.\d+\.\d+\.apk$/i.test(name)) return 'androidApk';
-    if (/^nowen-note-v?\d+\.\d+\.\d+\.fpk$/i.test(name)) return 'fnosFpk';
+    if (/^nowen-note-v?\d+\.\d+\.\d+(?:-fpk-r\d+)?\.fpk$/i.test(name)) return 'fnosFpk';
     if (/^amd64_io\.nowen\.note_\d+\.\d+\.\d+\.\d+\.upk$/i.test(name)) return 'ugosAmd64';
     if (/^arm64_io\.nowen\.note_\d+\.\d+\.\d+\.\d+\.upk$/i.test(name)) return 'ugosArm64';
     if (/^Nowen-Note-Lite-v?\d+\.\d+\.\d+-setup\.exe$/i.test(name)) return 'winLiteSetup';
@@ -61,9 +62,55 @@
     const result = Object.create(null);
     (release && release.assets || []).forEach(function (a) {
       const key = classifyAsset(a);
-      if (key && !result[key]) result[key] = a;
+      if (key && (!result[key] || (key === 'fnosFpk' && /-fpk-r\d+\.fpk$/i.test(a.name)))) result[key] = a;
     });
     return result;
+  }
+
+  // Trust GitHub Release for the file identity and expected size; use R2 only for
+  // objects explicitly enumerated in the verified, version-specific R2 manifest.
+  function isApprovedMirrorName(name, tag) {
+    const version = tag.slice(1);
+    const selected = [
+      'Nowen-Note-' + version + '-setup.exe',
+      'Nowen-Note-' + version + '-arm64.dmg',
+      'Nowen-Note-' + version + '-x64.dmg',
+      'Nowen-Note-' + version + '-x86_64.AppImage',
+      'Nowen-Note-' + version + '-amd64.deb',
+      'Nowen-Note-' + version + '.apk',
+      'nowen-note-' + version + '-fpk-r1.fpk',
+      'nowen-note-' + version + '.fpk'
+    ];
+    return selected.indexOf(name) !== -1 ||
+      /^nowen-clipper-\d+\.\d+\.\d+(?:-(?:edge|firefox))?\.zip$/.test(name);
+  }
+
+  async function resolveMirrors(release, fetcher) {
+    if (!release || !allowedTag.test(release.version || '') || typeof fetcher !== 'function') return release;
+    const tag = release.version;
+    const manifestUrl = MIRROR + '/' + tag + '/manifest.json';
+    try {
+      const response = await fetcher(manifestUrl, { mode: 'cors', cache: 'no-store' });
+      if (!response || !response.ok) return release;
+      const manifest = await response.json();
+      if (!manifest || manifest.schema !== 1 || manifest.version !== tag ||
+        !Array.isArray(manifest.assets) || manifest.assets.length !== 10) return release;
+      const byName = new Map(release.assets.map(function (asset) { return [asset.name, asset]; }));
+      const approved = new Map();
+      for (const row of manifest.assets) {
+        if (!row || typeof row.name !== 'string' || !Number.isSafeInteger(row.size) ||
+          !isApprovedMirrorName(row.name, tag) || !byName.has(row.name) ||
+          byName.get(row.name).size !== row.size || approved.has(row.name)) return release;
+        approved.set(row.name, row);
+      }
+      return Object.assign({}, release, { assets: release.assets.map(function (asset) {
+        return approved.has(asset.name) ? Object.assign({}, asset, {
+          url: MIRROR + '/' + tag + '/' + encodeURIComponent(asset.name),
+          githubUrl: asset.url,
+          source: 'r2'
+        }) : asset;
+      }) });
+    } catch { return release; }
   }
 
   function detectPlatform(ua) {
@@ -145,7 +192,7 @@
     }
   }
 
-  return { API: API, RELEASES: RELEASES, validateRelease: validateRelease,
+  return { API: API, RELEASES: RELEASES, MIRROR: MIRROR, validateRelease: validateRelease,
     classifyAsset: classifyAsset, matrix: matrix, detectPlatform: detectPlatform,
-    sizeLabel: sizeLabel, getCached: getCached, load: load };
+    sizeLabel: sizeLabel, getCached: getCached, load: load, resolveMirrors: resolveMirrors };
 });
