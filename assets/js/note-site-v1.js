@@ -31,9 +31,14 @@
   function buttonAsset(key, label, primary) {
     const a = R.matrix(snapshot.release)[key];
     if (!a) return '<span class="note-unavailable">' + esc(label) + ' · 当前正式版未提供安装包</span>';
-    return '<a class="' + (primary ? 'note-cta' : 'note-secondary') + '" href="' + esc(a.url) +
+    const mirrorLabel = a.source === 'r2' ? ' · R2 下载' : '';
+    const primaryLink = '<a class="' + (primary ? 'note-cta' : 'note-secondary') + '" href="' + esc(a.url) +
       '" target="_blank" rel="noopener noreferrer" download>' + esc(label) +
-      ' <span class="note-size">' + esc(R.sizeLabel(a.size)) + '</span> <span aria-hidden="true">↗</span></a>';
+      ' <span class="note-size">' + esc(R.sizeLabel(a.size)) + esc(mirrorLabel) +
+      '</span> <span aria-hidden="true">↗</span></a>';
+    return primaryLink + (a.githubUrl
+      ? ' ' + link(a.githubUrl, 'GitHub 原站备用 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"')
+      : '');
   }
   function guide(href, title) { return link(href, title + ' →', 'note-quiet'); }
   function meta() {
@@ -251,6 +256,7 @@
         (selected === p[0] ? 'true' : 'false') + '" tabindex="' + (selected === p[0] ? '0' : '-1') + '">' +
         esc(p[1]) + '</button>'; }).join('') + '</div>' +
       '<div id="notePlatformPanel" class="note-platform-panel" role="tabpanel" aria-live="polite">' + downloadPanel() + '</div>' +
+      '<p class="note-fine">已镜像的正式安装包优先使用 R2 下载源，旁边保留 GitHub 原站备用入口；未镜像的便携版、Lite、UPK 等继续使用 GitHub。若 R2 清单不可用则自动回退 GitHub。</p>' +
       '<p class="note-fine">未找到适合的附件？' +
       link(R.RELEASES, '查看 GitHub Releases 备用下载入口 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') +
       '　' + link('#/note/quick-start', '新手入门', 'note-quiet') + '</p></section>' +
@@ -259,11 +265,23 @@
       link('#/note/changelog', '查看版本说明 →', 'note-secondary') + '</section>');
     document.title = '下载 Nowen Note · Windows / macOS / Linux / Android / NAS';
     bindDownload();
+    let releaseRevision = 0;
     R.load(function (next) {
       if (seq !== generation || !document.getElementById('notePlatformPanel')) return;
+      const revision = ++releaseRevision;
       snapshot = next;
       document.getElementById('noteReleaseMeta').innerHTML = meta();
       selectPlatform(selected);
+      if (!next.release) return;
+      // Never guess a CDN URL: only switch after its verified R2 manifest was loaded.
+      R.resolveMirrors(next.release, fetch.bind(window)).then(function (verified) {
+        if (seq !== generation || revision !== releaseRevision ||
+          snapshot.release?.version !== next.release.version ||
+          !document.getElementById('notePlatformPanel')) return;
+        if (verified === next.release) return; // R2 inaccessible or not published yet: use GitHub.
+        snapshot = { release: verified, source: next.source };
+        selectPlatform(selected);
+      });
     });
   }
   function renderFeatures() {
