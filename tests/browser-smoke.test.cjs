@@ -67,7 +67,7 @@ for (const [engineName, engine] of [['Chromium',chromium],['Firefox',firefox],['
       await page.goto(base + '/#/note/tutorials');
       assert.ok((await page.locator('.guide-grid').count())===1);
       await page.goto(base + '/#/note');
-      assert.match(await page.locator('h1').innerText(),/记录灵感/);
+      assert.match(await page.locator('h1').innerText(),/Nowen Note 弄文笔记/);
       assert.deepEqual(errors,[]);
     } finally { await browser.close(); }
   });
@@ -229,13 +229,22 @@ test('NOWEN UI v2: branded home, light/dark, responsive and reduced-motion suppo
       await page.evaluate(value=>localStorage.setItem('nowen-help-theme',value),theme);
       await page.reload();
       assert.equal(await page.locator('html').getAttribute('data-theme'),theme);
-      assert.match(await page.locator('.hero-copy h1').innerText(),/知识自由生长/);
+      assert.match(await page.locator('.hero-copy h1').innerText(),/Nowen Note 弄文笔记/);
+      assert.equal(await page.locator('input[type="search"]').count(),1);
       assert.equal(await page.locator('.studio-preview-image').count(),1);
+      assert.equal(await page.locator('.shot-note-item').count(),2);
       assert.equal(await page.locator('.product-card').count(),4);
       assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://nowen.cn/');
       assert.equal(await page.locator('a.header-download').getAttribute('href'),'#/note/download');
       assert.equal(await page.locator('a.header-community').getAttribute('href'),'https://community.nowen.cn');
       assert.equal(await page.locator('a.header-community').getAttribute('target'),'_blank');
+      await page.locator('[data-shot-focus="tree"]').click();
+      assert.equal(await page.locator('.shot-focus-box.is-tree.is-active').count(),1);
+      await page.locator('#globalSearch').fill('zzzz不存在的词');
+      assert.match(await page.locator('#searchResults').innerText(),/没搜到/);
+      await page.locator('[data-search-suggest="Docker"]').click();
+      assert.ok(await page.locator('#searchResults a').count() > 0);
+      await page.keyboard.press('Escape');
       assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
       assert.match(await page.locator('body').evaluate(node=>getComputedStyle(node).color),/^rgb\(/);
       assert.equal(await page.locator('link[href="assets/css/nowen-ui-v2.css"]').count(),1);
@@ -248,7 +257,8 @@ test('NOWEN UI v2: branded home, light/dark, responsive and reduced-motion suppo
     const page=await browser.newPage({viewport:{width:375,height:812},reducedMotion:'reduce'});
     await page.goto(base+'/#/');
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),true);
-    assert.equal(await page.locator('.studio-float').count(),1);
+    assert.equal(await page.locator('.studio-float').count(),0);
+    assert.equal(await page.locator('.shot-note-item').count(),2);
     assert.equal(await page.locator('a[href="http://nowen.cn/"]').count(),0);
     await page.goto(base+'/#/note');
     assert.equal(await page.locator('.note-hero-art img').getAttribute('loading'),'eager');

@@ -50,7 +50,7 @@
         <article class="community-v5-card forum-card">
           <div class="community-forum-icon" aria-hidden="true">↗</div>
           <div class="community-v5-copy">
-            <span class="community-v5-kicker">OFFICIAL COMMUNITY</span>
+            <span class="community-v5-kicker">讨论与反馈</span>
             <h3>${escapeHtml(community.forum.name)}</h3>
             <p>${escapeHtml(community.forum.description)}</p>
             <a class="community-forum-link" href="${escapeHtml(community.forum.url)}" target="_blank" rel="noopener noreferrer">进入弄文社区 <span aria-hidden="true">↗</span></a>
@@ -82,14 +82,14 @@
 
   function homeSection() {
     return `<section class="home-section community-v5-section community-v5" aria-labelledby="community-title">
-      <div class="section-head"><div><span>COMMUNITY</span><h2 id="community-title">社区与支持</h2></div><a href="#/note/community">查看联系方式与反馈方式 →</a></div>
+      <div class="section-head"><div><h2 id="community-title">遇到问题来聊聊</h2></div><a href="#/note/community">查看全部联系方式 →</a></div>
       ${communityCards(false)}
     </section>`;
   }
 
   function productSection() {
     return `<section class="community-v5-product community-v5">
-      <div class="community-v5-heading"><div><span>COMMUNITY</span><h2>加入 Nowen 社区</h2></div><p>前往弄文社区发帖讨论、提交建议，也可关注公众号或加入 QQ 群。</p></div>
+      <div class="community-v5-heading"><div><h2>加入 Nowen 社区</h2></div><p>去弄文社区发帖交流、提建议，也可以关注公众号或加 QQ 群。</p></div>
       ${communityCards(false)}
     </section>`;
   }
@@ -148,8 +148,8 @@
     const [product, slug] = raw.split('/').filter(Boolean);
 
     if (!raw) {
-      const trust = $('.trust-row');
-      if (trust && !$('.community-v5-section')) trust.insertAdjacentHTML('beforebegin', homeSection());
+      const anchor = $('.trust-row') || $('.nowen-home-legal');
+      if (anchor && !$('.community-v5-section')) anchor.insertAdjacentHTML('beforebegin', homeSection());
     } else if (product === 'note' && !slug) {
       const hero = $('.product-overview .product-hero-card');
       if (hero && !$('.community-v5-product')) hero.insertAdjacentHTML('afterend', productSection());

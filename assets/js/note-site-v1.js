@@ -7,8 +7,8 @@
   const STORE = 'https://chromewebstore.google.com/detail/nowen-note-web-clipper/nglkodhfdbnfielchjpkjhenfaecafpg';
   const MS_STORE = 'https://apps.microsoft.com/detail/9MZ7Z6S39LL3';
   const DOCS = APP + '/blob/v1.5.5/docs/tutorials/';
-  const SCREEN = 'https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.2/docs/screenshots/';
-  const LOGO = 'https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.2/build/icons/128x128.png';
+  const SCREEN = 'assets/images/';
+  const LOGO = 'assets/images/nowen-brand-icon.png';
   const platforms = [
     ['windows', 'Windows'], ['mac', 'macOS'], ['linux', 'Linux'],
     ['android', 'Android'], ['extension', '浏览器插件'], ['fnos', '飞牛 fnOS'],
@@ -65,7 +65,7 @@
     document.body.dataset.view = 'note-site';
   }
   function footer() {
-    return '<footer class="note-site-footer"><span>NOWEN · 开源实验室</span>' +
+    return '<footer class="note-site-footer"><span>NOWEN · 弄文笔记</span>' +
       '<div>' + link('#/note/tutorials', '帮助文档') + link('#/note/community', '社区') +
       link(APP + '/issues', '反馈问题', '', ' target="_blank" rel="noopener noreferrer"') +
       link('privacy/', 'Windows 隐私政策', '', ' target="_blank" rel="noopener noreferrer"') + '</div></footer>';
@@ -83,55 +83,57 @@
   }
   function renderProduct() {
     frame('note', '<section class="note-hero note-hero-product"><div class="note-hero-text">' +
-      '<div class="note-identity"><img src="' + LOGO + '" width="46" height="46" alt="" /><span class="note-kicker">NOWEN NOTE · 弄文笔记</span></div>' +
-      '<h1>记录灵感，<br />整理成自己的知识库。</h1>' +
-      '<p>一款开源笔记与知识管理工具。写笔记、管理资料、安排任务，让数据保存在你掌控的设备或服务器上。</p>' +
-      '<div class="note-actions">' + link('#/note/download', '免费下载 Nowen Note', 'note-cta') +
-      link('http://note.nowen.cn/', '在线体验 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') +
+      '<div class="note-identity"><img src="' + LOGO + '" width="40" height="40" alt="" /><span class="note-kicker">弄文笔记 · 开源自托管</span></div>' +
+      '<h1>Nowen Note 弄文笔记</h1>' +
+      '<p>把零散想法、Markdown 文档和日常资料放进自己的目录树。装在电脑上直接写，家里有 NAS 也能自己搭一套服务端。</p>' +
+      '<div class="note-actions">' + link('#/note/download', '下载 Nowen Note', 'note-cta') +
+      link('#/note/nas', '查看部署教程', 'note-secondary') +
+      link('http://note.nowen.cn/', '在线体验 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') +
       link(APP, 'GitHub ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div>' +
-      '<p class="note-fine">桌面端可本地使用；跨设备同步需要连接同一服务端。在线演示不适合存放真实资料。</p></div>' +
-      '<div class="note-hero-art"><div class="note-hero-image-preview" aria-hidden="true"><span>NOWEN / WORKSPACE</span><strong>让每一条记录，<br />都找到自己的位置。</strong><small>Markdown · Knowledge · AI · Self-hosted</small></div>' + screenshot('desktop-ai-writing.png', 'Nowen Note 桌面端 AI 写作界面', '', true) + '</div></section>' +
-      '<section class="note-section note-release-highlight"><div class="note-section-heading"><span>NEW IN v1.5.5 · 更新速览</span><h2>跨端同步更及时，桌面体验更可靠</h2>' +
-      '<p>2026-11-09 正式发布 · 加强 Web / PC / Android 双向同步、知识树冲突恢复、桌面登录恢复与统一交互动效。</p></div><div class="note-values">' +
-      '<article><b>Web / PC / Android 双向同步</b><p>在线时改进变更通知和打开中笔记的更新；并发编辑保留两端正文，避免静默覆盖。</p></article>' +
-      '<article><b>知识树冲突修复</b><p>完善结构差异处理前的预检与操作意图验证，优化跨设备首次引导状态。</p></article>' +
-      '<article><b>桌面恢复更清晰</b><p>首次下载进度、登录恢复及后端失败重试提供更明确的提示和操作入口。</p></article>' +
-      '<article><b>交互与编辑优化</b><p>统一核心动效、响应布局，修复 Word 粘贴图片与手机分享弹窗裁切。</p></article></div>' +
-      '<p class="note-fine">v1.5.5 已正式发布。实时同步需联网并连接同一服务端，不能保证所有弱网场景零延迟或零冲突。macOS GitHub 包未签名公证；升级前请备份。Workspace / App Studio / 扩展平台 V3 留在 v1.6.0 规划。</p>' +
-      '<div class="note-inline-links">' + link('#/note/changelog', '查看 v1.5.5 更新亮点 →', 'note-secondary') +
+      '<p class="note-fine">桌面版装上就能本地写；想让手机和电脑看同一份资料，连上自己的服务端就行。在线演示会定期清空，别往里存重要资料。</p></div>' +
+      '<div class="note-hero-art">' + screenshot('note-desktop-tree.png', 'Nowen Note 正式版桌面端目录树与 Markdown 笔记界面', '', true) + '</div></section>' +
+      '<section class="note-section"><div class="note-section-heading"><h2>平时能用来做什么</h2>' +
+      '<p>不堆虚头巴脑的概念，就是把每天写字、收资料和同步这几件事做顺。</p></div>' +
+      '<div class="note-values"><article><b>按目录树把资料收好</b><p>文件夹可以套子目录，Markdown、富文本和图片附件放一起。建个「家庭资料」记下 NAS 备份了什么，下次不用翻聊天记录。</p></article>' +
+      '<article><b>本地直接写，也能装到 NAS</b><p>不想折腾服务器就先装桌面版；家里有飞牛、绿联或旧电脑，Docker 几分钟就能跑起来，数据留在自己手里。</p></article>' +
+      '<article><b>顺手记待办，按需叫出 AI</b><p>写完笔记顺手列几条待办，需要总结或改写时再接自己选的 AI 接口，不强迫联网。</p></article>' +
+      '<article><b>电脑和手机接着写</b><p>Windows、macOS、Linux、Android 都有正式版，连上同一服务端就能同步看到改动。</p></article></div></section>' +
+      '<section class="note-section note-release-highlight"><div class="note-section-heading"><h2>v1.5.5 刚更新了什么</h2>' +
+      '<p>2026-11-09 正式发布，重点把多端同步通知、知识树冲突修复和桌面端启动恢复做扎实了。</p></div><div class="note-values">' +
+      '<article><b>Web / PC / Android 双向同步</b><p>在线时改进变更通知和打开中笔记的更新；两端同时改同一篇时保留双方正文，避免静默覆盖。</p></article>' +
+      '<article><b>知识树冲突修复</b><p>处理目录结构差异前先做预检和意图确认，减少跨设备首次引导状态不一致。</p></article>' +
+      '<article><b>桌面恢复更清楚</b><p>首次下载进度、本机登录恢复和后端启动失败重试都有更直白的提示与操作入口。</p></article>' +
+      '<article><b>编辑与分享细节</b><p>顺手修了 Word 粘贴图片、Markdown 换行展示和手机分享弹窗裁切问题。</p></article></div>' +
+      '<p class="note-fine">v1.5.5 已正式发布。实时同步需联网并连接同一服务端，弱网下不保证零延迟或零冲突。macOS GitHub 包未做 Apple 公证；升级前请先备份。Workspace / App Studio / 扩展平台 V3 留在 v1.6.0 规划。</p>' +
+      '<div class="note-inline-links">' + link('#/note/changelog', '查看 v1.5.5 详细更新 →', 'note-secondary') +
       link(APP + '/releases/tag/v1.5.5', 'GitHub 正式发布 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div></section>' +
-      '<section class="note-section"><div class="note-section-heading"><span>WHY NOWEN</span><h2>从日常记录到长期积累</h2></div>' +
-      '<div class="note-values"><article><b>01 · 数据自主掌控</b><p>支持桌面本地使用，也能将服务部署在自己的 NAS 或服务器。</p></article>' +
-      '<article><b>02 · 笔记有条理</b><p>用知识树整理 Markdown、富文本与附件，查找更方便。</p></article>' +
-      '<article><b>03 · AI 与任务协作</b><p>写作辅助、知识问答与日常任务放在一个工作空间。</p></article>' +
-      '<article><b>04 · 多设备访问</b><p>Web、桌面与 Android 均有正式版；跨端同步请按教程配置。</p></article></div></section>' +
-      '<section class="note-section"><div class="note-section-heading"><span>IN THE APP</span><h2>真实界面，真实工作流</h2>' +
-      '<p>以下截图来自 v1.5.2 正式代码标签，非概念设计。</p></div><div class="note-shot-grid">' +
-      '<figure>' + screenshot('desktop-ai-writing.png', '桌面端笔记与 AI 助手') + '<figcaption>桌面端 · 记录与创作</figcaption></figure>' +
-      '<figure class="note-shot-mobile">' + screenshot('mobile-editor.png', 'Android 移动端编辑器') + '<figcaption>移动端 · 随时记录</figcaption></figure></div></section>' +
-      '<section class="note-section note-download-teaser"><div><span class="note-kicker">GET STARTED</span>' +
-      '<h2>选对版本，就能开始。</h2><p>Windows、macOS、Linux、Android、浏览器插件及 NAS 安装方式集中在一处。</p></div>' +
-      link('#/note/download', '选择我的设备 →', 'note-cta') + '</section>' +
-      '<section class="note-section"><div class="note-section-heading"><span>THREE STEPS</span><h2>三步开始使用</h2></div>' +
-      '<div class="note-steps"><div><b>1</b><h3>选择安装方式</h3><p>个人电脑下载客户端，NAS 选择安装包或 Docker。</p></div>' +
-      '<div><b>2</b><h3>安装或部署</h3><p>跟随对应平台教程。自托管需先准备服务器。</p></div>' +
-      '<div><b>3</b><h3>开始记录</h3><p>创建笔记，按需要再设置 AI 与同步。</p></div></div></section>' +
-      '<section class="note-section"><div class="note-section-heading"><span>OPEN SOURCE</span><h2>开放源码，也开放讨论</h2></div>' +
+      '<section class="note-section"><div class="note-section-heading"><h2>真实软件界面</h2>' +
+      '<p>下面都是正式版里直接截出来的画面，没有重新画概念图。</p></div><div class="note-shot-grid">' +
+      '<figure>' + screenshot('note-desktop-editor.png', '桌面端目录树与富文本编辑界面') + '<figcaption>桌面端 · 左侧知识树，右侧正文、清单和代码块</figcaption></figure>' +
+      '<figure class="note-shot-mobile">' + screenshot('note-mobile-editor.png', 'Android 移动端编辑器') + '<figcaption>Android 端 · 路上随手记一条</figcaption></figure></div></section>' +
+      '<section class="note-section note-download-teaser"><div>' +
+      '<h2>挑对设备就能装</h2><p>Windows、macOS、Linux、Android、浏览器剪藏插件和 NAS 安装包都收在一页里。</p></div>' +
+      link('#/note/download', '去选我的设备 →', 'note-cta') + '</section>' +
+      '<section class="note-section"><div class="note-section-heading"><h2>三步用起来</h2></div>' +
+      '<div class="note-steps"><div><b>1</b><h3>选好安装方式</h3><p>个人电脑直接下客户端，家里有 NAS 就选 FPK、UPK 或 Docker。</p></div>' +
+      '<div><b>2</b><h3>装完或跑起服务</h3><p>照着对应平台的教程一步步来，自托管记得改掉默认密码。</p></div>' +
+      '<div><b>3</b><h3>写下第一篇笔记</h3><p>先建两个顺手的目录，同步、剪藏和 AI 等用顺手了再慢慢配。</p></div></div></section>' +
+      '<section class="note-section"><div class="note-section-heading"><h2>代码开放，有问题直接聊</h2></div>' +
       '<div class="note-inline-links">' + link(APP, 'GitHub 仓库 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') +
-      link('#/note/quick-start', '使用教程', 'note-secondary') + link('#/note/community', '公众号与 QQ 群', 'note-secondary') +
-      link(APP + '/issues', '问题反馈 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</div></section>' +
+      link('#/note/quick-start', '5 分钟上手教程', 'note-secondary') + link('#/note/community', '公众号与 QQ 群', 'note-secondary') +
+      link(APP + '/issues', '去提 Issue ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</div></section>' +
       faq());
-    document.title = 'Nowen Note（弄文笔记）· 开源笔记与知识管理';
+    document.title = 'Nowen Note 弄文笔记 · 开源自托管笔记与知识库';
   }
   function faq() {
     const items = [
-      ['收费吗？需要自己部署服务器吗？', '项目开放源码，桌面端支持本地模式，不必先部署服务器；需要跨设备访问同一份服务端数据时可使用自托管部署。'],
-      ['手机和电脑怎么同步？', '在各端连接同一个服务器地址、账号和工作区。离线变更与冲突请按同步排障教程核查，当前并非所有平台都经过同等级验收。'],
-      ['NAS 怎么装？', '飞牛可下载正式 FPK；绿联本次提供 AMD64 和 ARM64 两种 UPK，安装前先核对设备 CPU 架构。其他 NAS 可使用 Docker。'],
-      ['升级会丢数据吗？', '不要把镜像回退当作数据回退。升级前必须备份数据库、附件以及部署配置，并做一次恢复验证。'],
-      ['怎么导入原有笔记？', '先用少量样本验证 Markdown、DOCX 或其他支持的格式，尤其检查附件和目录，再批量迁移。']
+      ['收费吗？一定要自己搭服务器吗？', '开源免费。桌面版支持本地模式，不搭服务器也能直接用；想在手机和电脑之间同步同一份资料，再装一套自己的服务端就行。'],
+      ['手机和电脑怎么同步？', '在各端连到同一个服务端地址、账号和工作区即可。遇到离线修改或冲突时，可以按同步排障教程一步步核查。'],
+      ['家里的 NAS 怎么装？', '飞牛可以直接装正式 FPK；绿联提供 AMD64 和 ARM64 两种 UPK，装之前先核对一下设备 CPU 架构。其他 NAS 用 Docker Compose 就能跑。'],
+      ['升级会丢数据吗？', '别把镜像回退当成数据回退。升级前务必先备份数据库、附件和部署配置，顺手确认一下备份能恢复。'],
+      ['原来的笔记怎么迁进来？', '先挑两三篇带图片的样本试一下 Markdown 或 DOCX 导入，确认目录和附件都没问题，再批量迁进来。']
     ];
-    return '<section class="note-section note-faq"><div class="note-section-heading"><span>FAQ</span><h2>常见问题</h2></div>' +
+    return '<section class="note-section note-faq"><div class="note-section-heading"><h2>几个常被问到的问题</h2></div>' +
       items.map(function (x) { return '<details><summary>' + esc(x[0]) + '</summary><p>' + esc(x[1]) + '</p></details>'; }).join('') +
       '<p>' + guide('#/note/sync-troubleshooting', '同步问题排查') + '　' + guide('#/note/backup-restore-drill', '备份恢复教程') + '</p></section>';
   }
@@ -246,8 +248,8 @@
   }
   function renderDownload() {
     const seq = ++generation;
-    frame('download', '<section class="note-heading"><span class="note-kicker">DOWNLOAD · OFFICIAL RELEASES</span>' +
-      '<div class="note-identity"><img src="' + LOGO + '" width="44" height="44" alt="" /><span class="note-kicker">Nowen Note · 弄文笔记</span></div><h1>下载 Nowen Note</h1><p>选择你的设备，开始使用弄文笔记。不确定选哪个？先使用系统推荐选项。</p>' +
+    frame('download', '<section class="note-heading">' +
+      '<div class="note-identity"><img src="' + LOGO + '" width="40" height="40" alt="" /><span class="note-kicker">弄文笔记 · 正式安装包</span></div><h1>下载 Nowen Note</h1><p>选好你的设备就能装。拿不准先看默认推荐的这一项。</p>' +
       '<div id="noteReleaseMeta" aria-live="polite">' + meta() + '</div></section>' +
       '<section class="note-section note-download-section" aria-label="选择安装平台"><h2 class="note-small-title">选择设备</h2>' +
       '<div class="note-platform-tabs" role="tablist" aria-label="选择操作系统">' +
@@ -285,9 +287,9 @@
     });
   }
   function renderFeatures() {
-    frame('features', '<section class="note-heading"><span class="note-kicker">PRODUCT FEATURES · v1.5.5</span><h1>同步更及时，交互更顺手</h1>' +
+    frame('features', '<section class="note-heading"><span class="note-kicker">v1.5.5 功能说明</span><h1>同步更及时，交互更顺手</h1>' +
       '<p>2026-11-09 正式发布：完善 Web、PC、Android 在线同步通知、冲突修复预检、桌面启动恢复和交互动效。Workspace、个人应用 Studio 与扩展平台 V3 仍规划在 v1.6.0。</p></section>' +
-      '<section class="note-section"><div class="note-section-heading"><span>NEW IN v1.5.5 · 更新内容</span><h2>这次更新了什么？</h2>' +
+      '<section class="note-section"><div class="note-section-heading"><h2>这次更新了什么？</h2>' +
       '<p>多端同步需要在线连接同一个服务端及账号；弱网和并发编辑仍可能有待处理冲突。</p></div><div class="note-feature-grid">' +
       feature('双向实时同步', 'Web / PC / Android 在线变更通知、正在打开的笔记自动更新；并发编辑保留两端正文。', 'v1.5.5 正式发布', '', '#/note/changelog') +
       feature('知识树冲突修复', '优化目录结构差异修复预检与用户操作意图校验，减少新手引导状态不一致。', 'v1.5.5 正式发布', '', '#/note/changelog') +
@@ -296,16 +298,16 @@
       feature('编辑器与分享', '修复 Word 粘贴图片、Markdown 换行展示与手机端分享弹窗裁切。', 'v1.5.5 正式发布', '', '#/note/attachments') +
       feature('AI 标识与兼容性', '完善 AI 生成内容标识、个人日记授权接口、鸿蒙导出及历史数据库兼容。', 'v1.5.5 正式发布', '', '#/note/changelog') +
       '</div></section>' +
-      '<section class="note-section"><div class="note-section-heading"><span>EVERYDAY WORKFLOW</span><h2>熟悉的笔记能力，持续完善</h2></div><div class="note-feature-grid">' +
-      feature('Markdown 与富文本', '选择合适的编辑方式，用统一知识树整理笔记。', '持续维护', 'desktop-ai-writing.png', '#/note/advanced-content-blocks') +
-      feature('手机随时记录', 'Android 客户端支持日常记录；跨设备访问需要正确配置服务端和账号。', '持续维护', 'mobile-editor.png', '#/note/quick-start') +
-      feature('AI 辅助写作', '总结、改写与知识问答，模型由你选择，在线服务可能发送相关文本。', '持续维护', 'settings-ai.png', '#/note/ai') +
-      '</div><p class="note-fine">真实界面截图沿用 v1.5.2 素材，并非 v1.5.5 新功能的界面截图。</p></section>');
+      '<section class="note-section"><div class="note-section-heading"><h2>日常写作与整理</h2></div><div class="note-feature-grid">' +
+      feature('Markdown 与富文本', '选择合适的编辑方式，用统一知识树整理笔记。', '持续维护', 'note-desktop-editor.png', '#/note/advanced-content-blocks') +
+      feature('手机随时记录', 'Android 客户端支持日常记录；跨设备访问需要正确配置服务端和账号。', '持续维护', 'note-mobile-editor.png', '#/note/quick-start') +
+      feature('AI 辅助写作', '总结、改写与知识问答，模型由你选择，在线服务可能发送相关文本。', '持续维护', 'note-settings-ai.png', '#/note/ai') +
+      '</div></section>');
     document.title = 'Nowen Note v1.5.5 功能更新 · 多端同步与交互优化';
   }
   function renderChangelog() {
     const seq = ++generation;
-    frame('changelog', '<section class="note-heading"><span class="note-kicker">RELEASE NOTES · v1.5.5</span><h1>版本与更新</h1>' +
+    frame('changelog', '<section class="note-heading"><span class="note-kicker">v1.5.5 更新日志</span><h1>版本与更新</h1>' +
       '<p>v1.5.5 于 2026-11-09 正式发布，支持的架构与安装包以 GitHub 实际 Release 附件为准。</p><div id="noteChangelogLive" aria-live="polite">' + meta() + '</div></section>' +
       '<section class="note-section note-version-list"><article><span class="note-feature-label">v1.5.5 · 2026-11-09 · 正式发布</span><h2>多端同步与桌面体验稳定性更新</h2>' +
       '<p><strong>多端同步：</strong>改善 Web、PC、Android 在线双向同步通知和打开中笔记自动更新（#910）；并发编辑保留两端正文。<strong>目录与登录：</strong>加强知识树冲突修复预检及首次引导状态。<strong>桌面与界面：</strong>首次下载进度、登录和后端故障恢复，统一动效与窗口响应布局。<strong>编辑与兼容：</strong>修复 Word 图片粘贴、Markdown 换行、移动端分享弹窗及历史数据库兼容。</p>' +
