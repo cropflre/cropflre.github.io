@@ -31,7 +31,7 @@
     document.documentElement.dataset.theme = theme;
     localStorage.setItem('nowen-help-theme', theme);
     const meta = $('meta[name="theme-color"]');
-    if (meta) meta.content = theme === 'dark' ? '#090d19' : '#f8f9fd';
+    if (meta) meta.content = theme === 'dark' ? '#111318' : '#fafaf7';
   }
   function initTheme() {
     const saved = localStorage.getItem('nowen-help-theme');
@@ -71,14 +71,36 @@
     }).filter(Boolean).slice(0, limit);
   }
 
+  const PRODUCT_COPY = {
+    note: {
+      desc: '写笔记、理目录、存附件。装在电脑上直接写，家里有 NAS 也能自己搭一套服务端。',
+      cta: count => `产品页与 ${count} 篇教程`
+    },
+    reader: {
+      desc: '把家里存的漫画和电子书理成书架，支持用 OPDS 在手机或平板上接着看。',
+      cta: count => `看 ${count} 篇部署与使用教程`
+    },
+    video: {
+      desc: '还在打磨，打算给本地片库做个省心点的播放器。',
+      cta: () => '开发中'
+    },
+    bookmarks: {
+      desc: '还在打磨，用来收好自己常打开的网页和家里各种内网地址。',
+      cta: () => '开发中'
+    }
+  };
+
   function productCards() {
     return data.products.map(p => {
       const count = collection(p.id)?.articles?.length || 0;
+      const copy = PRODUCT_COPY[p.id];
+      const desc = copy ? copy.desc : p.desc;
+      const statusText = copy ? copy.cta(count) : (p.status === 'ready' ? `${count} 篇教程` : '开发中');
       return `<a class="product-card ${p.status === 'planned' ? 'is-planned' : ''}" href="#/${p.id}">
-        <div class="product-icon">${p.icon}</div>
+        <div class="product-icon" aria-hidden="true">${p.icon}</div>
         <div class="product-title-row"><h3>${escapeHtml(p.name)}</h3><span>${escapeHtml(p.cn)}</span></div>
-        <p>${escapeHtml(p.desc)}</p>
-        <div class="product-bottom"><span class="status ${p.status}">${p.status === 'ready' ? `${count} 篇教程` : '即将上线'}</span><span class="arrow">→</span></div>
+        <p>${escapeHtml(desc)}</p>
+        <div class="product-bottom"><span class="status ${p.status}">${escapeHtml(statusText)}</span><span class="arrow" aria-hidden="true">→</span></div>
       </a>`;
     }).join('');
   }
@@ -104,7 +126,7 @@
     const items = recentItems();
     if (!items.length) return '';
     return `<section class="home-section recent-section">
-      <div class="section-head"><div><span>RECENT</span><h2>最近浏览</h2></div><button class="text-btn" type="button" id="clearRecent">清除记录</button></div>
+      <div class="section-head"><div><h2>刚才看过</h2></div><button class="text-btn" type="button" id="clearRecent">清除记录</button></div>
       <div class="recent-grid">${items.map(({ product, article }) => `<a class="recent-card" href="${articleHref(product.id, article.slug)}"><span>${product.icon}</span><div><small>${escapeHtml(product.name)}</small><b>${escapeHtml(article.title)}</b></div><i>→</i></a>`).join('')}</div>
     </section>`;
   }
@@ -113,30 +135,62 @@
     $('#appMain').innerHTML = `
       <section class="hero-shell">
         <div class="hero-copy">
-          <span class="eyebrow hero-eyebrow">NOWEN · OPEN SOURCE STUDIO</span>
-          <h1>把想法留下。<br /><em>让知识自由生长。</em></h1>
-          <p>从一段笔记，到一本书、一部影片。NOWEN 开源实验室用轻巧、开放的工具，让每个人拥有自己的数字空间。安装、使用与故障排查，都可以在这里找到答案。</p>
-          <div class="hero-search search-box"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="heroSearch" type="search" placeholder="搜索教程、设备安装、NAS 部署、MCP…" autocomplete="off" /><kbd>Enter</kbd></div>
-          <div class="hero-links"><a class="hero-download-link" href="#/note/download">免费下载 Nowen Note ↗</a><a href="https://community.nowen.cn" target="_blank" rel="noopener noreferrer">进入弄文社区 ↗</a><a href="#/note/quick-start">Note 5 分钟上手</a><a href="#/note/nas-iepose-remote">NAS 远程访问教程</a><a href="#/reader/quick-start">Reader 快速部署</a><a href="#/reader/opds">OPDS</a><a href="#/note/mcp">MCP</a></div>
-        <div class="hero-meta" aria-label="产品理念"><span>开源协作</span><span>数据自主</span><span>跨设备使用</span></div>
+          <h1>Nowen Note 弄文笔记</h1>
+          <p>写篇笔记，存点资料。家里有 NAS，也能装一份。</p>
+          <div class="hero-links">
+            <a class="hero-download-link" href="#/note/download">下载 Nowen Note</a>
+            <a class="hero-guide-link" href="#/note/nas">查看部署教程</a>
+          </div>
+          <p class="hero-subnote">支持 Windows、macOS、Linux、Android 和 Docker / NAS。桌面版装上就能本地写，需要多端同步再连自己的服务端。</p>
         </div>
         <figure class="studio-preview">
           <div class="studio-preview-window">
-            <div class="studio-preview-top"><span class="studio-preview-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>NOWEN NOTE / WORKSPACE</span><span>SCREENSHOT v1.5.2</span></div>
-            <img class="studio-preview-image" src="https://raw.githubusercontent.com/cropflre/nowen-note/v1.5.2/docs/screenshots/desktop-ai-writing.png" alt="Nowen Note v1.5.2 正式版桌面端笔记和 AI 写作的真实界面" width="880" height="660" decoding="async" />
-            <figcaption>来自正式版本的产品截图 · 非概念设计</figcaption>
+            <div class="studio-shot-stage">
+              <img class="studio-preview-image" src="assets/images/note-desktop-editor.png" alt="Nowen Note 正式版桌面端真实界面，左侧为目录树与标签，右侧为正文编辑区" width="1440" height="900" decoding="async" fetchpriority="high" />
+              <div class="shot-focus-box is-tree" data-focus-target="tree" data-focus-label="已标出左侧目录树与文件夹区域" aria-hidden="true"></div>
+              <div class="shot-focus-box is-editor" data-focus-target="editor" data-focus-label="已标出右侧正文编辑区" aria-hidden="true"></div>
+            </div>
+            <figcaption>
+              <span>Nowen Note 正式版真实截图 · 左边理目录，右边写正文</span>
+              <a href="#/note">看完整产品介绍 →</a>
+            </figcaption>
           </div>
-          <div class="studio-float"><div class="studio-float-icon" aria-hidden="true">✧</div><div><b>你的空间，由你掌控</b><span>Local-first · Self-hosted</span></div></div>
+          <div class="shot-notes" aria-label="界面旁注">
+            <div class="shot-note-item">
+              <strong>文件夹和知识树</strong>
+              <p>把《家里的 NAS 到底备份了什么》放在「家庭资料」里，下次就不用翻聊天记录了。</p>
+              <button type="button" class="shot-focus-btn" data-shot-focus="tree" aria-pressed="false">看示例</button>
+            </div>
+            <div class="shot-note-item">
+              <strong>Markdown、富文本和代码块</strong>
+              <p>随手记待办、贴代码或者写长文都行，右上角一直显示已保存状态。</p>
+              <button type="button" class="shot-focus-btn" data-shot-focus="editor" aria-pressed="false">看示例</button>
+            </div>
+            <span class="shot-live-status sr-only" aria-live="polite"></span>
+          </div>
         </figure>
       </section>
-      <section class="home-section"><div class="section-head"><div><span>PRODUCTS</span><h2>选择产品</h2></div><p>统一设计语言，按产品独立维护内容。</p></div><div class="product-grid">${productCards()}</div></section>
+      <section class="home-section">
+        <div class="section-head">
+          <div><h2>NOWEN 做的几个工具</h2></div>
+          <p>每个都从自己日常用得上的地方开始做。</p>
+        </div>
+        <div class="product-grid">${productCards()}</div>
+      </section>
       ${recentSection()}
-      <section class="home-section soft-section"><div class="section-head"><div><span>POPULAR</span><h2>热门教程</h2></div><p>Nowen Note + Nowen Reader</p></div><div class="topic-grid">${popularCards()}</div></section>
-      <div class="nowen-home-legal" style="max-width:1318px;margin:auto;padding:0 38px 20px;font-size:12px"><a href="privacy/">Nowen Note Windows 隐私政策</a> · <a href="privacy/en/">Privacy Policy (English)</a></div>
-      <section class="home-section trust-row"><div><b>基于真实代码维护</b><span>教程以各产品当前主分支能力为事实基线。</span></div><div><b>真实产品截图</b><span>Reader 教程直接使用项目仓库中的当前界面截图。</span></div><div><b>持续扩展</b><span>Video 与书签继续沿用同一套文档引擎接入。</span></div></section>`;
+      <section class="home-section soft-section">
+        <div class="section-head">
+          <div><h2>大家常翻的几篇教程</h2></div>
+          <p>装完不知道怎么配 NAS、同步或备份，可以先翻这几篇，或直接看 <a href="#/note/nas-iepose-remote">NAS 远程访问教程 →</a></p>
+        </div>
+        <div class="topic-grid">${popularCards()}</div>
+      </section>
+      <div class="nowen-home-legal">
+        <span><a href="privacy/">Nowen Note Windows 隐私政策</a> · <a href="privacy/en/">Privacy Policy (English)</a></span>
+        <span><a href="https://community.nowen.cn" target="_blank" rel="noopener noreferrer">弄文社区 ↗</a> · <a href="#/note/tutorials">全部教程</a></span>
+      </div>`;
     document.body.dataset.view = 'home';
-    document.title = 'NOWEN 开源实验室 · 笔记、阅读与数字生活';
-    initHeroSearch();
+    document.title = 'NOWEN · Nowen Note 弄文笔记与开源工具';
     $('#clearRecent')?.addEventListener('click', () => { localStorage.removeItem(RECENT_KEY); renderHome(); });
   }
 
@@ -156,7 +210,7 @@
   function renderProduct(productId) {
     const c = collection(productId); const info = productInfo(productId); const meta = c.meta || {};
     const groups = c.groups.map(g => `<section class="guide-group-card"><div class="guide-group-head"><span>${g.icon}</span><div><b>${escapeHtml(g.title)}</b><small>${c.articles.filter(a => a.group === g.id).length} 篇</small></div></div>${c.articles.filter(a => a.group === g.id).map(a => `<a href="${articleHref(productId, a.slug)}"><span>${escapeHtml(a.title)}</span><small>${escapeHtml(a.time)}</small></a>`).join('')}</section>`).join('');
-    renderDocsShell(productId, `<div class="product-overview"><nav class="breadcrumbs"><a href="#/">帮助中心</a><span>/</span><span>${escapeHtml(info.name)}</span></nav><div class="product-hero-card"><div class="product-hero-icon">${info.icon}</div><div><span class="eyebrow">${escapeHtml(info.name.toUpperCase())} · ${escapeHtml(info.cn)}</span><h1>${escapeHtml(info.name)} 使用教程</h1><p>${escapeHtml(meta.description || info.desc)}</p><div class="meta-row"><span class="pill ready">${c.articles.length} 篇教程已上线</span><span class="pill">按当前主分支维护</span>${meta.repoUrl ? `<a class="pill link" href="${meta.repoUrl}" target="_blank" rel="noopener">GitHub ↗</a>` : ''}</div></div></div><div class="guide-grid">${groups}</div></div>`);
+    renderDocsShell(productId, `<div class="product-overview"><nav class="breadcrumbs"><a href="#/">帮助中心</a><span>/</span><span>${escapeHtml(info.name)}</span></nav><div class="product-hero-card"><div class="product-hero-icon">${info.icon}</div><div><span class="eyebrow">${escapeHtml(info.cn)}</span><h1>${escapeHtml(info.name)} 使用教程</h1><p>${escapeHtml(meta.description || info.desc)}</p><div class="meta-row"><span class="pill ready">${c.articles.length} 篇教程已上线</span><span class="pill">随主分支同步更新</span>${meta.repoUrl ? `<a class="pill link" href="${meta.repoUrl}" target="_blank" rel="noopener">GitHub ↗</a>` : ''}</div></div></div><div class="guide-grid">${groups}</div></div>`);
     const quick = (c.popular || []).slice(0, 6).map(slug => articleMap(productId)[slug]).filter(Boolean);
     $('#docsToc').innerHTML = `<div class="toc-card"><b>快速入口</b>${quick.map(a => `<a href="${articleHref(productId, a.slug)}">${escapeHtml(a.title)}</a>`).join('')}</div>`;
     document.title = `${info.name} 使用教程 · Nowen 帮助中心`;
@@ -186,7 +240,7 @@
   function relatedHtml(productId, article) {
     const related = relatedArticles(productId, article);
     if (!related.length) return '';
-    return `<section class="related-section"><div class="related-head"><span>RELATED</span><h2>你可能还需要</h2></div><div class="related-grid">${related.map(a => `<a href="${articleHref(productId, a.slug)}"><small>${escapeHtml(groupFor(productId, a)?.title || '')}</small><b>${escapeHtml(a.title)}</b><span>${escapeHtml(a.summary)}</span><i>→</i></a>`).join('')}</div></section>`;
+    return `<section class="related-section"><div class="related-head"><h2>接着看</h2></div><div class="related-grid">${related.map(a => `<a href="${articleHref(productId, a.slug)}"><small>${escapeHtml(groupFor(productId, a)?.title || '')}</small><b>${escapeHtml(a.title)}</b><span>${escapeHtml(a.summary)}</span><i>→</i></a>`).join('')}</div></section>`;
   }
 
   function renderArticle(productId, slug) {
@@ -241,8 +295,8 @@
 
   function renderComing(productId) {
     const p = productInfo(productId);
-    $('#appMain').innerHTML = `<div class="coming-wrap"><div class="coming-icon">${p.icon}</div><span class="eyebrow">COMING SOON</span><h1>${escapeHtml(p.name)}</h1><p>${escapeHtml(p.desc)}</p><div class="coming-actions"><a class="primary-btn" href="#/">返回帮助中心</a><a class="secondary-btn" href="https://github.com/cropflre" target="_blank" rel="noopener">查看 GitHub</a></div></div>`;
-    document.body.dataset.view = 'docs'; document.title = `${p.name} · Nowen 帮助中心`;
+    $('#appMain').innerHTML = `<div class="coming-wrap"><div class="coming-icon">${p.icon}</div><span class="eyebrow">开发中</span><h1>${escapeHtml(p.name)}</h1><p>${escapeHtml(p.desc)}</p><div class="coming-actions"><a class="primary-btn" href="#/">返回首页</a><a class="secondary-btn" href="https://github.com/cropflre" target="_blank" rel="noopener">查看 GitHub</a></div></div>`;
+    document.body.dataset.view = 'docs'; document.title = `${p.name} · NOWEN`;
   }
 
   function search(query) {
@@ -260,7 +314,7 @@
   function showSearch(query) {
     const box = $('#searchResults'); if (!box) return; const results = search(query); searchIndex = -1;
     if (!query.trim()) { box.classList.remove('open'); box.innerHTML = ''; return; }
-    box.innerHTML = results.length ? results.map(({ product, article }, i) => `<a data-search-index="${i}" href="${articleHref(product.id, article.slug)}"><div class="search-title-line"><span class="product-chip">${product.icon} ${escapeHtml(product.name)}</span><b>${highlight(article.title, query)}</b></div><span>${highlight(article.summary, query)}</span></a>`).join('') : `<div class="search-empty">没有找到“${escapeHtml(query)}”相关教程</div>`;
+    box.innerHTML = results.length ? results.map(({ product, article }, i) => `<a data-search-index="${i}" href="${articleHref(product.id, article.slug)}"><div class="search-title-line"><span class="product-chip">${product.icon} ${escapeHtml(product.name)}</span><b>${highlight(article.title, query)}</b></div><span>${highlight(article.summary, query)}</span></a>`).join('') : `<div class="search-empty">没搜到。试试<button type="button" class="search-suggest-btn" data-search-suggest="备份">「备份」</button>或<button type="button" class="search-suggest-btn" data-search-suggest="Docker">「Docker」</button>。</div>`;
     box.classList.add('open');
   }
   function moveSearch(delta) {
@@ -278,15 +332,19 @@
       else if (e.key === 'Enter') { const links = $$('[data-search-index]', box); const target = links[searchIndex] || links[0]; if (target) { e.preventDefault(); location.hash = target.getAttribute('href'); box.classList.remove('open'); } }
       else if (e.key === 'Escape') { box.classList.remove('open'); input.blur(); }
     });
+    box?.addEventListener('click', e => {
+      const btn = e.target.closest('[data-search-suggest]');
+      if (!btn || !input) return;
+      e.stopPropagation();
+      input.value = btn.dataset.searchSuggest || '';
+      input.focus();
+      showSearch(input.value);
+    });
     document.addEventListener('click', e => { if (!e.target.closest('.global-search')) box?.classList.remove('open'); });
     document.addEventListener('keydown', e => {
       if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); input?.focus(); input?.select(); }
       if (e.key === '/' && !/input|textarea|select/i.test(document.activeElement?.tagName || '')) { e.preventDefault(); input?.focus(); }
     });
-  }
-  function initHeroSearch() {
-    const input = $('#heroSearch');
-    input?.addEventListener('keydown', e => { if (e.key === 'Enter') { const first = search(input.value)[0]; if (first) location.hash = articleHref(first.product.id, first.article.slug); else $('#globalSearch')?.focus(); } });
   }
 
   function initMobile() {
