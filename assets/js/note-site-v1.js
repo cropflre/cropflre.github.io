@@ -304,31 +304,45 @@
     document.title = 'Nowen Note v1.5.5 功能更新 · 多端同步与交互优化';
   }
   function renderChangelog() {
-    const seq = ++generation;
-    frame('changelog', '<section class="note-heading"><span class="note-kicker">RELEASE NOTES · v1.5.5</span><h1>版本与更新</h1>' +
-      '<p>v1.5.5 于 2026-11-09 正式发布，支持的架构与安装包以 GitHub 实际 Release 附件为准。</p><div id="noteChangelogLive" aria-live="polite">' + meta() + '</div></section>' +
-      '<section class="note-section note-version-list"><article><span class="note-feature-label">v1.5.5 · 2026-11-09 · 正式发布</span><h2>多端同步与桌面体验稳定性更新</h2>' +
+    frame('changelog', '<section class="note-heading"><span class="note-kicker">RELEASE NOTES</span><h1>版本与更新</h1>' +
+      '<p>查看各版本的更新亮点。支持的平台、架构和安装包以各版本的 GitHub Release 附件为准。</p></section>' +
+      '<section class="note-section note-version-list">' +
+      '<article><span class="note-feature-label">v1.6.1 · 2026-11-23 · 正式发布</span><h2>热更新、编辑器与分享</h2>' +
+      '<p><strong>热更新</strong><br />Windows、macOS、Linux 和 Android 首次支持应用内更新。需先下载安装 v1.6.1，后续多数更新可在应用内完成。Microsoft Store、iOS 和 Docker 等服务端沿用各自的更新渠道。</p>' +
+      '<p><strong>编辑与阅读</strong><br />新增 Tab 插入四个空格、快捷键对齐和可拖动的文本框。分享页支持显示高亮块、文本框、分栏和折叠块。桌面端恢复提取 PDF 附件文字。</p>' +
+      '<p><strong>登录与安装</strong><br />简化反向代理场景下的登录，改善旧版 Android WebView 的登录布局。精简桌面安装包，Windows 提供完整版安装程序和便携包。</p>' +
+      link(APP + '/releases/tag/v1.6.1', '查看 v1.6.1 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+      '<article><span class="note-feature-label">v1.6.0 · 2026-11-21 · 正式发布</span><h2>扩展中心、导入与 AI 协作</h2>' +
+      '<p><strong>扩展与设置</strong><br />扩展中心提供「发现」「我的」「工作台」，支持上传插件包。新增可搜索的「使用偏好」。</p>' +
+      '<p><strong>导入与记录</strong><br />识别 Obsidian、Logseq 和 AI 对话记录并引导导入。说说支持 PDF、Office 文档和压缩包，文件附件有独立额度。剪藏扩展可一键保存支持的 AI 对话。</p>' +
+      '<p><strong>AI 与 MCP</strong><br />团队笔记本授权按成员当前权限检查。个人任务可通过 MCP 修改，删除前须预览并确认。AI 写作助手保留打开时的选区，原文变化后仍可复制生成结果。</p>' +
+      link(APP + '/releases/tag/v1.6.0', '查看 v1.6.0 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+      '<article><span class="note-feature-label">v1.5.5 · 2026-11-09 · 正式发布</span><h2>多端同步与桌面体验稳定性更新</h2>' +
       '<p><strong>多端同步：</strong>改善 Web、PC、Android 在线双向同步通知和打开中笔记自动更新（#910）；并发编辑保留两端正文。<strong>目录与登录：</strong>加强知识树冲突修复预检及首次引导状态。<strong>桌面与界面：</strong>首次下载进度、登录和后端故障恢复，统一动效与窗口响应布局。<strong>编辑与兼容：</strong>修复 Word 图片粘贴、Markdown 换行、移动端分享弹窗及历史数据库兼容。</p>' +
       '<p class="note-fine">多端同步依赖在线连接同一服务端，并非所有场景无延迟或无冲突。macOS GitHub 包未签名或公证，Windows 直接下载 EXE 未签名；升级前请备份数据库、附件和配置。</p>' +
       link(APP + '/releases/tag/v1.5.5', '查看 v1.5.5 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
-      '<article><span class="note-feature-label">上一正式版 · 2026-11-02</span><h2>v1.5.4 · AI 与离线体验</h2>' +
+      '<article><span class="note-feature-label">v1.5.4 · 2026-11-02 · 正式发布</span><h2>AI 与离线体验</h2>' +
       '<p>AI 修改建议先预览再确认、Markdown 章节折叠、原图与附件恢复、桌面完整版 NAS 离线副本和 DOCX 1GB 导入。</p>' +
-      link(APP + '/releases/tag/v1.5.4', '查看 v1.5.4 历史 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
-      '<article><span class="note-feature-label">下一阶段 · v1.6.0 规划</span><h2>Workspace · App Studio · 扩展平台 V3</h2>' +
-      '<p>完整 Workspace、个人应用 Studio 和扩展平台 V3 不属于 v1.5.5 已交付功能。</p></article>' +
-      '<article><span class="note-feature-label">历史正式版 · 2026-10-23</span><h2>v1.5.3</h2>' +
+      link(APP + '/releases/tag/v1.5.4', '查看 v1.5.4 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+      '<article><span class="note-feature-label">v1.5.3 · 2026-10-23 · 正式发布</span><h2>收藏、图片与日历</h2>' +
       '<p>收藏搜索、图片转存、解除加密及节假日日历等能力。</p>' +
-      link(APP + '/releases/tag/v1.5.3', '查看 v1.5.3 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article></section>' +
+      link(APP + '/releases/tag/v1.5.3', '查看 v1.5.3 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+      '<article><span class="note-feature-label">v1.5.2 · 2026-10-16 · 正式发布</span><h2>文件中心、MCP 与任务</h2>' +
+      '<p>文件中心加入智能文件夹、回收站和批量整理。MCP 扩展授权知识树、个人任务和文件操作。任务支持今日完成清单、归档和导出，并完善单篇笔记的同步确认。</p>' +
+      link(APP + '/releases/tag/v1.5.2', '查看 v1.5.2 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+      '<article><span class="note-feature-label">v1.5.1 · 2026-10-08 · 正式发布</span><h2>任务提醒与移动端体验</h2>' +
+      '<p>新增任务到期排序、提醒和任务摘要推送。AI 可查询、创建和完成授权任务，并改善 Android 同步、编辑器和笔记加密。</p>' +
+      link(APP + '/releases/tag/v1.5.1', '查看 v1.5.1 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+      '<article><span class="note-feature-label">v1.5.0 · 2026-10-06 · 正式发布</span><h2>本地优先与知识树</h2>' +
+      '<p>完善 Sync V2 和离线编辑，扩展插件平台。思维导图融入统一知识树，新增轻量表格、XLSX 预览和选中文字加密。</p>' +
+      link(APP + '/releases/tag/v1.5.0', '查看 v1.5.0 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article></section>' +
       '<section class="note-section note-release-warning"><h2>升级前请备份</h2><p>数据库、附件及部署配置需独立备份并验证恢复；客户端或 Docker 镜像回退不会恢复持久化数据库。</p>' +
       link('#/note/backup-restore-drill', '备份与恢复教程 →', 'note-secondary') + '</section>' +
-      '<section class="note-section">' + link(APP + '/blob/main/CHANGELOG.md', '完整历史更新日志 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') +
-      '　' + link('#/note/download', '下载最新公开正式版 →', 'note-cta') + '</section>');
-    document.title = 'Nowen Note v1.5.5 更新日志 · 版本与更新';
-    R.load(function (releaseState) {
-      if (generation !== seq || !document.getElementById('noteChangelogLive')) return;
-      snapshot = releaseState;
-      document.getElementById('noteChangelogLive').innerHTML = meta();
-    });
+      '<section class="note-section note-inline-links">' +
+      link(APP + '/releases', 'GitHub 发布存档（含更早版本）↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') +
+      link(APP + '/blob/main/CHANGELOG.md', '源码更新日志 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') +
+      link('#/note/download', '下载最新公开正式版 →', 'note-cta') + '</section>');
+    document.title = 'Nowen Note 更新日志 · 版本与更新';
   }
   function render(name) {
     if (name !== 'download') generation++;

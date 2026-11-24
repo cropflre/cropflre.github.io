@@ -72,6 +72,31 @@ for (const [engineName, engine] of [['Chromium',chromium],['Firefox',firefox],['
     } finally { await browser.close(); }
   });
 }
+test('Chromium: published changelog stays current when GitHub API is unavailable', async () => {
+  const browser = await chromium.launch({headless:true});
+  try {
+    const page = await browser.newPage({viewport:{width:390,height:844}});
+    await page.route('https://api.github.com/repos/cropflre/nowen-note/releases/latest', fakeApi);
+    await page.route('https://fonts.googleapis.com/**', route => route.abort());
+    await page.goto(base + '/#/note/changelog', {waitUntil:'domcontentloaded'});
+    await page.getByRole('heading', {name:'版本与更新'}).waitFor();
+
+    const releases = 'https://github.com/cropflre/nowen-note/releases';
+    const versions = ['v1.6.1','v1.6.0','v1.5.5','v1.5.4','v1.5.3','v1.5.2','v1.5.1','v1.5.0'];
+    const cards = page.locator('.note-version-list article');
+    assert.deepEqual(
+      await cards.locator('a').evaluateAll(links => links.map(link => link.href)),
+      versions.map(version => releases + '/tag/' + version)
+    );
+    assert.match(await cards.nth(0).innerText(), /v1\.6\.1 · 2026-11-23 · 正式发布/);
+    assert.match(await cards.nth(0).innerText(), /需先下载安装 v1\.6\.1/);
+    assert.match(await cards.nth(1).innerText(), /v1\.6\.0 · 2026-11-21 · 正式发布/);
+    assert.doesNotMatch(await page.locator('.note-heading').innerText(), /v1\.5\.5/);
+    assert.equal(await page.getByRole('link', {name:/GitHub 发布存档/}).getAttribute('href'), releases);
+    assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1), true);
+  } finally { await browser.close(); }
+});
+
 test('Chromium: verified R2 manifest selects CDN and preserves GitHub fallback and UGOS UPK',async()=>{
   const browser=await chromium.launch({headless:true});
   const page=await browser.newPage();
