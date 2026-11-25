@@ -115,6 +115,7 @@
 
   function detectPlatform(ua) {
     const u = String(ua || '').toLowerCase();
+    if (/harmonyos/.test(u)) return 'harmony';
     if (/android/.test(u)) return 'android';
     if (/iphone|ipad|ipod/.test(u)) return 'ios';
     if (/macintosh|mac os x/.test(u)) return 'mac';
