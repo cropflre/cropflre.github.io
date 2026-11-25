@@ -27,6 +27,7 @@ const startServer = () => new Promise(resolve => {
   });
 });
 const fakeApi = async route => route.fulfill({status:429,contentType:'application/json',body:'{"message":"rate limited"}'});
+const appGalleryUrl = 'https://appgallery.huawei.com/app/detail?id=com.nowen.note';
 test.before(async () => { await startServer(); });
 test.after(async () => { await new Promise(resolve=>server.close(resolve)); });
 for (const [engineName, engine] of [['Chromium',chromium],['Firefox',firefox],['WebKit Safari',webkit]]) {
@@ -56,6 +57,9 @@ for (const [engineName, engine] of [['Chromium',chromium],['Firefox',firefox],['
       assert.equal(await page.locator('a[href$=".fpk"]').count(),1);
       await page.getByRole('tab',{name:'Android'}).click();
       assert.equal(await page.locator('a[href$=".apk"]').count(),1);
+      await page.getByRole('tab',{name:'Android'}).press('ArrowRight');
+      assert.equal(await page.getByRole('tab',{name:'HarmonyOS'}).getAttribute('aria-selected'),'true');
+      assert.equal(await page.getByRole('link',{name:'在华为应用市场下载'}).getAttribute('href'),appGalleryUrl);
       await page.getByRole('tab',{name:'浏览器插件'}).click();
       assert.equal(await page.locator('a[href*="chromewebstore.google.com"]').count(),1);
       await page.getByRole('tab',{name:'Docker / NAS'}).click();
@@ -186,6 +190,26 @@ test('Mobile browser identities recommend Android or iOS without false install l
   }finally{await android.close();}
 });
 
+test('HarmonyOS opens AppGallery when GitHub and the fallback manifest are unavailable',async()=>{
+  const browser=await chromium.launch({headless:true});
+  try {
+    const page=await browser.newPage({
+      ...devices['Pixel 7'],
+      userAgent:devices['Pixel 7'].userAgent + ' HarmonyOS/5.0'
+    });
+    await page.route('https://api.github.com/repos/cropflre/nowen-note/releases/latest',fakeApi);
+    await page.route('**/assets/data/nowen-note-stable.json',route=>route.abort());
+    await page.route(appGalleryUrl,route=>route.fulfill({body:'弄文笔记'}));
+    await Promise.all([
+      page.waitForRequest('https://api.github.com/repos/cropflre/nowen-note/releases/latest'),
+      page.goto(base+'/#/note/download')
+    ]);
+    assert.equal(await page.getByRole('tab',{name:'HarmonyOS'}).getAttribute('aria-selected'),'true');
+    await page.getByRole('link',{name:'在华为应用市场下载'}).click();
+    await page.waitForURL(appGalleryUrl);
+  } finally { await browser.close(); }
+});
+
 test('Existing help center: cross-product search, theme, community and mobile menu',async()=>{
   const browser=await chromium.launch({headless:true});
   const page=await browser.newPage({viewport:{width:375,height:812}});
@@ -266,6 +290,7 @@ test('NOWEN UI v2: branded home, light/dark, responsive and reduced-motion suppo
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://nowen.cn/note/');
     await page.goto(base+'/download/');
     assert.equal(await page.locator('link[rel="canonical"]').getAttribute('href'),'https://nowen.cn/download/');
+    assert.equal(await page.getByRole('link',{name:'在华为应用市场下载'}).getAttribute('href'),appGalleryUrl);
     await page.close();
   }finally{await browser.close();}
 });

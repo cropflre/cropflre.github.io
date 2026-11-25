@@ -6,13 +6,14 @@
   const APP = 'https://github.com/cropflre/nowen-note';
   const STORE = 'https://chromewebstore.google.com/detail/nowen-note-web-clipper/nglkodhfdbnfielchjpkjhenfaecafpg';
   const MS_STORE = 'https://apps.microsoft.com/detail/9MZ7Z6S39LL3';
+  const APP_GALLERY = 'https://appgallery.huawei.com/app/detail?id=com.nowen.note';
   const DOCS = APP + '/blob/v1.5.5/docs/tutorials/';
   const SCREEN = 'assets/images/';
   const LOGO = 'assets/images/nowen-brand-icon.png';
   const platforms = [
     ['windows', 'Windows'], ['mac', 'macOS'], ['linux', 'Linux'],
-    ['android', 'Android'], ['extension', '浏览器插件'], ['fnos', '飞牛 fnOS'],
-    ['ugos', '绿联 UGOS'], ['docker', 'Docker / NAS'], ['ios', 'iOS / 鸿蒙']
+    ['android', 'Android'], ['harmony', 'HarmonyOS'], ['extension', '浏览器插件'],
+    ['fnos', '飞牛 fnOS'], ['ugos', '绿联 UGOS'], ['docker', 'Docker / NAS'], ['ios', 'iOS']
   ];
   let selected = R.detectPlatform(navigator.userAgent);
   if (!platforms.some(function (p) { return p[0] === selected; })) selected = 'windows';
@@ -112,7 +113,7 @@
       '<figure>' + screenshot('note-desktop-editor.png', '桌面端目录树与富文本编辑界面') + '<figcaption>桌面端 · 左侧知识树，右侧正文、清单和代码块</figcaption></figure>' +
       '<figure class="note-shot-mobile">' + screenshot('note-mobile-editor.png', 'Android 移动端编辑器') + '<figcaption>Android 端 · 路上随手记一条</figcaption></figure></div></section>' +
       '<section class="note-section note-download-teaser"><div>' +
-      '<h2>挑对设备就能装</h2><p>Windows、macOS、Linux、Android、浏览器剪藏插件和 NAS 安装包都收在一页里。</p></div>' +
+      '<h2>挑对设备就能装</h2><p>Windows、macOS、Linux、Android、HarmonyOS、浏览器剪藏插件和 NAS 的安装入口都收在一页里。</p></div>' +
       link('#/note/download', '去选我的设备 →', 'note-cta') + '</section>' +
       '<section class="note-section"><div class="note-section-heading"><h2>三步用起来</h2></div>' +
       '<div class="note-steps"><div><b>1</b><h3>选好安装方式</h3><p>个人电脑直接下客户端，家里有 NAS 就选 FPK、UPK 或 Docker。</p></div>' +
@@ -139,6 +140,10 @@
   }
 
   function downloadPanel() {
+    if (selected === 'harmony') return '<div class="note-panel-head"><h2>HarmonyOS</h2></div>' +
+      '<div class="note-panel-body"><p>适用于运行 HarmonyOS 5 及以上版本的手机和平板。</p>' +
+      link(APP_GALLERY, '在华为应用市场下载', 'note-cta') +
+      '<p class="note-fine">也可在设备的华为应用市场搜索「弄文笔记」安装。</p></div>';
     if (!snapshot.release) return '<div class="note-panel-body"><p>暂时无法确认正式版安装包，请使用下方 GitHub Releases 备用入口。接口故障不代表没有安装包。</p></div>';
     const x = R.matrix(snapshot.release);
     const header = '<div class="note-panel-head"><h2>' + esc(platforms.find(function (p) { return p[0] === selected; })[1]) +
@@ -200,7 +205,7 @@
         '<p class="note-fine">启动后访问 http://设备IP:3001。默认账号和密码须在首次登录后立即修改。数据挂载为 /app/data，升级前备份数据库、附件及配置；公开访问建议 HTTPS。</p>' +
         guide('#/note/nas', 'NAS 部署教程') + '　' + guide(DOCS + 'docker-deploy.md', 'Docker Compose 文档');
     }
-    if (selected === 'ios') body = '<p>当前正式 Release 没有 iOS 或 HarmonyOS 可直接分发的安装包。项目存在相关工程，但这不代表已上架或可下载。</p>' +
+    if (selected === 'ios') body = '<p>当前正式 Release 没有可直接分发的 iOS 安装包。</p>' +
       link(APP + '/blob/v1.5.5/docs/iOS-Release.md', '了解 iOS 开发进展 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"');
     return header + '<div class="note-panel-body">' + body + '</div>';
   }
@@ -265,7 +270,7 @@
       '<section class="note-section note-release-warning"><h2>升级前备份提醒</h2>' +
       '<p>升级前请备份数据库、附件和部署配置并验证可恢复；镜像回滚不会恢复持久化数据。本次 macOS 包未经 Apple 公证，Windows GitHub EXE 未签名。安装包仅来自公开正式 Release。</p>' +
       link('#/note/changelog', '查看版本说明 →', 'note-secondary') + '</section>');
-    document.title = '下载 Nowen Note · Windows / macOS / Linux / Android / NAS';
+    document.title = '下载 Nowen Note · Windows / macOS / Linux / Android / HarmonyOS / NAS';
     bindDownload();
     let releaseRevision = 0;
     R.load(function (next) {
@@ -273,7 +278,7 @@
       const revision = ++releaseRevision;
       snapshot = next;
       document.getElementById('noteReleaseMeta').innerHTML = meta();
-      selectPlatform(selected);
+      if (selected !== 'harmony') selectPlatform(selected);
       if (!next.release) return;
       // Never guess a CDN URL: only switch after its verified R2 manifest was loaded.
       R.resolveMirrors(next.release, fetch.bind(window)).then(function (verified) {
@@ -282,7 +287,7 @@
           !document.getElementById('notePlatformPanel')) return;
         if (verified === next.release) return; // R2 inaccessible or not published yet: use GitHub.
         snapshot = { release: verified, source: next.source };
-        selectPlatform(selected);
+        if (selected !== 'harmony') selectPlatform(selected);
       });
     });
   }
