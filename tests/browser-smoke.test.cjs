@@ -43,14 +43,15 @@ for (const [engineName, engine] of [['Chromium',chromium],['Firefox',firefox],['
     try {
       await page.goto(base + '/#/note/download',{waitUntil:'domcontentloaded'});
       await page.locator('#noteReleaseMeta strong').waitFor({timeout:15000});
-      assert.match(await page.locator('#noteReleaseMeta').innerText(),/v1\.5\.5/);
+      assert.match(await page.locator('#noteReleaseMeta').innerText(),/v1\.6\.2/);
       await page.getByRole('tab',{name:'macOS'}).click();
       assert.equal(await page.locator('a[href$="-arm64.dmg"]').count(),1);
       assert.equal(await page.locator('a[href$="-x64.dmg"]').count(),1);
       await page.getByRole('tab',{name:'Windows'}).click();
-      assert.equal(await page.locator('a[href$="Nowen-Note-1.5.5-setup.exe"]').count(),1);
+      assert.equal(await page.locator('a[href$="Nowen-Note-1.6.2-setup.exe"]').count(),1);
+      assert.equal(await page.getByText('Windows Lite 轻量版',{exact:true}).count(),0);
       await page.locator('summary').first().click();
-      assert.equal(await page.locator('a[href$="Nowen-Note-1.5.5-portable.exe"]').count(),1);
+      assert.equal(await page.locator('a[href$="Nowen-Note-1.6.2-portable.exe"]').count(),1);
       await page.getByRole('tab',{name:'绿联 UGOS'}).click();
       assert.equal(await page.locator('a[href$=".upk"]').count(),2);
       await page.getByRole('tab',{name:'飞牛 fnOS'}).click();
@@ -63,7 +64,7 @@ for (const [engineName, engine] of [['Chromium',chromium],['Firefox',firefox],['
       await page.getByRole('tab',{name:'浏览器插件'}).click();
       assert.equal(await page.locator('a[href*="chromewebstore.google.com"]').count(),1);
       await page.getByRole('tab',{name:'Docker / NAS'}).click();
-      assert.match(await page.locator('.note-code').innerText(),/--branch v1\.5\.5/);
+      assert.match(await page.locator('.note-code').innerText(),/--branch v1\.6\.2/);
       await page.goto(base + '/#/note/quick-start');
       assert.match(await page.locator('h1').first().innerText(),/快速|上手|入门/);
       await page.goto(base + '/#/reader/quick-start');
@@ -72,6 +73,7 @@ for (const [engineName, engine] of [['Chromium',chromium],['Firefox',firefox],['
       assert.ok((await page.locator('.guide-grid').count())===1);
       await page.goto(base + '/#/note');
       assert.match(await page.locator('h1').innerText(),/Nowen Note 弄文笔记/);
+      assert.match(await page.locator('.note-release-highlight').innerText(),/v1\.6\.2 更新亮点/);
       assert.deepEqual(errors,[]);
     } finally { await browser.close(); }
   });
@@ -81,26 +83,26 @@ test('Chromium: verified R2 manifest selects CDN and preserves GitHub fallback a
   const page=await browser.newPage();
   const raw=JSON.parse(await fs.readFile(path.join(root,'assets/data/nowen-note-stable.json'),'utf8'));
   const allowNames=[
-    'Nowen-Note-1.5.5-setup.exe','Nowen-Note-1.5.5-arm64.dmg','Nowen-Note-1.5.5-x64.dmg',
-    'Nowen-Note-1.5.5-x86_64.AppImage','Nowen-Note-1.5.5-amd64.deb','Nowen-Note-1.5.5.apk',
-    'nowen-note-1.5.5-fpk-r1.fpk',
+    'Nowen-Note-1.6.2-setup.exe','Nowen-Note-1.6.2-arm64.dmg','Nowen-Note-1.6.2-x64.dmg',
+    'Nowen-Note-1.6.2-x86_64.AppImage','Nowen-Note-1.6.2-amd64.deb','Nowen-Note-1.6.2.apk',
+    'nowen-note-1.6.2.fpk',
     'nowen-clipper-0.5.0-edge.zip','nowen-clipper-0.5.0-firefox.zip','nowen-clipper-0.5.0.zip'
   ];
-  const manifest={schema:1,version:'v1.5.5',assets:allowNames.map(name=>({
+  const manifest={schema:1,version:'v1.6.2',assets:allowNames.map(name=>({
     name,size:raw.assets.find(a=>a.name===name).size
   }))};
   await page.route('https://api.github.com/repos/cropflre/nowen-note/releases/latest',fakeApi);
-  await page.route('https://download.nowen.cn/v1.5.5/manifest.json',route=>route.fulfill({
+  await page.route('https://download.nowen.cn/v1.6.2/manifest.json',route=>route.fulfill({
     status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},
     body:JSON.stringify(manifest)
   }));
   try{
     await page.goto(base+'/#/note/download');
     await page.getByRole('tab',{name:'Windows'}).click();
-    await page.locator('a[href="https://download.nowen.cn/v1.5.5/Nowen-Note-1.5.5-setup.exe"]').waitFor();
-    assert.ok(await page.locator('a[href="https://github.com/cropflre/nowen-note/releases/download/v1.5.5/Nowen-Note-1.5.5-setup.exe"]').count()>0);
+    await page.locator('a[href="https://download.nowen.cn/v1.6.2/Nowen-Note-1.6.2-setup.exe"]').waitFor();
+    assert.ok(await page.locator('a[href="https://github.com/cropflre/nowen-note/releases/download/v1.6.2/Nowen-Note-1.6.2-setup.exe"]').count()>0);
     await page.getByRole('tab',{name:'飞牛 fnOS'}).click();
-    assert.ok(await page.locator('a[href="https://download.nowen.cn/v1.5.5/nowen-note-1.5.5-fpk-r1.fpk"]').count()>0);
+    assert.ok(await page.locator('a[href="https://download.nowen.cn/v1.6.2/nowen-note-1.6.2.fpk"]').count()>0);
     await page.getByRole('tab',{name:'绿联 UGOS'}).click();
     assert.equal(await page.locator('a[href$=".upk"]').count(),2);
     assert.equal(await page.locator('a[href*="download.nowen.cn"][href$=".upk"]').count(),0);
@@ -141,7 +143,7 @@ test('Chromium: responsive no overflow on all required widths', async () => {
     for (const width of [375,768,1280,1920]) {
       const page=await browser.newPage({viewport:{width,height:800}});
       await page.route('https://api.github.com/repos/cropflre/nowen-note/releases/latest',fakeApi);
-      for (const hash of ['#/','#/note','#/note/download','#/note/features']) {
+      for (const hash of ['#/','#/note','#/note/download','#/note/features','#/note/changelog']) {
         await page.goto(base+'/'+hash);
         assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth <= window.innerWidth + 1),true,
           hash + ' overflows at ' + width);
@@ -155,17 +157,17 @@ test('Chromium: responsive no overflow on all required widths', async () => {
     }
   } finally { await browser.close(); }
 });
-test('Chromium: newer formal release with missing assets never reuses v1.5.5 downloads',async()=>{
+test('Chromium: newer formal release with missing assets never reuses v1.6.2 downloads',async()=>{
   const browser=await chromium.launch({headless:true});
   const page=await browser.newPage();
-  const release={tag_name:'v1.5.6',published_at:'2026-11-10T00:00:00Z',
-    html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.6',
+  const release={tag_name:'v1.6.3',published_at:'2026-12-01T00:00:00Z',
+    html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.6.3',
     draft:false,prerelease:false,assets:[]};
   await page.route('https://api.github.com/repos/cropflre/nowen-note/releases/latest',route=>
     route.fulfill({status:200,contentType:'application/json',body:JSON.stringify(release)}));
   try {
     await page.goto(base+'/#/note/download');
-    await page.locator('#noteReleaseMeta strong').getByText('v1.5.6').waitFor({timeout:15000});
+    await page.locator('#noteReleaseMeta strong').getByText('v1.6.3').waitFor({timeout:15000});
     assert.equal(await page.locator('.note-platform-panel a[href$="-setup.exe"]').count(),0);
     assert.match(await page.locator('.note-platform-panel').innerText(),/未提供安装包/);
   } finally {await browser.close();}
