@@ -7,7 +7,7 @@
   const STORE = 'https://chromewebstore.google.com/detail/nowen-note-web-clipper/nglkodhfdbnfielchjpkjhenfaecafpg';
   const MS_STORE = 'https://apps.microsoft.com/detail/9MZ7Z6S39LL3';
   const APP_GALLERY = 'https://appgallery.huawei.com/app/detail?id=com.nowen.note';
-  const DOCS = APP + '/blob/v1.5.5/docs/tutorials/';
+  const DOCS = APP + '/blob/v1.6.2/docs/tutorials/';
   const SCREEN = 'assets/images/';
   const LOGO = 'assets/images/nowen-brand-icon.png';
   const platforms = [
@@ -99,15 +99,14 @@
       '<article><b>本地直接写，也能装到 NAS</b><p>不想折腾服务器就先装桌面版；家里有飞牛、绿联或旧电脑，Docker 几分钟就能跑起来，数据留在自己手里。</p></article>' +
       '<article><b>顺手记待办，按需叫出 AI</b><p>写完笔记顺手列几条待办，需要总结或改写时再接自己选的 AI 接口，不强迫联网。</p></article>' +
       '<article><b>电脑和手机接着写</b><p>Windows、macOS、Linux、Android 都有正式版，连上同一服务端就能同步看到改动。</p></article></div></section>' +
-      '<section class="note-section note-release-highlight"><div class="note-section-heading"><h2>v1.5.5 刚更新了什么</h2>' +
-      '<p>2026-11-09 正式发布，重点把多端同步通知、知识树冲突修复和桌面端启动恢复做扎实了。</p></div><div class="note-values">' +
-      '<article><b>Web / PC / Android 双向同步</b><p>在线时改进变更通知和打开中笔记的更新；两端同时改同一篇时保留双方正文，避免静默覆盖。</p></article>' +
-      '<article><b>知识树冲突修复</b><p>处理目录结构差异前先做预检和意图确认，减少跨设备首次引导状态不一致。</p></article>' +
-      '<article><b>桌面恢复更清楚</b><p>首次下载进度、本机登录恢复和后端启动失败重试都有更直白的提示与操作入口。</p></article>' +
-      '<article><b>编辑与分享细节</b><p>顺手修了 Word 粘贴图片、Markdown 换行展示和手机分享弹窗裁切问题。</p></article></div>' +
-      '<p class="note-fine">v1.5.5 已正式发布。实时同步需联网并连接同一服务端，弱网下不保证零延迟或零冲突。macOS GitHub 包未做 Apple 公证；升级前请先备份。Workspace / App Studio / 扩展平台 V3 留在 v1.6.0 规划。</p>' +
-      '<div class="note-inline-links">' + link('#/note/changelog', '查看 v1.5.5 详细更新 →', 'note-secondary') +
-      link(APP + '/releases/tag/v1.5.5', 'GitHub 正式发布 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div></section>' +
+      '<section class="note-section note-release-highlight"><div class="note-section-heading"><h2>v1.6.2 更新亮点</h2>' +
+      '<p>v1.6.2 已正式发布，带来 Office 文档编辑、桌面同步和导入改进、文件批量操作及应用时区设置。</p></div><div class="note-values">' +
+      '<article><b>编辑 Word、PPT 和 Excel</b><p>把 DOCX、PPTX 或 XLSX 拖入目录树即可导入。PPT 支持从 Markdown 大纲生成幻灯片。</p></article>' +
+      '<article><b>桌面同步与导入</b><p>改善 NAS 弱网同步与登录续期，修复备份恢复报错及 Obsidian 相对路径附件导入。桌面端可直接导入本地文件夹。</p></article>' +
+      '<article><b>批量整理文件</b><p>文件管理和图床支持跨页多选、批量移动、打标签和移入回收站。</p></article>' +
+      '<article><b>设置应用时区</b><p>跟随系统时区，或将自定义时区随账号同步，用于日记筛选、任务提醒和分享有效期。</p></article></div>' +
+      '<div class="note-inline-links">' + link('#/note/changelog', '查看 v1.6.2 详细更新 →', 'note-secondary') +
+      link(APP + '/releases/tag/v1.6.2', 'GitHub 正式发布 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '</div></section>' +
       '<section class="note-section"><div class="note-section-heading"><h2>真实软件界面</h2>' +
       '<p>下面都是正式版里直接截出来的画面，没有重新画概念图。</p></div><div class="note-shot-grid">' +
       '<figure>' + screenshot('note-desktop-editor.png', '桌面端目录树与富文本编辑界面') + '<figcaption>桌面端 · 左侧知识树，右侧正文、清单和代码块</figcaption></figure>' +
@@ -152,7 +151,8 @@
     if (selected === 'windows') body = '<p>推荐安装版，免安装需求可选择便携版。</p>' +
       buttonAsset('winSetup', '下载 Windows 安装版', true) +
       '<details><summary>其他版本：便携版</summary>' + buttonAsset('winPortable', '下载便携版', false) + '</details>' +
-      '<details><summary>Windows Lite 轻量版</summary>' + buttonAsset('winLiteSetup', '下载 Lite 安装版', false) + buttonAsset('winLitePortable', '下载 Lite 便携版', false) + '</details>' +
+      (x.winLiteSetup || x.winLitePortable ? '<details><summary>Windows Lite 轻量版</summary>' +
+        buttonAsset('winLiteSetup', '下载 Lite 安装版', false) + buttonAsset('winLitePortable', '下载 Lite 便携版', false) + '</details>' : '') +
       '<p class="note-fine">GitHub 直装 Windows EXE 未提供代码签名。也可' + link(MS_STORE, '查看 Microsoft Store', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') + '（商店渠道独立更新）。</p>' +
       guide(DOCS + 'desktop.md', 'Windows 安装说明');
     if (selected === 'mac') body = '<p>请先在「苹果菜单 → 关于本机」查看芯片类型，再选择安装包。网页无法可靠判断你的 Mac 芯片。</p>' +
@@ -183,7 +183,7 @@
         buttonAsset('clipperEdgeZip', '下载 Edge ZIP', false) + buttonAsset('clipperFirefoxZip', '下载 Firefox ZIP', false) + '</details>' +
         guide(DOCS + 'clipper.md', '浏览器扩展配置教程');
     }
-    if (selected === 'fnos') body = '<p>适用于支持手动安装 FPK 的飞牛 fnOS。目前官方包主要适配 x86-64；其他架构先核对设备兼容性。</p>' +
+    if (selected === 'fnos') body = '<p>从 v1.6.2 起，飞牛 fnOS 使用 AMD64 和 ARM64 通用 FPK，可在飞牛应用中心手动安装。</p>' +
       buttonAsset('fnosFpk', '下载 fnOS FPK', true) +
       '<ol><li>打开飞牛应用中心 → 设置 → 手动安装应用。</li><li>选择下载的 FPK，按安装向导配置。</li>' +
       '<li>首次安装可能需要拉取 Docker 镜像，请保持网络畅通。</li><li>启动后确认数据目录和备份策略，再配置公网 HTTPS。</li></ol>' +
@@ -206,7 +206,7 @@
         guide('#/note/nas', 'NAS 部署教程') + '　' + guide(DOCS + 'docker-deploy.md', 'Docker Compose 文档');
     }
     if (selected === 'ios') body = '<p>当前正式 Release 没有可直接分发的 iOS 安装包。</p>' +
-      link(APP + '/blob/v1.5.5/docs/iOS-Release.md', '了解 iOS 开发进展 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"');
+      link(APP + '/blob/v1.6.2/docs/iOS-Release.md', '了解 iOS 开发进展 ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"');
     return header + '<div class="note-panel-body">' + body + '</div>';
   }
 
@@ -292,37 +292,43 @@
     });
   }
   function renderFeatures() {
-    frame('features', '<section class="note-heading"><span class="note-kicker">v1.5.5 功能说明</span><h1>同步更及时，交互更顺手</h1>' +
-      '<p>2026-11-09 正式发布：完善 Web、PC、Android 在线同步通知、冲突修复预检、桌面启动恢复和交互动效。Workspace、个人应用 Studio 与扩展平台 V3 仍规划在 v1.6.0。</p></section>' +
-      '<section class="note-section"><div class="note-section-heading"><h2>这次更新了什么？</h2>' +
-      '<p>多端同步需要在线连接同一个服务端及账号；弱网和并发编辑仍可能有待处理冲突。</p></div><div class="note-feature-grid">' +
-      feature('双向实时同步', 'Web / PC / Android 在线变更通知、正在打开的笔记自动更新；并发编辑保留两端正文。', 'v1.5.5 正式发布', '', '#/note/changelog') +
-      feature('知识树冲突修复', '优化目录结构差异修复预检与用户操作意图校验，减少新手引导状态不一致。', 'v1.5.5 正式发布', '', '#/note/changelog') +
-      feature('桌面启动与恢复', '改善首次下载进度、本机账号登录恢复和后台失败后的重试体验。', 'v1.5.5 正式发布', '', '#/note/offline-workspace') +
-      feature('统一动效与响应式', '统一核心界面交互动效，修复窗口从窄到宽时的工作区布局恢复。', 'v1.5.5 正式发布', '', '#/note/changelog') +
-      feature('编辑器与分享', '修复 Word 粘贴图片、Markdown 换行展示与手机端分享弹窗裁切。', 'v1.5.5 正式发布', '', '#/note/attachments') +
-      feature('AI 标识与兼容性', '完善 AI 生成内容标识、个人日记授权接口、鸿蒙导出及历史数据库兼容。', 'v1.5.5 正式发布', '', '#/note/changelog') +
+    frame('features', '<section class="note-heading"><span class="note-kicker">v1.6.2 功能说明</span><h1>编辑 Office 文档，批量整理附件</h1>' +
+      '<p>用同一棵知识树管理笔记和办公文档，也可以从本地文件夹和 Obsidian 迁移资料。</p></section>' +
+      '<section class="note-section"><div class="note-section-heading"><h2>v1.6.2 新功能</h2></div><div class="note-feature-grid">' +
+      feature('Word、PPT 和 Excel', '支持 DOCX、PPTX、XLSX 导入导出。PPT 支持全屏放映和演讲者备注，Excel 工作簿支持 Sync V2 和只读分享。', '编辑器', '', '#/note/changelog') +
+      feature('桌面同步与备份恢复', '改善弱网登录续期和附件同步，修复跨设备附件目录冲突及备份恢复报错。', '桌面端', '', '#/note/offline-workspace') +
+      feature('本地文件夹与 Obsidian 导入', '桌面端可直接导入本地文件夹，修复 Obsidian 导入时无法找到相对路径附件的问题。', '迁移', '', '#/note/changelog') +
+      feature('文件和图床批量整理', '跨页选择文件后可批量移动、打标签或移入回收站。清空回收站时保护仍被引用的文件。', '文件管理', '', '#/note/attachments') +
+      feature('团队协作', '团队空间支持成员邀请、所有权转让、用户组授权、@提及、实时通知和任务负责人。', '团队空间', '', '#/note/changelog') +
+      feature('应用时区', '可跟随系统时区，也可选择随账号同步的自定义时区。日记筛选、任务提醒和分享有效期采用所选时区。', '使用偏好', '', '#/note/changelog') +
       '</div></section>' +
       '<section class="note-section"><div class="note-section-heading"><h2>日常写作与整理</h2></div><div class="note-feature-grid">' +
       feature('Markdown 与富文本', '选择合适的编辑方式，用统一知识树整理笔记。', '持续维护', 'note-desktop-editor.png', '#/note/advanced-content-blocks') +
       feature('手机随时记录', 'Android 客户端支持日常记录；跨设备访问需要正确配置服务端和账号。', '持续维护', 'note-mobile-editor.png', '#/note/quick-start') +
       feature('AI 辅助写作', '总结、改写与知识问答，模型由你选择，在线服务可能发送相关文本。', '持续维护', 'note-settings-ai.png', '#/note/ai') +
       '</div></section>');
-    document.title = 'Nowen Note v1.5.5 功能更新 · 多端同步与交互优化';
+    document.title = 'Nowen Note v1.6.2 功能更新 · Office 编辑与文件管理';
   }
   function renderChangelog() {
     const seq = ++generation;
-    frame('changelog', '<section class="note-heading"><span class="note-kicker">v1.5.5 更新日志</span><h1>版本与更新</h1>' +
-      '<p>v1.5.5 于 2026-11-09 正式发布，支持的架构与安装包以 GitHub 实际 Release 附件为准。</p><div id="noteChangelogLive" aria-live="polite">' + meta() + '</div></section>' +
-      '<section class="note-section note-version-list"><article><span class="note-feature-label">v1.5.5 · 2026-11-09 · 正式发布</span><h2>多端同步与桌面体验稳定性更新</h2>' +
+    frame('changelog', '<section class="note-heading"><span class="note-kicker">v1.6.2 更新日志</span><h1>版本与更新</h1>' +
+      '<p>查看正式版的更新内容和下载入口。</p><div id="noteChangelogLive" aria-live="polite">' + meta() + '</div></section>' +
+      '<section class="note-section note-version-list"><article><span class="note-feature-label">v1.6.2 · 正式发布</span><h2>Office 编辑、文件管理与桌面同步</h2>' +
+      '<ul><li>新增 Word 和 PPT 编辑器，开放 Excel 工作簿。Office 文件可直接拖入目录树。</li><li>改善 NAS 弱网同步、登录续期、附件排队和备份恢复。支持桌面本地文件夹直导，修复 Obsidian 相对路径附件导入。</li><li>文件管理和图床支持跨页多选及批量操作，团队空间新增邀请、用户组授权和任务负责人。</li><li>应用可跟随系统时区或同步自定义时区。飞牛使用 AMD64 和 ARM64 通用 FPK。</li></ul>' +
+      link(APP + '/releases/tag/v1.6.2', '查看 v1.6.2 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+      '<article><span class="note-feature-label">v1.6.1 · 2026-11-23</span><h2>桌面和 Android 应用内热更新</h2>' +
+      '<p>为 Windows、macOS、Linux 和 Android 引入应用内热更新，改善编辑、分享和登录流程。</p>' +
+      link(APP + '/releases/tag/v1.6.1', '查看 v1.6.1 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+      '<article><span class="note-feature-label">v1.6.0 · 2026-11-21</span><h2>扩展中心、笔记导入和 MCP</h2>' +
+      '<p>更新扩展中心和设置，改进导入、AI 对话归档和说说附件，并扩展 MCP 团队空间授权和个人任务操作。</p>' +
+      link(APP + '/releases/tag/v1.6.0', '查看 v1.6.0 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
+      '<article><span class="note-feature-label">v1.5.5 · 2026-11-09</span><h2>多端同步与桌面体验稳定性更新</h2>' +
       '<p><strong>多端同步：</strong>改善 Web、PC、Android 在线双向同步通知和打开中笔记自动更新（#910）；并发编辑保留两端正文。<strong>目录与登录：</strong>加强知识树冲突修复预检及首次引导状态。<strong>桌面与界面：</strong>首次下载进度、登录和后端故障恢复，统一动效与窗口响应布局。<strong>编辑与兼容：</strong>修复 Word 图片粘贴、Markdown 换行、移动端分享弹窗及历史数据库兼容。</p>' +
       '<p class="note-fine">多端同步依赖在线连接同一服务端，并非所有场景无延迟或无冲突。macOS GitHub 包未签名或公证，Windows 直接下载 EXE 未签名；升级前请备份数据库、附件和配置。</p>' +
       link(APP + '/releases/tag/v1.5.5', '查看 v1.5.5 正式 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
-      '<article><span class="note-feature-label">上一正式版 · 2026-11-02</span><h2>v1.5.4 · AI 与离线体验</h2>' +
+      '<article><span class="note-feature-label">历史正式版 · 2026-11-02</span><h2>v1.5.4 · AI 与离线体验</h2>' +
       '<p>AI 修改建议先预览再确认、Markdown 章节折叠、原图与附件恢复、桌面完整版 NAS 离线副本和 DOCX 1GB 导入。</p>' +
       link(APP + '/releases/tag/v1.5.4', '查看 v1.5.4 历史 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article>' +
-      '<article><span class="note-feature-label">下一阶段 · v1.6.0 规划</span><h2>Workspace · App Studio · 扩展平台 V3</h2>' +
-      '<p>完整 Workspace、个人应用 Studio 和扩展平台 V3 不属于 v1.5.5 已交付功能。</p></article>' +
       '<article><span class="note-feature-label">历史正式版 · 2026-10-23</span><h2>v1.5.3</h2>' +
       '<p>收藏搜索、图片转存、解除加密及节假日日历等能力。</p>' +
       link(APP + '/releases/tag/v1.5.3', '查看 v1.5.3 Release ↗', 'note-secondary', ' target="_blank" rel="noopener noreferrer"') + '</article></section>' +
@@ -330,7 +336,7 @@
       link('#/note/backup-restore-drill', '备份与恢复教程 →', 'note-secondary') + '</section>' +
       '<section class="note-section">' + link(APP + '/blob/main/CHANGELOG.md', '完整历史更新日志 ↗', 'note-quiet', ' target="_blank" rel="noopener noreferrer"') +
       '　' + link('#/note/download', '下载最新公开正式版 →', 'note-cta') + '</section>');
-    document.title = 'Nowen Note v1.5.5 更新日志 · 版本与更新';
+    document.title = 'Nowen Note v1.6.2 更新日志 · 版本与更新';
     R.load(function (releaseState) {
       if (generation !== seq || !document.getElementById('noteChangelogLive')) return;
       snapshot = releaseState;

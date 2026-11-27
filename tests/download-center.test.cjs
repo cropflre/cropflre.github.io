@@ -8,38 +8,38 @@ const root = path.resolve(__dirname, '..');
 const snapshot = JSON.parse(fs.readFileSync(path.join(root, 'assets/data/nowen-note-stable.json'), 'utf8'));
 const official = S.validateRelease(snapshot);
 
-test('fallback is verified v1.5.5 with supported installation assets', () => {
-  assert.equal(official.version, 'v1.5.5');
-  assert.equal(official.assets.length, 18);
-  assert.ok(official.assets.every(a=>a.url.startsWith('https://github.com/cropflre/nowen-note/releases/download/v1.5.5/')));
+test('fallback is verified v1.6.2 with supported installation assets', () => {
+  assert.equal(official.version, 'v1.6.2');
+  assert.equal(official.assets.length, 13);
+  assert.ok(official.assets.every(a=>a.url.startsWith('https://github.com/cropflre/nowen-note/releases/download/v1.6.2/')));
   assert.ok(official.assets.every(a=>!/\.blockmap|\.ya?ml$/i.test(a.name)));
 });
-test('matrix maps real v1.5.5 packages and excludes unavailable Linux Lite', () => {
+test('matrix maps real v1.6.2 packages and excludes unavailable Lite installers', () => {
   const m=S.matrix(official);
-  assert.equal(m.winSetup.name,'Nowen-Note-1.5.5-setup.exe');
-  assert.equal(m.winPortable.name,'Nowen-Note-1.5.5-portable.exe');
-  assert.equal(m.winLiteSetup.name,'Nowen-Note-Lite-1.5.5-setup.exe');
-  assert.equal(m.winLitePortable.name,'Nowen-Note-Lite-1.5.5-portable.exe');
-  assert.equal(m.macArm.name,'Nowen-Note-1.5.5-arm64.dmg');
-  assert.equal(m.macIntel.name,'Nowen-Note-1.5.5-x64.dmg');
-  assert.equal(m.linuxAppImage.name,'Nowen-Note-1.5.5-x86_64.AppImage');
-  assert.equal(m.linuxDeb.name,'Nowen-Note-1.5.5-amd64.deb');
+  assert.equal(m.winSetup.name,'Nowen-Note-1.6.2-setup.exe');
+  assert.equal(m.winPortable.name,'Nowen-Note-1.6.2-portable.exe');
+  assert.equal(m.winLiteSetup,undefined);
+  assert.equal(m.winLitePortable,undefined);
+  assert.equal(m.macArm.name,'Nowen-Note-1.6.2-arm64.dmg');
+  assert.equal(m.macIntel.name,'Nowen-Note-1.6.2-x64.dmg');
+  assert.equal(m.linuxAppImage.name,'Nowen-Note-1.6.2-x86_64.AppImage');
+  assert.equal(m.linuxDeb.name,'Nowen-Note-1.6.2-amd64.deb');
   assert.equal(m.linuxLiteAppImage,undefined);
   assert.equal(m.linuxLiteDeb,undefined);
-  assert.equal(m.androidApk.name,'Nowen-Note-1.5.5.apk');
-  assert.equal(m.fnosFpk.name,'nowen-note-1.5.5-fpk-r1.fpk');
-  assert.equal(m.ugosAmd64.name,'amd64_io.nowen.note_1.5.5.0001.upk');
-  assert.equal(m.ugosArm64.name,'arm64_io.nowen.note_1.5.5.0001.upk');
+  assert.equal(m.androidApk.name,'Nowen-Note-1.6.2.apk');
+  assert.equal(m.fnosFpk.name,'nowen-note-1.6.2.fpk');
+  assert.equal(m.ugosAmd64.name,'amd64_io.nowen.note_1.6.2.0001.upk');
+  assert.equal(m.ugosArm64.name,'arm64_io.nowen.note_1.6.2.0001.upk');
   assert.equal(m.clipperZip.name,'nowen-clipper-0.5.0.zip');
   assert.equal(m.clipperEdgeZip.name,'nowen-clipper-0.5.0-edge.zip');
   assert.equal(m.clipperFirefoxZip.name,'nowen-clipper-0.5.0-firefox.zip');
 });
 test('verified R2 mirror only replaces exact current GitHub release assets and preserves fallback', async () => {
   const chosen=[
-    'Nowen-Note-1.5.5-setup.exe','Nowen-Note-1.5.5-arm64.dmg',
-    'Nowen-Note-1.5.5-x64.dmg','Nowen-Note-1.5.5-x86_64.AppImage',
-    'Nowen-Note-1.5.5-amd64.deb','Nowen-Note-1.5.5.apk',
-    'nowen-note-1.5.5-fpk-r1.fpk',
+    'Nowen-Note-1.6.2-setup.exe','Nowen-Note-1.6.2-arm64.dmg',
+    'Nowen-Note-1.6.2-x64.dmg','Nowen-Note-1.6.2-x86_64.AppImage',
+    'Nowen-Note-1.6.2-amd64.deb','Nowen-Note-1.6.2.apk',
+    'nowen-note-1.6.2.fpk',
     'nowen-clipper-0.5.0-edge.zip','nowen-clipper-0.5.0-firefox.zip',
     'nowen-clipper-0.5.0.zip'
   ];
@@ -53,22 +53,22 @@ test('verified R2 mirror only replaces exact current GitHub release assets and p
     seen.push(url); assert.equal(opts.mode,'cors');
     return {ok:true,json:async()=>manifest};
   });
-  assert.deepEqual(seen,['https://download.nowen.cn/v1.5.5/manifest.json']);
+  assert.deepEqual(seen,['https://download.nowen.cn/v1.6.2/manifest.json']);
   assert.equal(mirrored.assets.filter(a=>a.source==='r2').length,10);
-  assert.equal(mirrored.assets.find(a=>a.name==='Nowen-Note-1.5.5-setup.exe').url,
-    'https://download.nowen.cn/v1.5.5/Nowen-Note-1.5.5-setup.exe');
-  assert.equal(mirrored.assets.find(a=>a.name==='Nowen-Note-1.5.5-setup.exe').githubUrl,
-    official.assets.find(a=>a.name==='Nowen-Note-1.5.5-setup.exe').url);
+  assert.equal(mirrored.assets.find(a=>a.name==='Nowen-Note-1.6.2-setup.exe').url,
+    'https://download.nowen.cn/v1.6.2/Nowen-Note-1.6.2-setup.exe');
+  assert.equal(mirrored.assets.find(a=>a.name==='Nowen-Note-1.6.2-setup.exe').githubUrl,
+    official.assets.find(a=>a.name==='Nowen-Note-1.6.2-setup.exe').url);
   assert.equal(S.matrix(mirrored).fnosFpk.url,
-    'https://download.nowen.cn/v1.5.5/nowen-note-1.5.5-fpk-r1.fpk');
-  for(const unsupported of ['Nowen-Note-1.5.5-portable.exe','amd64_io.nowen.note_1.5.5.0001.upk']){
+    'https://download.nowen.cn/v1.6.2/nowen-note-1.6.2.fpk');
+  for(const unsupported of ['Nowen-Note-1.6.2-portable.exe','amd64_io.nowen.note_1.6.2.0001.upk']){
     const a=mirrored.assets.find(x=>x.name===unsupported);
     assert.ok(a.url.startsWith('https://github.com/'));
     assert.equal(a.source,undefined);
   }
   const invalidCases=[
-    {...manifest,version:'v1.5.6'},
-    {...manifest,assets:[...manifest.assets.slice(0,-1),{name:'amd64_io.nowen.note_1.5.5.0001.upk',size:169014701}]},
+    {...manifest,version:'v1.6.3'},
+    {...manifest,assets:[...manifest.assets.slice(0,-1),{name:'amd64_io.nowen.note_1.6.2.0001.upk',size:official.assets.find(a=>a.name==='amd64_io.nowen.note_1.6.2.0001.upk').size}]},
     {...manifest,assets:manifest.assets.map((a,i)=>i===0?{...a,size:a.size+1}:a)},
     {...manifest,assets:manifest.assets.slice(1)},
     {...manifest,assets:manifest.assets.map((a,i)=>i===0?{...a,name:'evil.exe'}:a)}
@@ -117,7 +117,7 @@ test('API failure uses verified local manifest and does not confuse failure with
       {ok:true,json:async()=>snapshot} : {ok:false,status:403}
   });
   assert.equal(result.source,'fallback');
-  assert.equal(result.release.version,'v1.5.5');
+  assert.equal(result.release.version,'v1.6.2');
   assert.deepEqual(seen,['fallback']);
 });
 test('fresh cache avoids API fetch; stale cache permits a new formal release', async () => {
@@ -130,11 +130,11 @@ test('fresh cache avoids API fetch; stale cache permits a new formal release', a
   const second=await S.load(null,{storage,fetch:fetcher,now:100100});
   assert.equal(second.source,'cached');
   assert.equal(calls,2+1); // first manifest + API, second manifest
-  const next={...snapshot,tag_name:'v1.5.6',html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.6',assets:[]};
+  const next={...snapshot,tag_name:'v1.6.3',html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.6.3',assets:[]};
   const newer=await S.load(null,{storage,fetch:async url=>({
     ok:true,json:async()=>url.includes('api.github.com')?next:snapshot
   }),now:100000+11*60*1000});
-  assert.equal(newer.release.version,'v1.5.6');
+  assert.equal(newer.release.version,'v1.6.3');
   assert.deepEqual(Object.keys(S.matrix(newer.release)),[]);
 });
 test('stale API release cannot replace newer verified fallback',async()=>{
@@ -143,10 +143,10 @@ test('stale API release cannot replace newer verified fallback',async()=>{
   const result=await S.load(null,{storage:null,fetch:async url=>({
     ok:true,json:async()=>url.includes('api.github.com')?old:snapshot
   })});
-  assert.equal(result.release.version,'v1.5.5');
+  assert.equal(result.release.version,'v1.6.2');
   assert.equal(result.source,'fallback');
 });
-test('a newly verified v1.5.5 fallback supersedes a cached older v1.5.3',async()=>{
+test('a newly verified v1.6.2 fallback supersedes a cached older v1.5.3',async()=>{
   const old={...snapshot,tag_name:'v1.5.3',
     html_url:'https://github.com/cropflre/nowen-note/releases/tag/v1.5.3',assets:[]};
   const cache=new Map([['nowen-note-release-v2',JSON.stringify({at:100000,data:old})]]);
@@ -154,14 +154,18 @@ test('a newly verified v1.5.5 fallback supersedes a cached older v1.5.3',async()
     getItem:k=>cache.get(k)||null,setItem:(k,v)=>cache.set(k,v)
   },fetch:async url=>url.includes('api.github.com')
     ? {ok:false,status:429} : {ok:true,json:async()=>snapshot}});
-  assert.equal(result.release.version,'v1.5.5');
+  assert.equal(result.release.version,'v1.6.2');
   assert.equal(result.source,'fallback');
 });
-test('website v1.5.5 release promotion does not imply 1.6.0 features ship',()=>{
- const site=fs.readFileSync(path.join(root,'assets/js/note-site-v1.js'),'utf8');
- assert.match(site,/v1\.5\.5 已正式发布/);
- assert.match(site,/v1\.6\.0/);
- assert.doesNotMatch(site,/NEW IN v1\.5\.3|PRODUCT FEATURES · v1\.5\.3/);
+test('product, release history and static pages reference the same formal release',()=>{
+  const site=fs.readFileSync(path.join(root,'assets/js/note-site-v1.js'),'utf8');
+  assert.match(site,/v1\.6\.2 已正式发布/);
+  assert.match(site,/v1\.6\.2 更新日志/);
+  assert.match(site,/应用时区/);
+  assert.doesNotMatch(site,/v1\.6\.0 规划/);
+  for (const page of ['note/index.html','download/index.html']) {
+    assert.ok(fs.readFileSync(path.join(root,page),'utf8').includes(official.url));
+  }
 });
 test('new routes do not collide with documented article slugs', () => {
   const data = ['assets/js/help-data-v2.js','assets/js/help-note-v4.js','assets/js/help-community-v5.js']
